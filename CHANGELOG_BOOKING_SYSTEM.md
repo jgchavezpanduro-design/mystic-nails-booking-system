@@ -262,6 +262,7 @@ If your design inspiration is from an AI-generated image
 2. ✅ Validación de 2 horas no funcionaba - Mejorado el cálculo
 3. ✅ Fecha no se actualizaba - Agregado display amigable
 4. ✅ Mensaje de WhatsApp confuso - Mejorado formato y emojis
+5. ✅ **Botones de booking no funcionaban** - Reemplazado `href="#booking"` con `href="javascript:void(0)"` para prevenir navegación del anchor
 
 ---
 
@@ -336,6 +337,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-10
-**Versión:** 4.1 - Booking System with Calendar Integration + Diana Email
+**Versión:** 4.2 - Booking System with Calendar Integration + Bug Fixes
 **Estado:** ✅ Production Ready
-**Último cambio:** Email de Diana configurado para notificaciones de Google Calendar
+**Último cambio:** Botones de booking corregidos (javascript:void(0))
