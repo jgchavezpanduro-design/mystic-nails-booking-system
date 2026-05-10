@@ -1,0 +1,14 @@
+# Mystic Nails Art - Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mysticnailsplaya.com/sitemap.xml
+
+# Crawl-delay (optional, prevents server overload)
+Crawl-delay: 1
+
+# Disallow specific files if needed
+# Disallow: /private/
+# Disallow: /temp/

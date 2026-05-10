@@ -1,0 +1,198 @@
+{
+  "Dashboard": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Mystic Nails Art"
+    ],
+    "sampleData": [
+      [
+        "Panel del mes"
+      ],
+      [],
+      [
+        "Mes:",
+        4,
+        "Año:",
+        2026
+      ]
+    ]
+  },
+  "Citas": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Citas y servicios"
+    ],
+    "sampleData": [
+      [
+        "Cada fila es una cita. Las celdas en gris claro se calculan solas."
+      ],
+      [],
+      [
+        "ID Cita",
+        "Fecha",
+        "Hora Inicio",
+        "Duración (min)",
+        "Clienta",
+        "Tipo (auto)",
+        "Manicurista",
+        "Servicio Principal",
+        "Detalle del servicio",
+        "Servicios extras",
+        "Precio servicio (auto)",
+        "Cobro extras",
+        "Subtotal (auto)",
+        "Descuento",
+        "Propina",
+        "Depósito",
+        "Total cobrado (auto)",
+        "Saldo día (auto)",
+        "Método pago",
+        "Estado",
+        "Notas",
+        "% Manicurista (auto)",
+        "% Empresa (auto)",
+        "% Admin (auto)",
+        "Comisión $ (auto)",
+        "Empresa $ (auto)",
+        "Admin $ (auto)",
+        "Pago manicurista total (auto)",
+        "Foto Drive (link)"
+      ]
+    ]
+  },
+  "Clientas": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Clientas"
+    ],
+    "sampleData": [
+      [
+        "Catálogo de clientas. Marca cada una como Local o Extranjera."
+      ],
+      [],
+      [
+        "ID",
+        "Nombre",
+        "Teléfono",
+        "Instagram",
+        "Tipo",
+        "Cumpleaños",
+        "Cómo te encontró",
+        "Notas / alergias",
+        "Primera visita",
+        "Última visita",
+        "# Visitas",
+        "Total gastado"
+      ]
+    ]
+  },
+  "Servicios": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Catálogo de servicios"
+    ],
+    "sampleData": [
+      [
+        "Precios en MXN. Local = clienta de México. Extranjera = clienta de fuera."
+      ],
+      [],
+      [
+        "ID",
+        "Categoría",
+        "Servicio",
+        "Detalle",
+        "Precio Local",
+        "Precio Extranjera",
+        "Tiempo (min)"
+      ]
+    ]
+  },
+  "Manicuristas": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Manicuristas"
+    ],
+    "sampleData": [
+      [
+        "Edita las % de comisión y sueldo fijo cuando cambien"
+      ],
+      [],
+      [
+        "ID",
+        "Nombre",
+        "% Manicurista",
+        "% Empresa",
+        "% Admin",
+        "Sueldo Fijo Semanal",
+        "Activa",
+        "Notas"
+      ]
+    ]
+  },
+  "Compras": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Compras e inversión"
+    ],
+    "sampleData": [
+      [
+        "Gastos que restan del fondo de empresa (productos, herramientas, marketing, etc.)"
+      ],
+      [],
+      [
+        "ID",
+        "Fecha",
+        "Concepto",
+        "Categoría",
+        "Monto",
+        "Proveedor",
+        "Método pago",
+        "Quien compra",
+        "Notas"
+      ]
+    ]
+  },
+  "Liquidaciones": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Liquidaciones del periodo"
+    ],
+    "sampleData": [
+      [
+        "Cuánto le toca a cada manicurista en el mes seleccionado en Configuración"
+      ],
+      [],
+      [
+        "Mes en curso:",
+        4,
+        "Año:",
+        2026
+      ]
+    ]
+  },
+  "Configuración": {
+    "rowCount": 999,
+    "colCount": 1,
+    "headers": [
+      "Mystic Nails Art"
+    ],
+    "sampleData": [
+      [
+        "Panel de configuración"
+      ],
+      [],
+      [
+        "Parámetro",
+        "Valor",
+        "Descripción"
+      ]
+    ]
+  }
+}

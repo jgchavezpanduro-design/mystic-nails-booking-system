@@ -1,0 +1,14 @@
+# Ignore everything by default
+**
+
+# Only include Google Apps Script files
+!Code.gs
+!appsscript.json
+
+# Ignore node_modules and build artifacts
+node_modules/**
+dist/**
+build**/
+*.log
+.DS_Store
+mystic-nails-app/**
