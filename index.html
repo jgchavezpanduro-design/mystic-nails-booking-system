@@ -2461,8 +2461,9 @@
 
             <!-- Step 2: Select Service -->
             <div id="step2" class="booking-step" style="display: none;">
-                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 2: Select Service</h3>
+                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 2: Select Services</h3>
                 <p style="margin-bottom: 15px; color: var(--gray);">Technician: <strong id="selectedTechnicianName"></strong></p>
+                <p style="margin-bottom: 20px; font-size: 14px; color: var(--primary); font-weight: 500;">💡 You can select multiple services</p>
 
                 <h4 style="margin-bottom: 15px; color: var(--primary);">Manicure Services</h4>
                 <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
@@ -2507,7 +2508,7 @@
 
                 <div style="background: var(--light); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
                     <p><strong>Technician:</strong> <span id="confirmTechnician"></span></p>
-                    <p><strong>Service:</strong> <span id="confirmService"></span></p>
+                    <p><strong>Services:</strong> <span id="confirmService"></span></p>
                     <p><strong>Estimated Time:</strong> <span id="confirmTimeEstimate"></span></p>
                 </div>
 
@@ -2529,7 +2530,7 @@
 
                 <div style="background: var(--light); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
                     <p><strong>Technician:</strong> <span id="finalTechnician"></span></p>
-                    <p><strong>Service:</strong> <span id="finalService"></span></p>
+                    <p><strong>Services:</strong> <span id="finalService"></span></p>
                     <p><strong>Date:</strong> <span id="finalDate"></span></p>
                     <p><strong>Start Time:</strong> <span id="finalTime"></span></p>
                     <p><strong>Removal:</strong> <span id="finalRemoval"></span></p>
@@ -2574,8 +2575,7 @@
 
         // Variables globales
         let selectedTechnician = '';
-        let selectedService = '';
-        let selectedServiceDuration = 0;
+        let selectedServices = []; // Array para múltiples servicios
         let selectedDate = '';
         let selectedTime = '';
         let selectedRemoval = false;
@@ -2650,8 +2650,7 @@
 
             // Reset form
             selectedTechnician = '';
-            selectedService = '';
-            selectedServiceDuration = 0;
+            selectedServices = []; // Reset array de servicios
             selectedDate = '';
             selectedTime = '';
             selectedRemoval = false;
@@ -2680,17 +2679,31 @@
         }
 
         function selectService(service, duration) {
-            selectedService = service;
-            selectedServiceDuration = parseInt(duration);
+            const serviceIndex = selectedServices.indexOf(service);
 
-            // Highlight selected service button
+            if (serviceIndex === -1) {
+                // Agregar servicio si no está seleccionado
+                selectedServices.push(service);
+            } else {
+                // Quitar servicio si ya está seleccionado
+                selectedServices.splice(serviceIndex, 1);
+            }
+
+            // Highlight selected service buttons (toggle effect)
             document.querySelectorAll('.service-btn').forEach(btn => {
-                btn.style.background = btn.textContent.includes(service) ? 'var(--primary)' : 'white';
-                btn.style.color = btn.textContent.includes(service) ? 'white' : 'var(--dark)';
+                const btnService = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                if (selectedServices.includes(btnService)) {
+                    btn.style.background = 'var(--primary)';
+                    btn.style.color = 'white';
+                } else {
+                    btn.style.background = 'white';
+                    btn.style.color = 'var(--dark)';
+                }
             });
 
-            // Show removal option for manicure services
-            if (['Gelish', 'Rubber Base', 'Acrylic', 'Polygel'].includes(service)) {
+            // Show removal option si hay servicios de manicure seleccionados
+            const hasManicureService = selectedServices.some(s => ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel'].includes(s));
+            if (hasManicureService) {
                 document.getElementById('removalOption').style.display = 'block';
             } else {
                 document.getElementById('removalOption').style.display = 'none';
@@ -2700,7 +2713,8 @@
             // Calculate and display estimated time
             calculateEstimatedTime();
 
-            document.getElementById('step2NextBtn').disabled = false;
+            // Enable next button solo si hay al menos un servicio seleccionado
+            document.getElementById('step2NextBtn').disabled = selectedServices.length === 0;
         }
 
         function selectRemoval(includeRemoval) {
@@ -2719,17 +2733,24 @@
                 document.getElementById('yesRemovalBtn').style.color = 'var(--dark)';
             }
 
-            // Recalculate estimated time
+            // Recalculate estimated time for all services
             calculateEstimatedTime();
         }
 
         function calculateEstimatedTime() {
-            let totalTime = selectedServiceDuration;
+            let totalTime = 0;
 
-            // Add removal time if applicable
-            if (selectedRemoval && serviceData[selectedService]) {
-                totalTime += serviceData[selectedService].removalTime;
-            }
+            // Sumar duración de todos los servicios seleccionados
+            selectedServices.forEach(service => {
+                if (serviceData[service]) {
+                    totalTime += serviceData[service].duration;
+
+                    // Agregar tiempo de retiro SOLO una vez si aplica
+                    if (selectedRemoval && ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel'].includes(service)) {
+                        totalTime += serviceData[service].removalTime;
+                    }
+                }
+            });
 
             estimatedDuration = totalTime;
 
@@ -2750,8 +2771,7 @@
         function goToStep(step) {
             console.log('=== goToStep called with step:', step, '===');
             console.log('selectedTechnician:', selectedTechnician);
-            console.log('selectedService:', selectedService);
-            console.log('selectedServiceDuration:', selectedServiceDuration);
+            console.log('selectedServices:', selectedServices);
 
             document.querySelectorAll('.booking-step').forEach(s => s.style.display = 'none');
             document.getElementById('step' + step).style.display = 'block';
@@ -2760,12 +2780,42 @@
             if (step === 3) {
                 console.log('Entering step 3, updating confirmation details...');
                 document.getElementById('confirmTechnician').textContent = selectedTechnician || 'Not selected';
-                document.getElementById('confirmService').textContent = selectedService || 'Not selected';
+
+                // Mostrar lista de servicios seleccionados
+                if (selectedServices.length > 0) {
+                    document.getElementById('confirmService').textContent = selectedServices.join(', ');
+                } else {
+                    document.getElementById('confirmService').textContent = 'Not selected';
+                }
+
                 const timeEstimate = document.getElementById('estimatedTime');
                 document.getElementById('confirmTimeEstimate').textContent = timeEstimate ? timeEstimate.textContent : 'Not calculated';
 
                 // Clear previous time slots
                 document.getElementById('timeSlots').innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">📅 Please select a date above to see available time slots.</p>';
+            }
+
+            // Update final confirmation details when entering step 4
+            if (step === 4) {
+                console.log('Entering step 4, updating final confirmation...');
+
+                // Mostrar detalles finales
+                document.getElementById('finalTechnician').textContent = selectedTechnician;
+
+                if (selectedServices.length > 0) {
+                    document.getElementById('finalService').textContent = selectedServices.join(', ');
+                } else {
+                    document.getElementById('finalService').textContent = 'Not selected';
+                }
+
+                document.getElementById('finalDate').textContent = new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                document.getElementById('finalTime').textContent = selectedTime;
             }
         }
 
@@ -2879,7 +2929,14 @@
 
         function updateConfirmationDetails() {
             document.getElementById('confirmTechnician').textContent = selectedTechnician;
-            document.getElementById('confirmService').textContent = selectedService;
+
+            // Mostrar lista de servicios seleccionados
+            if (selectedServices.length > 0) {
+                document.getElementById('confirmService').textContent = selectedServices.join(', ');
+            } else {
+                document.getElementById('confirmService').textContent = 'Not selected';
+            }
+
             document.getElementById('confirmTimeEstimate').textContent = document.getElementById('estimatedTime').textContent;
         }
 
@@ -2916,7 +2973,7 @@
             const specialRequests = document.getElementById('specialRequests').value;
 
             if (!name || !phone) {
-                alert('Please fill in your name and phone number');
+                alert('⚠️ Please fill in your name and phone number');
                 return;
             }
 
@@ -2926,7 +2983,7 @@
             const minBookingTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
             if (selectedDateObj < minBookingTime) {
-                alert('⚠️ Appointments must be booked at least 2 hours in advance. For same-day bookings, please contact us via WhatsApp to check availability.');
+                alert('⏰ Appointments must be booked at least 2 hours in advance.\n\nFor same-day bookings, please contact us via WhatsApp to check availability.');
                 return;
             }
 
@@ -2943,12 +3000,17 @@
                 day: 'numeric'
             });
 
+            // Preparar lista de servicios para WhatsApp
+            const servicesList = selectedServices.map((service, index) => {
+                return `${index + 1}. 💅 ${service}`;
+            }).join('%0A');
+
             // Prepare data for Google Calendar event
             const calendarData = {
                 clientName: name,
                 clientPhone: phone,
                 technician: selectedTechnician,
-                service: selectedService,
+                service: selectedServices.join(', '),
                 date: selectedDate,
                 startTime: selectedTime,
                 durationMinutes: estimatedDuration,
@@ -2966,52 +3028,87 @@
                     },
                     body: JSON.stringify(calendarData)
                 }).then(() => {
-                    console.log('Calendar event created');
+                    console.log('✅ Calendar event created');
                 }).catch(error => {
-                    console.error('Error creating calendar event:', error);
+                    console.error('❌ Error creating calendar event:', error);
                 });
             }
 
-            // Send WhatsApp confirmation with request for nail design photo
+            // Send WhatsApp confirmation with policies
             const removalText = selectedRemoval ? '✅ *Yes*' : '❌ *No*';
             const whatsappMsg = `💅 *NEW BOOKING REQUEST* 💅
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-👤 *Client:* ${name}
-📞 *Phone:* ${phone}
+👤 *CLIENT INFO*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆔 *Name:* ${name}
+📱 *Phone:* ${phone}
 
 📅 *APPOINTMENT DETAILS*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👩‍🎨 *Technician:* ${selectedTechnician}
-💅 *Service:* ${selectedService}
+💅 *Services:*
+${servicesList}
+
 📆 *Date:* ${formattedDate}
-⏰ *Time:* ${selectedTime} - ${endTime}
+🕐 *Time:* ${selectedTime} - ${endTime}
 ⏱️ *Duration:* ${document.getElementById('estimatedTime').textContent}
 💅 *Removal:* ${removalText}
 
-${specialRequests ? `📝 *Notes:* ${specialRequests}%0A%0A` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${specialRequests ? `ℹ️ *Notes:* ${specialRequests}%0A%0A` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ⚠️ *IMPORTANT - PLEASE READ CAREFULLY*
 
 📸 *PHOTO OF YOUR NAIL DESIGN*
 Please send a photo or screenshot of the nail design you want ASAP! This helps us prepare for your appointment.
 
-⚠️ *NOTE ABOUT AI-GENERATED DESIGNS*
+🤖 *NOTE ABOUT AI-GENERATED DESIGNS*
 If your design inspiration is from an AI-generated image (Midjourney, DALL-E, etc.), please be aware that:
 • Some AI designs may not be achievable in real life
 • We can create similar styles but with realistic adaptations
 • Please have alternative reference photos ready
 • We'll confirm what's possible during your appointment
 
-💬 *We'll reply to confirm your appointment and discuss your nail design!*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 *POLICIES - NO EXCEPTIONS*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💰 *DEPOSIT REQUIRED*
+• We book appointments with $100 deposit only
+• Cannot confirm appointments without deposit
+
+⏰ *TOLERANCE POLICY*
+• Every minute is important - we wait up to 10min
+• If tolerance time passes, you lose the appointment AND deposit
+• Can reschedule up to 24h before, otherwise deposit is lost
+
+🚫 *COMPANIONS*
+• No companions without exception
+
+📍 *ARRIVAL TIME*
+• Please arrive at exact time - we cannot receive you before your scheduled time
+• Policies are for respect, safety and well-being of all of us
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 *We'll reply to confirm your appointment, deposit payment and discuss your nail design!*
 
 Thank you for choosing *Mystic Nails Art*! ✨`;
 
             // Open WhatsApp
             window.open(`https://wa.me/529843108186?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
 
-            alert('✅ Booking request sent!\n\n📅 Calendar event created for admin and technician.\n💬 WhatsApp message sent.\n\n⚠️ IMPORTANT:\nPlease send us a photo of your nail design ASAP.\nIf it\'s an AI-generated design, we\'ll confirm what\'s possible.');
+            alert('✅ *Booking Request Sent!*
+
+📅 Google Calendar event created for admin and technician
+💬 WhatsApp message opened
+
+⚠️ *IMPORTANT:*
+• Please send us a photo of your nail design ASAP
+• If it\'s an AI-generated design, we\'ll confirm what\'s possible
+• $100 deposit required to confirm your appointment');
+
             closeBookingModal();
         }
     </script>
