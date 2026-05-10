@@ -24,7 +24,7 @@ const SHEETS = {
 const TECHNICIAN_EMAILS = {
   'Carolina': '27supercaro@gmail.com',
   'Montse': 'Mrqz.mntse25@gmail.com',
-  'Diana': '' // Agregar cuando se tenga
+  'Diana': 'Dianamejia2825@gmail.com'
 };
 
 const ADMIN_EMAILS = ['jgchavezpanduro@gmail.com']; // Agregar más admins si es necesario

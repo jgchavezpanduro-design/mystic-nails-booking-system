@@ -2,7 +2,8 @@
 
 **Fecha:** 2026-05-10
 **Rama:** `feature/booking-system-calendar-integration`
-**Deploy ID:** AKfycbxzj6M_CEA3Kl00CzaZW6ePBA7HdqwhS5Rwg6PeGZ-vxnmxR2zQH3NxsQYPA85zZ7FcMQ
+**Deploy ID:** AKfycbwmZbX8HlXrFZJEriAVPK09xFRf6BeQmtet4bJPcxGiYZKCGPfFaO4g0oeYQSaAYF_xIQ (Latest)
+**Deploy ID Anterior:** AKfycbxzj6M_CEA3Kl00CzaZW6ePBA7HdqwhS5Rwg6PeGZ-vxnmxR2zQH3NxsQYPA85zZ7FcMQ
 
 ---
 
@@ -119,13 +120,14 @@ Se ha completado la implementación del **Sistema de Booking Automatizado** con 
 - **Admin:** jgchavezpanduro@gmail.com
 - **Carolina:** 27supercaro@gmail.com
 - **Montse:** Mrqz.mntse25@gmail.com
-- **Diana:** (Pendiente)
+- **Diana:** Dianamejia2825@gmail.com ✅
 
 ### **Deployments:**
 1. Deploy #1: Creación inicial
 2. Deploy #2: Actualización de horarios
 3. Deploy #3: Horarios de Diana
 4. Deploy #4: Mensajes mejorados con advertencias de IA
+5. Deploy #5: ✅ **Email de Diana agregado** (Dianamejia2825@gmail.com) - Notificaciones de Calendar activadas
 
 ---
 
@@ -334,5 +336,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-10
-**Versión:** 4.0 - Booking System with Calendar Integration
+**Versión:** 4.1 - Booking System with Calendar Integration + Diana Email
 **Estado:** ✅ Production Ready
+**Último cambio:** Email de Diana configurado para notificaciones de Google Calendar
