@@ -274,10 +274,10 @@ If your design inspiration is from an AI-generated image
 5. ✅ **Botones de booking no funcionaban** - Reemplazado `href="#booking"` con `href="javascript:void(0)"` para prevenir navegación del anchor
 6. ✅ **Botón de navegación "Book Appointment"** - Agregado `openBookingModal(event)` al botón de navegación superior
 7. ✅ **Botón de footer "Book Appointment"** - Agregado `openBookingModal(event)` al Quick Links del footer
-8. ✅ **Carpeta gallery/ creada** - Contiene SOLO 15 imágenes numeradas para rotación (SIN Caro)
+8. ✅ **TODAS las imágenes duplicadas eliminadas** - Carpeta `watermarked/` eliminada (31 archivos duplicados)
 9. ✅ **Caro mystic movida a about/** - Ahora aparece solo en sección About
 10. ✅ **TODAS las imágenes de galería centradas en uñas** - object-position: center 42% (encuadre balanceado)
-11. ✅ **Estructura limpia** - watermarked/ ya no se usa, gallery/ es la carpeta oficial
+11. ✅ **Estructura final limpia** - Solo 17 imágenes únicas en total (15 galería + 1 About + 1 archivo)
 
 ---
 
@@ -368,6 +368,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-11
-**Versión:** 5.2 - Gallery Structure Cleaned + Caro Completely Removed from Rotation
+**Versión:** 5.3 - All Duplicate Images Removed + Clean Folder Structure
 **Estado:** ✅ Production Ready
-**Último cambio:** Carpeta gallery/ creada con solo 15 imágenes + Caro movida a about/
+**Último cambio:** Eliminada carpeta watermarked/ (31 duplicados) + solo 17 imágenes únicas restantes
