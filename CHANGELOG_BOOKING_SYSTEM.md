@@ -274,9 +274,10 @@ If your design inspiration is from an AI-generated image
 5. ✅ **Botones de booking no funcionaban** - Reemplazado `href="#booking"` con `href="javascript:void(0)"` para prevenir navegación del anchor
 6. ✅ **Botón de navegación "Book Appointment"** - Agregado `openBookingModal(event)` al botón de navegación superior
 7. ✅ **Botón de footer "Book Appointment"** - Agregado `openBookingModal(event)` al Quick Links del footer
-8. ✅ **Imagen "caro mystic" eliminada** - Removida de la galería y renombrada a .bak
-9. ✅ **Imágenes 8 y 10 con encuadre mejorado** - object-position: center 35% para ver mejor las uñas
-10. ✅ **Nombres de imágenes simplificados** - Cambiados de nombres largos de WhatsApp a 1.jpeg, 2.jpeg, etc.
+8. ✅ **Imagen "caro mystic" eliminada de galería** - Removida del array allGalleryImages
+9. ✅ **Imagen "caro mystic" agregada a sección About** - Ahora aparece en "About Mystic Nails Art" como imagen de Carolina
+10. ✅ **Imágenes 8 y 10 con encuadre mejorado** - object-position: center 35% para ver mejor las uñas
+11. ✅ **Nombres de imágenes simplificados** - Cambiados de nombres largos de WhatsApp a 1.jpeg, 2.jpeg, etc.
 
 ---
 
@@ -367,6 +368,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-11
-**Versión:** 4.9 - Gallery Image Cleanup and Framing Improvements
+**Versión:** 5.0 - About Section Enhanced with Founder Image
 **Estado:** ✅ Production Ready
-**Último cambio:** Imagen "caro mystic" eliminada + imágenes 8 y 10 con mejor encuadre de uñas + nombres simplificados
+**Último cambio:** Imagen "caro mystic" movida a sección About + placeholder reemplazado con foto real
