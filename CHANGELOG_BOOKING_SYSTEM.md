@@ -263,6 +263,8 @@ If your design inspiration is from an AI-generated image
 2. ✅ `Cannot read properties of null (reading 'parentNode')` - Date input
 3. ✅ `Failed to load resource: the server responded with a status of 404` - Search endpoint
 4. ✅ `Uncaught SyntaxError: Invalid or unexpected token` (line 3059) - Fixed template literals in alert() and whatsappMsg
+5. ✅ **Nested quotes error** (minute:'2-digit') - Changed to minute: '2-digit' with proper spacing
+6. ✅ **Curly apostrophe in testimonial** - Replaced with straight apostrophe for JavaScript compatibility
 
 ### **Funcionalidad:**
 1. ✅ Horarios no se mostraban - Corregido lógica de dayName
@@ -362,6 +364,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-11
-**Versión:** 4.7 - Gallery UX Improvements (Pause, Zoom, Faster Rotation)
+**Versión:** 4.8 - JavaScript Syntax Fixes + Gallery Timing Corrected
 **Estado:** ✅ Production Ready
-**Último cambio:** Galería con pause-on-hover + zoom 1.3 + rotación cada 3s
+**Último cambio:** Errores de sintaxis corregidos + galería rotando cada 3s con pause-on-hover funcional
