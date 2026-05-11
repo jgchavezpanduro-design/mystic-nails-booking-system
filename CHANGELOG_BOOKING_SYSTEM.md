@@ -341,7 +341,23 @@ If your design inspiration is from an AI-generated image
 
 ---
 
+## 🎨 Actualizaciones Recientes (2026-05-11)
+
+### **Branding: Premium → Arte Efímero**
+- ✅ Logos SVG eliminados (navegación y footer)
+- ✅ "Premium Nail Art" → "Arte Efímero" (navegación)
+- ✅ "Premium Nail Art Studio" → "Arte Efímero" (footer)
+- ✅ Logo limpio: solo texto "Mystic Nails" + "Arte Efímero"
+
+### **Galería Mejorada**
+- ✅ Algoritmo Fisher-Yates shuffle implementado
+- ✅ Sistema anti-repetición para auto-rotación
+- ✅ Scripts de descarga de Instagram creados
+- ✅ Array de imágenes corregido (sin duplicados)
+
+---
+
 **Última actualización:** 2026-05-11
-**Versión:** 4.5 - Gallery Improvements + Instagram Integration Ready
+**Versión:** 4.6 - Branding Update: Premium → Arte Efímero
 **Estado:** ✅ Production Ready
-**Último cambio:** Galería mejorada con Fisher-Yates shuffle + scripts de descarga de Instagram creados
+**Último cambio:** Logos SVG eliminados + "Premium" cambiado a "Arte Efímero"
