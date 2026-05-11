@@ -3013,7 +3013,9 @@ ${servicesList}
 ⏱️ *Duration:* ${document.getElementById('estimatedTime').textContent}
 💅 *Removal:* ${removalText}
 
-${specialRequests ? `ℹ️ *Notes:* ${specialRequests}%0A%0A` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${specialRequests ? `ℹ️ *Notes:* ${specialRequests}
+
+` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ⚠️ *IMPORTANT - PLEASE READ CAREFULLY*
 
@@ -3056,15 +3058,15 @@ Thank you for choosing *Mystic Nails Art*! ✨`;
             // Open WhatsApp
             window.open(`https://wa.me/529843108186?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
 
-            alert('✅ *Booking Request Sent!*
+            alert(`✅ *Booking Request Sent!*
 
 📅 Google Calendar event created for admin and technician
 💬 WhatsApp message opened
 
 ⚠️ *IMPORTANT:*
 • Please send us a photo of your nail design ASAP
-• If it\'s an AI-generated design, we\'ll confirm what\'s possible
-• $100 deposit required to confirm your appointment');
+• If it's an AI-generated design, we'll confirm what's possible
+• $100 deposit required to confirm your appointment`);
 
             closeBookingModal();
         }
