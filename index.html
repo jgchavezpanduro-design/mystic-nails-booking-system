@@ -2796,7 +2796,7 @@
 
             console.log('Is today:', isToday);
             console.log('Current time:', now.toLocaleTimeString());
-            console.log('Minimum booking time:', minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}));
+            console.log('Minimum booking time:', minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
 
             timeSlotsContainer.innerHTML = '';
             let availableSlots = 0;
@@ -2831,7 +2831,7 @@
             // Show message if no slots available
             if (availableSlots === 0) {
                 if (skippedSlots > 0) {
-                    timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ All slots for today have passed (minimum 2 hours in advance).<br><br><strong>Current time:</strong> ' + now.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) + '<br><strong>Next available time:</strong> ' + minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) + '<br><br><strong>Please select a future date or contact us via WhatsApp.</strong></p>';
+                    timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ All slots for today have passed (minimum 2 hours in advance).<br><br><strong>Current time:</strong> ' + now.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) + '<br><strong>Next available time:</strong> ' + minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) + '<br><br><strong>Please select a future date or contact us via WhatsApp.</strong></p>';
                 } else {
                     timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ No available slots for this date.</p>';
                 }
@@ -3200,20 +3200,29 @@ Thank you for choosing *Mystic Nails Art*! ✨`;
 
             // Crear nuevo intervalo de 3 segundos (3000ms)
             galleryRotateInterval = setInterval(() => {
-                loadRandomGallery();
+                console.log('⏰ Interval fired - checking pause status:', isGalleryPaused);
+                if (!isGalleryPaused) {
+                    loadRandomGallery();
+                } else {
+                    console.log('⏸️ Skipping gallery refresh - paused');
+                }
             }, 3000);
+
+            console.log('✅ Gallery rotation started (3s interval)');
         }
 
-        // Cargar galería inicial cuando el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                loadRandomGallery();
-                startGalleryRotation();
-            });
-        } else {
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 DOM loaded - initializing gallery');
+
+            // Cargar galería inicial
             loadRandomGallery();
-            startGalleryRotation();
-        }
+
+            // Iniciar rotación después de 1 segundo
+            setTimeout(() => {
+                startGalleryRotation();
+            }, 1000);
+        });
     </script>
 </body>
 </html>
