@@ -1700,12 +1700,12 @@
     <!-- Navigation -->
     <nav style="position: fixed; top: 0; width: 100%; background: rgba(253, 251, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; box-shadow: var(--md-sys-elevation-level2); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
         <div class="container">
-            <div class="logo" style="display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: var(--md-sys-color-primary);">
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="logo" style="display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: var(--md-sys-color-primary);">
                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
                     <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 26px; letter-spacing: -0.5px;">Mystic Nails</span>
                     <span style="font-size: 11px; color: var(--md-sys-color-on-surface-variant); font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Arte Efímero</span>
                 </div>
-            </div>
+            </a>
             <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; font-size: 24px; color: var(--md-sys-color-on-surface); cursor: pointer; padding: 8px; border-radius: var(--md-sys-shape-corner-small); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">☰</button>
             <div class="nav-links" id="navLinks" style="display: flex; gap: 8px; align-items: center;">
                 <a href="#services" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Services</a>
