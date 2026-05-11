@@ -1724,7 +1724,7 @@
                 <a href="#services" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Services</a>
                 <a href="#about" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">About Us</a>
                 <a href="#testimonials" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Reviews</a>
-                <a href="javascript:void(0)" class="nav-cta" onclick="closeMenu()" style="padding: 12px 24px; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); border-radius: var(--md-sys-shape-corner-full); text-decoration: none; font-weight: 600; box-shadow: var(--md-sys-elevation-level2); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Book Appointment</a>
+                <a href="javascript:void(0)" class="nav-cta" onclick="openBookingModal(event); closeMenu()" style="padding: 12px 24px; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); border-radius: var(--md-sys-shape-corner-full); text-decoration: none; font-weight: 600; box-shadow: var(--md-sys-elevation-level2); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Book Appointment</a>
             </div>
         </div>
     </nav>
@@ -2199,7 +2199,7 @@
                     <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Quick Links</h4>
                     <a href="#services" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Services</a>
                     <a href="#about" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">About Us</a>
-                    <a href="javascript:void(0)" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Book Appointment</a>
+                    <a href="javascript:void(0)" onclick="openBookingModal(event)" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Book Appointment</a>
                 </div>
 
                 <div class="footer-section">
