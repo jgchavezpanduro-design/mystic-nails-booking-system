@@ -51,6 +51,8 @@ Se ha completado la implementación del **Sistema de Booking Automatizado** con 
 - ✅ Aviso visible sobre diseños de IA antes de confirmar
 - ✅ Alertas informativas al completar el booking
 - ✅ Diseño responsive y mobile-first
+- ✅ **Galería mejorada con algoritmo Fisher-Yates** (sin duplicados en auto-rotación)
+- ✅ **Scripts de descarga de Instagram** creados (ready para agregar más imágenes)
 
 ---
 
@@ -340,6 +342,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-11
-**Versión:** 4.4 - Booking System with Calendar Integration + All Booking Buttons Fixed
+**Versión:** 4.5 - Gallery Improvements + Instagram Integration Ready
 **Estado:** ✅ Production Ready
-**Último cambio:** Botones de navegación y footer corregidos para abrir modal de booking
+**Último cambio:** Galería mejorada con Fisher-Yates shuffle + scripts de descarga de Instagram creados
