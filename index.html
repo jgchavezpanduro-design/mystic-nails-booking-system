@@ -3124,17 +3124,9 @@ Thank you for choosing *Mystic Nails Art*! ✨`;
             img.src = imageSrc;
             img.alt = 'Nail Art Design - Mystic Nails Art';
 
-            // Para imágenes específicas, hacer zoom más cercano a las uñas:
-            // Imágenes 6 y 7 (índices 5 y 6 en 0-based): center top
-            // Imágenes 8 y 10 (índices 7 y 9 en 0-based): center 35% (encuadre más cercano a uñas)
-            if (index === 5 || index === 6) {
-                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.4s ease;';
-            } else if (index === 7 || index === 9) {
-                // Imágenes 8 y 10 - encuadre más cercano a las uñas
-                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transition: transform 0.4s ease;';
-            } else {
-                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;';
-            }
+            // Todas las imágenes centradas en las uñas - encuadre balanceado
+            // center 42%: enfocado en las uñas, ni muy cerca ni muy lejos
+            img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; object-position: center 42%; transition: transform 0.4s ease;';
             img.loading = 'lazy';
 
             const overlay = document.createElement('div');
