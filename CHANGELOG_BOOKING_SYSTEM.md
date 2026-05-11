@@ -53,6 +53,10 @@ Se ha completado la implementación del **Sistema de Booking Automatizado** con 
 - ✅ Diseño responsive y mobile-first
 - ✅ **Galería mejorada con algoritmo Fisher-Yates** (sin duplicados en auto-rotación)
 - ✅ **Scripts de descarga de Instagram** creados (ready para agregar más imágenes)
+- ✅ **Auto-rotación de galería: 3 segundos** (antes 5 segundos)
+- ✅ **Pause-on-hover** (galería no rota cuando usuario ve imágenes)
+- ✅ **Zoom mejorado** (scale 1.3 en hover, antes 1.1)
+- ✅ **Imágenes 6 y 8 con zoom cercano a uñas** (object-position: center top)
 
 ---
 
@@ -358,6 +362,6 @@ If your design inspiration is from an AI-generated image
 ---
 
 **Última actualización:** 2026-05-11
-**Versión:** 4.6 - Branding Update: Premium → Arte Efímero
+**Versión:** 4.7 - Gallery UX Improvements (Pause, Zoom, Faster Rotation)
 **Estado:** ✅ Production Ready
-**Último cambio:** Logos SVG eliminados + "Premium" cambiado a "Arte Efímero"
+**Último cambio:** Galería con pause-on-hover + zoom 1.3 + rotación cada 3s
