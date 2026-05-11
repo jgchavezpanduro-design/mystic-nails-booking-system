@@ -3075,29 +3075,67 @@ Thank you for choosing *Mystic Nails Art*! ✨`;
         // RANDOM GALLERY WITH AUTO-ROTATION
         // ========================================
 
-        // Lista completa de imágenes disponibles
+        // Lista completa de imágenes disponibles (16 imágenes actuales)
         const allGalleryImages = [
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.04.jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.05.jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.05 (1).jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.05 (2).jpeg',
             'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06.jpeg',
             'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (1).jpeg',
             'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (2).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.04.jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.05.jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08.jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08 (2).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.05 (2).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.10.jpeg',
             'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (3).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.11.jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.10 (1).jpeg',
             'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (4).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (3).jpeg',
-            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.06 (1).jpeg'
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08.jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08 (1).jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08 (2).jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.08 (3).jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.10.jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.10 (1).jpeg',
+            'assets/imagenes/watermarked/WhatsApp Image 2026-05-10 at 01.27.11.jpeg'
         ];
 
-        // Función para seleccionar imágenes aleatorias sin repetición
+        // NOTA: Cuando descargues las imágenes de Instagram, se agregarán aquí
+        // con formato: 'assets/imagenes/watermarked/Instagram_001.jpg', etc.
+
+        // Función mejorada para seleccionar imágenes aleatorias SIN repetición
+        // Usando Fisher-Yates shuffle para verdadera aleatoriedad
         function getRandomImages(count) {
-            const shuffled = [...allGalleryImages].sort(() => Math.random() - 0.5);
+            const shuffled = [...allGalleryImages];
+
+            // Fisher-Yates shuffle
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
             return shuffled.slice(0, Math.min(count, shuffled.length));
+        }
+
+        // Variable para rastrear imágenes ya mostradas (evitar duplicados en auto-refresh)
+        let lastShownImages = [];
+
+        function getRandomImagesWithoutRepetition(count) {
+            let availableImages = allGalleryImages.filter(img => !lastShownImages.includes(img));
+
+            // Si no hay suficientes imágenes sin mostrar, resetear
+            if (availableImages.length < count) {
+                lastShownImages = [];
+                availableImages = [...allGalleryImages];
+            }
+
+            const shuffled = [...availableImages];
+
+            // Fisher-Yates shuffle
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            const selected = shuffled.slice(0, Math.min(count, shuffled.length));
+            lastShownImages = [...lastShownImages, ...selected];
+
+            return selected;
         }
 
         // Función para crear un elemento de galería
@@ -3143,7 +3181,8 @@ Thank you for choosing *Mystic Nails Art*! ✨`;
             galleryGrid.innerHTML = '';
 
             // Seleccionar 8 imágenes aleatorias (o menos si no hay suficientes)
-            const selectedImages = getRandomImages(8);
+            // Sin repetición usando Fisher-Yates shuffle
+            const selectedImages = getRandomImagesWithoutRepetition(8);
 
             // Crear y agregar elementos
             selectedImages.forEach(imageSrc => {
