@@ -1700,6 +1700,11 @@
         #bookingModal > div::-webkit-scrollbar-thumb:hover {
             background: rgba(169, 119, 219, 0.5);
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1713,11 +1718,11 @@
                 </div>
             </a>
             <button class="menu-toggle" onclick="toggleMenu()" style="background: transparent; border: none; font-size: 24px; color: var(--md-sys-color-on-surface); cursor: pointer; padding: 8px; border-radius: var(--md-sys-shape-corner-small); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">☰</button>
-            <div class="nav-links" id="navLinks" style="display: flex; gap: 8px; align-items: center;">
-                <a href="#services" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Services</a>
-                <a href="#about" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">About Us</a>
-                <a href="#testimonials" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Reviews</a>
-                <a href="javascript:void(0)" class="nav-cta" onclick="openBookingModal(event); closeMenu()" style="padding: 12px 24px; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); border-radius: var(--md-sys-shape-corner-full); text-decoration: none; font-weight: 600; box-shadow: var(--md-sys-elevation-level2); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Book Appointment</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#services" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Servicios</a>
+                <a href="#about" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Nosotros</a>
+                <a href="#testimonials" onclick="closeMenu()" style="padding: 10px 16px; border-radius: var(--md-sys-shape-corner-full); color: var(--md-sys-color-on-surface-variant); text-decoration: none; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Reseñas</a>
+                <a href="javascript:void(0)" class="nav-cta" onclick="openBookingModal(event); closeMenu()" style="padding: 12px 24px; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); border-radius: var(--md-sys-shape-corner-full); text-decoration: none; font-weight: 600; box-shadow: var(--md-sys-elevation-level2); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">Reservar Cita</a>
             </div>
         </div>
     </nav>
@@ -1732,15 +1737,15 @@
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 1L10 6L15 6.5L11 10L12.5 15L8 12L3.5 15L5 10L1 6.5L6 6L8 1Z" fill="var(--md-sys-color-tertiary)"/>
                         </svg>
-                        <span style="font-size: 12px; font-weight: 600; color: var(--md-sys-color-on-tertiary-container); letter-spacing: 1px; text-transform: uppercase;">Premium Quality</span>
+                        <span style="font-size: 12px; font-weight: 600; color: var(--md-sys-color-on-tertiary-container); letter-spacing: 1px; text-transform: uppercase;">Calidad Premium</span>
                     </div>
 
-                    <h1 style="font-size: 72px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Elevate Your<br>Nail Experience</h1>
-                    <p style="font-size: 20px; color: var(--md-sys-color-on-surface-variant); margin-bottom: 25px; font-weight: 400; line-height: 1.6;">Premium nail art in Playa del Carmen. Where creativity meets perfection.</p>
+                    <h1 style="font-size: 72px; font-weight: 900; margin-bottom: 15px; line-height: 1.1; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Eleva Tu<br>Experiencia en Uñas</h1>
+                    <p style="font-size: 20px; color: var(--md-sys-color-on-surface-variant); margin-bottom: 25px; font-weight: 400; line-height: 1.6;">Arte premium en uñas en Playa del Carmen. Donde la creatividad se encuentra con la perfección.</p>
 
                     <div class="cta-group" style="margin-bottom: 30px;">
-                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="padding: 18px 40px; font-size: 17px; font-weight: 600;">Book your appointment</a>
-                        <a href="https://wa.me/529843108186?text=Hello!*%20I%20have%20a%20question%20about%20your%20services" target="_blank" class="btn btn-primary" style="background: #25D366; color: white; border: 3px solid white; padding: 18px 40px; font-size: 17px; font-weight: 700; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);">💬 Talk to us on WhatsApp</a>
+                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="padding: 18px 40px; font-size: 17px; font-weight: 600;">Reserva tu cita</a>
+                        <a href="https://wa.me/529843108186?text=Hola!*%20Tengo%20una%20pregunta%20sobre%20sus%20servicios" target="_blank" class="btn btn-primary" style="background: #25D366; color: white; border: 3px solid white; padding: 18px 40px; font-size: 17px; font-weight: 700; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);">💬 Escríbenos en WhatsApp</a>
                     </div>
 
                     <div class="hero-stats" style="gap: 25px; margin-bottom: 20px;">
@@ -1882,20 +1887,17 @@
     <section class="services" id="services" style="background: white; padding: 100px 0;">
         <div class="container">
             <div class="section-header reveal" style="text-align: center;">
-                <h2 style="font-size: 64px; margin-bottom: 10px; color: var(--primary);">Services</h2>
+                <h2 style="font-size: 64px; margin-bottom: 10px; color: var(--primary);">Servicios</h2>
             </div>
 
             <!-- Natural Nails -->
             <div class="services-category" style="margin-bottom: 60px;">
-                <h3 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary);">Natural Nails</h3>
+                <h3 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary);">Uñas Naturales</h3>
 
                 <div class="services-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px;">
                     <!-- Kapping Polygel -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            </div>
                             <h3 style="font-size: 18px; color: var(--primary); margin-bottom: 8px;">Kapping Polygel</h3>
                             <p style="color: var(--gray); font-size: 11px;">120-150 minutes</p>
                         </div>
@@ -1904,15 +1906,12 @@
                             <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 13px; text-align: center;">1 Color + French</li>
                             <li style="padding: 6px 0; font-size: 13px; text-align: center;">Effects / Design</li>
                         </ul>
-                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Book Now</a>
+                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Reservar Ahora</a>
                     </div>
 
                     <!-- Gelish -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M18.5 2C16.57 2 15 3.57 15 5.5C15 6.72 15.63 7.79 16.56 8.45C16.22 9.2 15.96 10 15.79 10.81L13.73 20.33C13.57 21.29 14.27 22.18 15.25 22.18H18.5C20.43 22.18 22 20.61 22 18.68V9.68C22 7.75 20.43 6.18 18.5 6.18C18.16 6.18 17.83 6.22 17.5 6.29V5.5C17.5 3.57 16.43 2 14.5 2C12.57 2 11 3.57 11 5.5C11 6.72 11.63 7.79 12.56 8.45C12.22 9.2 11.96 10 11.79 10.81L9.73 20.33C9.57 21.29 10.27 22.18 11.25 22.18H14.5C16.43 22.18 18 20.61 18 18.68V9.68C18 7.75 16.93 6.18 15 6.18C14.66 6.18 14.33 6.22 14 6.29V5.5C14 3.57 12.93 2 11 2Z"/></svg>
-                            </div>
                             <h3 style="font-size: 18px; color: var(--primary); margin-bottom: 8px;">Gelish</h3>
                             <p style="color: var(--gray); font-size: 10px;">short and healthy nails</p>
                         </div>
@@ -1921,15 +1920,12 @@
                             <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 13px; text-align: center;">1 Color + French</li>
                             <li style="padding: 6px 0; font-size: 13px; text-align: center;">Simple Design</li>
                         </ul>
-                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Book Now</a>
+                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Reservar Ahora</a>
                     </div>
 
                     <!-- Builder Gel -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
-                            </div>
                             <h3 style="font-size: 18px; color: var(--primary); margin-bottom: 8px;">Builder Gel</h3>
                             <p style="color: var(--gray); font-size: 10px;">perfect to go from weak to strong nails</p>
                         </div>
@@ -1938,15 +1934,12 @@
                             <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 13px; text-align: center;">1 Color + French</li>
                             <li style="padding: 6px 0; font-size: 13px; text-align: center;">Free Design</li>
                         </ul>
-                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Book Now</a>
+                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Reservar Ahora</a>
                     </div>
 
                     <!-- Rubber Base -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg>
-                            </div>
                             <h3 style="font-size: 18px; color: var(--primary); margin-bottom: 8px;">Rubber Base</h3>
                             <p style="color: var(--gray); font-size: 10px;">short nails. protective and soothing reinforcement</p>
                         </div>
@@ -1955,22 +1948,19 @@
                             <li style="padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 13px; text-align: center;">1 Color + French</li>
                             <li style="padding: 6px 0; font-size: 13px; text-align: center;">Simple Design</li>
                         </ul>
-                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Book Now</a>
+                        <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="width: 100%; text-align: center; padding: 12px; font-size: 14px;">Reservar Ahora</a>
                     </div>
                 </div>
             </div>
 
             <!-- Extensions -->
             <div class="services-category" style="margin-bottom: 60px;">
-                <h3 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary);">Extensions</h3>
+                <h3 style="text-align: center; margin-bottom: 40px; font-size: 32px; color: var(--primary);">Extensiones</h3>
 
                 <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
                     <!-- Softgel / Gel X -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
-                            </div>
                             <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Softgel / Gel X</h3>
                             <p style="color: var(--gray); font-size: 11px;">instant magic in your hands lightweight and perfect extensions</p>
                         </div>
@@ -1985,9 +1975,6 @@
                     <!-- Acrylics -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg>
-                            </div>
                             <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Acrylics</h3>
                             <p style="color: var(--gray); font-size: 11px;">strength and beauty in one creation, rigid and long lasting extensions</p>
                         </div>
@@ -2009,11 +1996,8 @@
                     <!-- Express -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            </div>
                             <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Express</h3>
-                            <p style="color: var(--gray); font-size: 13px;">20-30 minutes</p>
+                            <p style="color: var(--gray); font-size: 13px;">25 minutes</p>
                         </div>
                         <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
                             <li style="padding: 8px 0; text-align: center;">Quick and essential pedicure</li>
@@ -2024,11 +2008,8 @@
                     <!-- Russian -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
-                            </div>
                             <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Russian</h3>
-                            <p style="color: var(--gray); font-size: 13px;">30 min - 1 hr</p>
+                            <p style="color: var(--gray); font-size: 13px;">45 minutes</p>
                         </div>
                         <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
                             <li style="padding: 8px 0; text-align: center;">Dry pedicure with deep cleaning</li>
@@ -2039,11 +2020,8 @@
                     <!-- Mystic -->
                     <div class="service-card" style="background: var(--light); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s ease;">
                         <div style="text-align: center; margin-bottom: 20px;">
-                            <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg>
-                            </div>
-                            <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Mystic</h3>
-                            <p style="color: var(--gray); font-size: 13px;">1 hr - 1:30</p>
+                            <h3 style="font-size: 22px; color: var(--primary); margin-bottom: 10px;">Mystic Spa Pedicure</h3>
+                            <p style="color: var(--gray); font-size: 13px;">75 minutes</p>
                         </div>
                         <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
                             <li style="padding: 8px 0; text-align: center;">Spa treatment with gelish included</li>
@@ -2056,7 +2034,7 @@
             <!-- Pricing Note -->
             <div style="background: var(--light); padding: 20px; border-radius: 15px; margin-top: 40px; text-align: center;">
                 <p style="color: var(--gray); font-size: 14px; margin: 0;">
-                    <strong>Note:</strong> Prices may vary depending on design complexity. Contact us for an exact quote.
+                    <strong>Nota:</strong> Los precios pueden variar dependiendo de la complejidad del diseño. Contáctanos para una cotización exacta.
                 </p>
             </div>
         </div>
@@ -2067,27 +2045,27 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2 style="font-size: 48px; margin-bottom: 10px; color: var(--primary);">About Mystic Nails Art</h2>
-                    <p>We are premium nail art specialists in Playa del Carmen since 2023. Our passion is creating unique designs that reflect your personality and style.</p>
-                    <p>With over 1,300 satisfied clients, we have become the preferred choice for women seeking quality, hygiene, and spectacular results.</p>
-                    <p>Every set is a work of art, designed with you in mind and using the best products on the market.</p>
+                    <h2 style="font-size: 48px; margin-bottom: 10px; color: var(--primary);">Sobre Mystic Nails Art</h2>
+                    <p>Somos especialistas en arte premium en uñas en Playa del Carmen desde 2023. Nuestra pasión es crear diseños únicos que reflejen tu personalidad y estilo.</p>
+                    <p>Con más de 1,300 clientes satisfechas, nos hemos convertido en la opción preferida para mujeres que buscan calidad, higiene y resultados espectaculares.</p>
+                    <p>Cada set es una obra de arte, diseñada pensando en ti y usando los mejores productos del mercado.</p>
 
                     <div class="about-stats">
                         <div class="about-stat">
                             <div class="about-stat-number">2+</div>
-                            <div class="about-stat-label">Years Experience</div>
+                            <div class="about-stat-label">Años de Experiencia</div>
                         </div>
                         <div class="about-stat">
                             <div class="about-stat-number">1,300+</div>
-                            <div class="about-stat-label">Happy Clients</div>
+                            <div class="about-stat-label">Clientes Felices</div>
                         </div>
                         <div class="about-stat">
                             <div class="about-stat-number">5.5★</div>
-                            <div class="about-stat-label">Instagram Rating</div>
+                            <div class="about-stat-label">Calificación en Instagram</div>
                         </div>
                         <div class="about-stat">
                             <div class="about-stat-number">100%</div>
-                            <div class="about-stat-label">Premium Products</div>
+                            <div class="about-stat-label">Productos Premium</div>
                         </div>
                     </div>
                 </div>
@@ -2103,8 +2081,8 @@
     <section class="testimonials" id="testimonials" style="background: white;">
         <div class="container">
             <div class="section-header" style="color: var(--dark);">
-                <h2>Customer Reviews | Verified Google Opinions</h2>
-                <p>1,300+ 5-star reviews on Google Maps. Discover what our clients say about Mystic Nails Art.</p>
+                <h2>Reseñas de Clientes | Opiones Verificadas de Google</h2>
+                <p>Más de 1,300 reseñas de 5 estrellas en Google Maps. Descubre lo que dicen nuestras clientas sobre Mystic Nails Art.</p>
             </div>
 
             <div class="testimonials-carousel-container">
@@ -2303,7 +2281,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 40px;">
-                <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary">Book Your Appointment</a>
+                <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary">Reserva Tu Cita</a>
             </div>
         </div>
     </section>
@@ -2312,15 +2290,15 @@
     <section class="booking" id="booking" style="padding: 80px 0; background: transparent;">
         <div class="container" style="text-align: center;">
             <div class="booking-cta" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 60px 30px; border-radius: 20px; color: white; box-shadow: 0 10px 30px rgba(169, 119, 219, 0.3);">
-                <h2 style="font-size: 36px; margin-bottom: 15px; font-weight: 700; color: white;">Ready for spectacular nails?</h2>
-                <p style="font-size: 18px; margin-bottom: 30px; opacity: 0.95;">Book your appointment in seconds. Choose your technician, date, and time.</p>
+                <h2 style="font-size: 36px; margin-bottom: 15px; font-weight: 700; color: white;">¿Lista para unas uñas espectaculares?</h2>
+                <p style="font-size: 18px; margin-bottom: 30px; opacity: 0.95;">Reserva tu cita en segundos. Elige tu técnica, fecha y hora.</p>
 
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                     <a href="javascript:void(0)" onclick="openBookingModal(event)" class="btn btn-primary" style="font-size: 18px; padding: 18px 50px; min-width: 280px; background: white; color: var(--primary); border: none;">
-                        Book Appointment Now
+                        Reserva Cita Ahora
                     </a>
-                    <a href="https://wa.me/529843108186?text=Hello!*%20I%20have%20a%20question%20about%20your%20nail%20services" target="_blank" class="btn btn-secondary" style="font-size: 18px; padding: 18px 50px; border: 2px solid white; color: white; background: transparent; min-width: 280px;">
-                        Have a Question?
+                    <a href="https://wa.me/529843108186?text=Hola!*%20Tengo%20una%20pregunta%20sobre%20sus%20servicios%20de%20uñas" target="_blank" class="btn btn-secondary" style="font-size: 18px; padding: 18px 50px; border: 2px solid white; color: white; background: transparent; min-width: 280px;">
+                        ¿Tienes Preguntas?
                     </a>
                 </div>
             </div>
@@ -2339,7 +2317,7 @@
 
             <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px;">
                 <div class="footer-section">
-                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Visit Us</h4>
+                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Visítanos</h4>
                     <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                         <span style="font-size: 18px;">📍</span>
                         Calle 16 Nte entre 35 y 40, Centro
@@ -2355,21 +2333,21 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Hours</h4>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Monday - Friday: 10:00 - 20:00</p>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Saturday: 10:00 - 18:00</p>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Sunday: Closed</p>
+                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Horario</h4>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Lunes - Viernes: 10:00 - 20:00</p>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Sábado: 10:00 - 18:00</p>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px;">Domingo: Cerrado</p>
                 </div>
 
                 <div class="footer-section">
-                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Quick Links</h4>
-                    <a href="#services" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Services</a>
-                    <a href="#about" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">About Us</a>
-                    <a href="javascript:void(0)" onclick="openBookingModal(event)" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Book Appointment</a>
+                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Enlaces Rápidos</h4>
+                    <a href="#services" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Servicios</a>
+                    <a href="#about" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Nosotros</a>
+                    <a href="javascript:void(0)" onclick="openBookingModal(event)" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s;">Reservar Cita</a>
                 </div>
 
                 <div class="footer-section">
-                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Follow Us</h4>
+                    <h4 style="color: var(--md-sys-color-surface); font-size: 18px; margin-bottom: 20px;">Síguenos</h4>
                     <div class="social-links" style="display: flex; gap: 12px;">
                         <a href="https://instagram.com/mysticnailsart" target="_blank" aria-label="Instagram" style="width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none;">
                             <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
@@ -2387,14 +2365,21 @@
 
             <!-- Footer Bottom -->
             <div style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p style="color: rgba(255,255,255,0.5); font-size: 14px;">&copy; 2026 Mystic Nails Art. All rights reserved. Made with 💜 in Playa del Carmen</p>
+                <p style="color: rgba(255,255,255,0.5); font-size: 14px;">&copy; 2026 Mystic Nails Art. Todos los derechos reservados. Hecho con 💜 en Playa del Carmen</p>
             </div>
         </div>
     </footer>
 
+    <!-- Admin Panel Button (discreto) -->
+    <div style="position: fixed; bottom: 80px; left: 20px; z-index: 9999;">
+        <button onclick="showAdminPanel()" style="background: rgba(169, 119, 219, 0.1); border: 1px solid rgba(169, 119, 219, 0.3); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.7;" title="Panel de Admin">
+            ⚙️
+        </button>
+    </div>
+
     <!-- WhatsApp Widget -->
     <div class="whatsapp-widget">
-        <a href="https://wa.me/529843108186?text=Hello!*%20I%20want%20to%20book%20an%20appointment" class="whatsapp-btn" target="_blank">
+        <a href="https://wa.me/529843108186?text=Hola!*%20Quiero%20reservar%20una%20cita" class="whatsapp-btn" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.472 14.382c-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
             </svg>
@@ -2545,143 +2530,386 @@
         }
     </script>
 
-    <!-- Booking Modal -->
-    <div id="bookingModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center;">
-        <div style="background: white; border-radius: 20px; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; padding: 40px; position: relative;">
-            <button onclick="closeBookingModal()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 32px; cursor: pointer; color: #333;">&times;</button>
+    <!-- Booking Modal - Fullscreen Experience -->
+    <div id="bookingModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10000; overflow-y: auto;">
+        <!-- Close Button -->
+        <button onclick="closeBookingModal()" style="position: fixed; top: 20px; right: 20px; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; z-index: 10001; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">&times;</button>
 
-            <h2 style="text-align: center; color: var(--primary); margin-bottom: 30px; font-size: 32px;">Book Your Appointment</h2>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 100px 20px;">
+            <!-- Breadcrumb Progress -->
+            <div id="breadcrumbProgress" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
+                <!-- Will be dynamically updated -->
+            </div>
+
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 10px; font-size: 42px; font-weight: 700;">Reserva Tu Cita</h2>
+            <p style="text-align: center; color: var(--gray); font-size: 18px; margin-bottom: 50px;">Completa tu reserva en solo unos pocos pasos</p>
+
+            <!-- Step 0: Resident Type -->
+            <div id="step0" class="booking-step">
+                <h3 style="margin-bottom: 30px; color: var(--dark); font-size: 28px; text-align: center;">¿Eres residente en México o de visita?</h3>
+                <p style="text-align: center; color: var(--gray); font-size: 16px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Esta información nos ayuda a prepararte mejor para tu cita.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 800px; margin: 0 auto;">
+                    <!-- Residente Option -->
+                    <div onclick="selectClientType('local')" class="client-type-card" style="border: 3px solid var(--primary); border-radius: 20px; padding: 50px 40px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <div style="font-size: 64px; margin-bottom: 20px;">🏠</div>
+                        <h4 style="color: var(--dark); margin: 0 0 15px 0; font-size: 26px; font-weight: 700;">Residente</h4>
+                        <p style="color: var(--gray); font-size: 15px; margin: 0; line-height: 1.6;">
+                            Vivo en México
+                        </p>
+                    </div>
+
+                    <!-- Visitante Option -->
+                    <div onclick="selectClientType('foreign')" class="client-type-card" style="border: 3px solid var(--secondary); border-radius: 20px; padding: 50px 40px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <div style="font-size: 64px; margin-bottom: 20px;">✈️</div>
+                        <h4 style="color: var(--dark); margin: 0 0 15px 0; font-size: 26px; font-weight: 700;">De visita</h4>
+                        <p style="color: var(--gray); font-size: 15px; margin: 0; line-height: 1.6;">
+                            Turista / Visitante
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Step 1: Select Technician -->
             <div id="step1" class="booking-step">
-                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 1: Select Your Technician</h3>
-                <div class="technician-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div class="technician-card" onclick="selectTechnician('Carolina')" style="border: 2px solid var(--primary); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                        <div style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 32px;">👩‍🎨</div>
-                        <h4 style="color: var(--dark); margin: 0;">Carolina</h4>
-                        <p style="font-size: 12px; color: var(--gray);">Nail Artist</p>
+                <h3 style="margin-bottom: 40px; color: var(--dark); font-size: 28px; text-align: center;">Selecciona Tu Técnica de Uñas</h3>
+                <div class="technician-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                    <div class="technician-card" onclick="selectTechnician('Carolina')" style="border: 3px solid var(--primary); border-radius: 20px; padding: 50px 30px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <h4 style="color: var(--dark); margin: 0 0 10px 0; font-size: 32px; font-weight: 700;">Carolina</h4>
+                        <p style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">Nail Artist</p>
+                        <p style="font-size: 13px; color: var(--primary);">Disponible Lun-Dom</p>
+                        <p style="font-size: 13px; color: var(--primary);">9:00 AM - 5:00 PM</p>
                     </div>
-                    <div class="technician-card" onclick="selectTechnician('Montse')" style="border: 2px solid var(--primary); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                        <div style="width: 80px; height: 80px; background: var(--secondary); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M18.5 2C16.57 2 15 3.57 15 5.5C15 6.72 15.63 7.79 16.56 8.45C16.22 9.2 15.96 10 15.79 10.81L13.73 20.33C13.57 21.29 14.27 22.18 15.25 22.18H18.5C20.43 22.18 22 20.61 22 18.68V9.68C22 7.75 20.43 6.18 18.5 6.18C18.16 6.18 17.83 6.22 17.5 6.29V5.5C17.5 3.57 16.43 2 14.5 2Z"/></svg>
-                        </div>
-                        <h4 style="color: var(--dark); margin: 0;">Montse</h4>
-                        <p style="font-size: 12px; color: var(--gray);">Nail Artist</p>
+                    <div class="technician-card" onclick="selectTechnician('Montse')" style="border: 3px solid var(--primary); border-radius: 20px; padding: 50px 30px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <h4 style="color: var(--dark); margin: 0 0 10px 0; font-size: 32px; font-weight: 700;">Montse</h4>
+                        <p style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">Nail Artist</p>
+                        <p style="font-size: 13px; color: var(--primary);">Disponible Lun-Dom</p>
+                        <p style="font-size: 13px; color: var(--primary);">12:00 PM - 4:00 PM</p>
                     </div>
-                    <div class="technician-card" onclick="selectTechnician('Diana')" style="border: 2px solid var(--primary); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                        <div style="width: 80px; height: 80px; background: var(--gold); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg>
-                        </div>
-                        <h4 style="color: var(--dark); margin: 0;">Diana</h4>
-                        <p style="font-size: 12px; color: var(--gray);">Nail Artist</p>
+                    <div class="technician-card" onclick="selectTechnician('Diana')" style="border: 3px solid var(--primary); border-radius: 20px; padding: 50px 30px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <h4 style="color: var(--dark); margin: 0 0 10px 0; font-size: 32px; font-weight: 700;">Diana</h4>
+                        <p style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">Nail Artist</p>
+                        <p style="font-size: 13px; color: var(--primary);">Available Mon, Tue, Thu-Sun</p>
+                        <p style="font-size: 13px; color: var(--primary);">Mon/Thu: 9AM-12PM | Tue: 9AM-8PM | Fri-Sun: 3:30PM-8PM</p>
                     </div>
                 </div>
             </div>
 
             <!-- Step 2: Select Service -->
             <div id="step2" class="booking-step" style="display: none;">
-                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 2: Select Services</h3>
-                <p style="margin-bottom: 15px; color: var(--gray);">Technician: <strong id="selectedTechnicianName"></strong></p>
-                <p style="margin-bottom: 20px; font-size: 14px; color: var(--primary); font-weight: 500;">💡 You can select multiple services</p>
-
-                <h4 style="margin-bottom: 15px; color: var(--primary);">Manicure Services</h4>
-                <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
-                    <button onclick="selectService('Gelish', '90')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">Gelish (90 min)</button>
-                    <button onclick="selectService('Rubber Base', '120')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">Rubber Base (120 min)</button>
-                    <button onclick="selectService('Acrylic', '180')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">Acrylic Extensions (180 min)</button>
-                    <button onclick="selectService('Polygel', '180')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">💎 Polygel Sculpt (180 min)</button>
+                <div style="background: linear-gradient(135deg, var(--light), #fff); padding: 20px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--primary);">
+                    <p style="margin: 0; color: var(--gray); font-size: 16px;">Nail Artist: <strong id="selectedTechnicianName" style="color: var(--primary);"></strong></p>
                 </div>
 
-                <h4 style="margin-bottom: 15px; color: var(--primary); margin-top: 25px;">Pedicure Services</h4>
-                <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
-                    <button onclick="selectService('Express Pedicure', '60')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">👣 Express Pedicure (60 min)</button>
-                    <button onclick="selectService('Russian Pedicure', '90')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">👣 Russian Pedicure (90 min)</button>
-                    <button onclick="selectService('Mystic Pedicure', '90')" class="service-btn" style="padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 14px;">👣 Mystic Spa Pedicure (90 min)</button>
+                <h4 style="margin-bottom: 25px; color: var(--primary); font-size: 24px;">Servicios de Manicure</h4>
+                <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                    <!-- Gelish Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Gelish', '90')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Gelish</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">90 min</div>
+                                    <div class="service-price-display" data-service="Gelish" style="font-size: 15px; color: var(--gold); font-weight: 700;">$430 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Perfect for short and healthy nails.</p>
+                        </button>
+
+                        <!-- Variant Dropdown para Gelish -->
+                        <div class="service-variant-dropdown" data-service="Gelish" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 2px solid #E5E7EB;">
+                            <label style="display: block; font-size: 11px; color: var(--gray); margin-bottom: 6px; font-weight: 600;">Estilo:</label>
+                            <select onchange="selectServiceVariant('Gelish', this.value)" class="variant-select" style="width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--gold); border-radius: 8px; background: linear-gradient(135deg, #fff9f0, #ffffff); font-size: 13px; font-weight: 600; color: var(--dark); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08); appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 12 12\"><path fill=\"%23f59e0b\" d=\"M6 8.825L10.5 4.425 11.925 5.925 6 11.825 0.075 5.925 1.5 4.425 6 8.825z\"/></svg>'); background-repeat: no-repeat; background-position: right 10px center;" data-service="Gelish" onclick="event.stopPropagation()">
+                                <option value="1 Color">1 Color - $430</option>
+                                <option value="1 Color + French">+French - $470</option>
+                                <option value="Efectos / Diseño">Diseño - $500</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Rubber Base Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Rubber Base', '120')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Rubber Base</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">120 min</div>
+                                    <div class="service-price-display" data-service="Rubber Base" style="font-size: 15px; color: var(--gold); font-weight: 700;">$520 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Short nails with protective and soothing reinforcement.</p>
+                        </button>
+
+                        <!-- Variant Dropdown para Rubber Base -->
+                        <div class="service-variant-dropdown" data-service="Rubber Base" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #E5E7EB;">
+                            <label style="display: block; font-size: 13px; color: var(--gray); margin-bottom: 8px; font-weight: 600;">💅 Estilo:</label>
+                            <select onchange="selectServiceVariant('Rubber Base', this.value)" class="variant-select" style="width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--gold); border-radius: 8px; background: linear-gradient(135deg, #fff9f0, #ffffff); font-size: 13px; font-weight: 600; color: var(--dark); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08); appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 12 12\"><path fill=\"%23f59e0b\" d=\"M6 8.825L10.5 4.425 11.925 5.925 6 11.825 0.075 5.925 1.5 4.425 6 8.825z\"/></svg>'); background-repeat: no-repeat; background-position: right 10px center;" data-service="Rubber Base" onclick="event.stopPropagation()">
+                                <option value="1 Color">1 Color - $520</option>
+                                <option value="1 Color + French">+French - $550</option>
+                                <option value="Efectos / Diseño">Diseño - $600</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Acrylic Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Acrylic', '180')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Acrylic Extensions</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">180 min</div>
+                                    <div class="service-price-display" data-service="Acrylic" style="font-size: 15px; color: var(--gold); font-weight: 700;">$740 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Strength and beauty in one creation. Rigid and long-lasting extensions.</p>
+                        </button>
+
+                        <!-- Variant Dropdown para Acrylic -->
+                        <div class="service-variant-dropdown" data-service="Acrylic" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #E5E7EB;">
+                            <label style="display: block; font-size: 13px; color: var(--gray); margin-bottom: 8px; font-weight: 600;">💅 Estilo:</label>
+                            <select onchange="selectServiceVariant('Acrylic', this.value)" class="variant-select" style="width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--gold); border-radius: 8px; background: linear-gradient(135deg, #fff9f0, #ffffff); font-size: 13px; font-weight: 600; color: var(--dark); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08); appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 12 12\"><path fill=\"%23f59e0b\" d=\"M6 8.825L10.5 4.425 11.925 5.925 6 11.825 0.075 5.925 1.5 4.425 6 8.825z\"/></svg>'); background-repeat: no-repeat; background-position: right 10px center;" data-service="Acrylic" onclick="event.stopPropagation()">
+                                <option value="1 Color">1 Color - $740</option>
+                                <option value="1 Color + French">+French - $770</option>
+                                <option value="Efectos / Diseño">Diseño - $800</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Polygel Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Polygel', '180')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Polygel Sculpt</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">180 min</div>
+                                    <div class="service-price-display" data-service="Polygel" style="font-size: 15px; color: var(--gold); font-weight: 700;">$640 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Premium sculpture with kapping polygel.</p>
+                        </button>
+
+                        <!-- Variant Dropdown para Polygel -->
+                        <div class="service-variant-dropdown" data-service="Polygel" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #E5E7EB;">
+                            <label style="display: block; font-size: 13px; color: var(--gray); margin-bottom: 8px; font-weight: 600;">💅 Estilo:</label>
+                            <select onchange="selectServiceVariant('Polygel', this.value)" class="variant-select" style="width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--gold); border-radius: 8px; background: linear-gradient(135deg, #fff9f0, #ffffff); font-size: 13px; font-weight: 600; color: var(--dark); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08); appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 12 12\"><path fill=\"%23f59e0b\" d=\"M6 8.825L10.5 4.425 11.925 5.925 6 11.825 0.075 5.925 1.5 4.425 6 8.825z\"/></svg>'); background-repeat: no-repeat; background-position: right 10px center;" data-service="Polygel" onclick="event.stopPropagation()">
+                                <option value="1 Color">1 Color - $640</option>
+                                <option value="1 Color + French">+French - $680</option>
+                                <option value="Efectos / Diseño">Diseño - $710</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 25px; color: var(--primary); font-size: 24px; margin-top: 40px;">Pedicure Services</h4>
+                <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                    <!-- Express Pedicure Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Express Pedicure', '25')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Express Pedicure</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">25 min</div>
+                                    <div class="service-price-display" data-service="Express Pedicure" style="font-size: 15px; color: var(--gold); font-weight: 700;">$350 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Quick and essential pedicure for your busy schedule.</p>
+                        </button>
+                    </div>
+
+                    <!-- Russian Pedicure Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Russian Pedicure', '45')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Russian Pedicure</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">45 min</div>
+                                    <div class="service-price-display" data-service="Russian Pedicure" style="font-size: 15px; color: var(--gold); font-weight: 700;">$500 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Dry pedicure with deep cleaning and precise cuticle work.</p>
+                        </button>
+                    </div>
+
+                    <!-- Mystic Pedicure Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--primary); border-radius: 15px; background: white; transition: all 0.3s ease;">
+                        <button onclick="selectService('Mystic Pedicure', '75')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Mystic Spa Pedicure</div>
+                                    <div style="font-size: 14px; color: var(--primary); font-weight: 600;">75 min</div>
+                                    <div class="service-price-display" data-service="Mystic Pedicure" style="font-size: 15px; color: var(--gold); font-weight: 700;">$700 MXN</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">Spa treatment with gelish included for complete relaxation and care.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Special Options -->
+                <h4 style="margin-bottom: 25px; color: var(--primary); font-size: 24px; margin-top: 40px;">Opciones Especiales</h4>
+                <div class="service-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                    <!-- Not Sure Yet Service Card -->
+                    <div class="service-card" style="padding: 25px; border: 3px solid var(--gold); border-radius: 15px; background: linear-gradient(135deg, #fffbeb, #fff); transition: all 0.3s ease;">
+                        <button onclick="selectService('Not Sure Yet', '180')" class="service-btn" style="width: 100%; text-align: left; position: relative; background: none; border: none; padding: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="text-align: left; flex: 1;">
+                                    <div style="font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px;">Aún no lo sé</div>
+                                    <div style="font-size: 14px; color: var(--gold); font-weight: 600;">180 min (3 hrs)</div>
+                                    <div class="service-price-display" data-service="Not Sure Yet" style="font-size: 15px; color: var(--gold); font-weight: 700;">Precio según servicio</div>
+                                </div>
+                                <div class="checkbox-indicator" style="width: 30px; height: 30px; border: 3px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; text-align: left; margin: 0;">No estás segura qué servicio quieres. Reserva tiempo y decidimos en tu cita.</p>
+                        </button>
+
+                        <!-- Variant Dropdown para Not Sure Yet -->
+                        <div class="service-variant-dropdown" data-service="Not Sure Yet" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #E5E7EB;">
+                            <label style="display: block; font-size: 13px; color: var(--gray); margin-bottom: 8px; font-weight: 600;">💅 Estilo:</label>
+                            <select onchange="selectServiceVariant('Not Sure Yet', this.value)" class="variant-select" style="width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--gold); border-radius: 8px; background: linear-gradient(135deg, #fff9f0, #ffffff); font-size: 13px; font-weight: 600; color: var(--dark); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 1px 4px rgba(245, 158, 11, 0.08); appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" height=\"10\" viewBox=\"0 0 12 12\"><path fill=\"%23f59e0b\" d=\"M6 8.825L10.5 4.425 11.925 5.925 6 11.825 0.075 5.925 1.5 4.425 6 8.825z\"/></svg>'); background-repeat: no-repeat; background-position: right 10px center;" data-service="Not Sure Yet" onclick="event.stopPropagation()">
+                                <option value="1 Color">1 Color</option>
+                                <option value="1 Color + French">+French</option>
+                                <option value="Efectos / Diseño">Diseño</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Removal Option -->
-                <div id="removalOption" style="display: none; margin-top: 20px; padding: 20px; background: var(--light); border-radius: 12px;">
-                    <h4 style="margin-bottom: 15px; color: var(--dark);">Include Removal? (Previous Set)</h4>
+                <div id="removalOption" style="display: none; margin-top: 30px; padding: 30px; background: linear-gradient(135deg, var(--light), #fff); border-radius: 15px; border-left: 5px solid var(--gold);">
+                    <h4 style="margin-bottom: 20px; color: var(--dark); font-size: 20px;">¿Incluir Retiro? (Set Anterior)</h4>
+                    <p style="margin-bottom: 20px; color: var(--gray);">¿Necesitas que retiremos tu set anterior de uñas?</p>
                     <div style="display: flex; gap: 15px;">
-                        <button onclick="selectRemoval(false)" id="noRemovalBtn" class="removal-btn" style="flex: 1; padding: 15px; border: 2px solid var(--gray); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease;">No Removal</button>
-                        <button onclick="selectRemoval(true)" id="yesRemovalBtn" class="removal-btn" style="flex: 1; padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease;">Yes, Include Removal</button>
+                        <button onclick="selectRemoval(false)" id="noRemovalBtn" class="removal-btn" style="flex: 1; padding: 20px; border: 3px solid var(--gray); border-radius: 12px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 600;">No, gracias</button>
+                        <button onclick="selectRemoval(true)" id="yesRemovalBtn" class="removal-btn" style="flex: 1; padding: 20px; border: 3px solid var(--primary); border-radius: 12px; background: white; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 600;">Sí, incluir retiro</button>
                     </div>
                 </div>
 
                 <!-- Time Estimate Display -->
-                <div id="timeEstimate" style="display: none; margin-top: 20px; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 12px; text-align: center;">
-                    <p style="color: white; font-size: 18px; font-weight: 600; margin: 0;">
-                        ⏱️ Estimated Time: <span id="estimatedTime">120 minutes</span>
+                <div id="timeEstimate" style="display: none; margin-top: 30px; padding: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    <p style="color: white; font-size: 20px; font-weight: 600; margin: 0;">
+                        Tiempo Estimado Total: <span id="estimatedTime" style="font-size: 24px; font-weight: 700;">120 minutes</span>
                     </p>
                 </div>
 
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button onclick="goToStep(1)" style="flex: 1; padding: 12px; background: var(--gray); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Back</button>
-                    <button onclick="goToStep(3)" id="step2NextBtn" style="flex: 1; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;" disabled>Next</button>
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button onclick="goToStep(1)" style="flex: 1; padding: 18px; background: var(--gray); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 600;">← Atrás</button>
+                    <button onclick="goToStep(3)" id="step2NextBtn" style="flex: 1; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 600;" disabled>Siguiente →</button>
                 </div>
             </div>
 
             <!-- Step 3: Select Date & Time -->
             <div id="step3" class="booking-step" style="display: none;">
-                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 3: Select Date & Time</h3>
+                <h3 style="margin-bottom: 30px; color: var(--dark); font-size: 28px; text-align: center;">Selecciona Fecha y Hora</h3>
 
-                <div style="background: var(--light); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                    <p><strong>Technician:</strong> <span id="confirmTechnician"></span></p>
-                    <p><strong>Services:</strong> <span id="confirmService"></span></p>
-                    <p><strong>Estimated Time:</strong> <span id="confirmTimeEstimate"></span></p>
+                <div style="background: linear-gradient(135deg, var(--light), #fff); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--primary);">
+                    <p style="margin: 5px 0; color: var(--dark); font-size: 16px;"><strong>Nail Artist:</strong> <span id="confirmTechnician" style="color: var(--primary);"></span></p>
+                    <p style="margin: 5px 0; color: var(--dark); font-size: 16px;"><strong>Services:</strong> <span id="confirmService" style="color: var(--primary);"></span></p>
+                    <p style="margin: 5px 0; color: var(--dark); font-size: 16px;"><strong>Total Price:</strong> <span id="confirmPrice" style="color: var(--primary); font-weight: 700;"></span></p>
+                    <p style="margin: 5px 0; color: var(--dark); font-size: 16px;"><strong>Estimated Time:</strong> <span id="confirmTimeEstimate" style="color: var(--primary); font-weight: 700;"></span></p>
                 </div>
 
-                <label style="display: block; margin-bottom: 5px; color: var(--dark); font-weight: 600;">Select Date:</label>
-                <input type="date" id="appointmentDate" min="" style="width: 100%; padding: 12px; border: 2px solid var(--primary); border-radius: 8px; margin-bottom: 20px; font-size: 16px;">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- Horizontal Date Selector -->
+                    <div style="margin-bottom: 40px;">
+                        <label style="display: block; margin-bottom: 15px; color: var(--dark); font-weight: 700; font-size: 18px;">📅 Selecciona Fecha</label>
 
-                <label style="display: block; margin-bottom: 5px; color: var(--dark); font-weight: 600;">Select Start Time:</label>
-                <div id="timeSlots" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px;"></div>
+                        <!-- Week Navigation -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <button onclick="navigateWeek(-1)" style="background: white; border: 2px solid #E5E7EB; border-radius: 10px; padding: 10px 15px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; font-size: 16px; color: #374151;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <span id="currentMonthDisplay" style="font-size: 20px; font-weight: 700; color: #1F2937;"></span>
+                            <button onclick="navigateWeek(1)" style="background: white; border: 2px solid #E5E7EB; border-radius: 10px; padding: 10px 15px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; font-size: 16px; color: #374151;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+                        </div>
 
-                <div style="display: flex; gap: 10px;">
-                    <button onclick="goToStep(2)" style="flex: 1; padding: 12px; background: var(--gray); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Back</button>
-                    <button onclick="goToStep(4)" id="step3NextBtn" style="flex: 1; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;" disabled>Next</button>
+                        <!-- Days Grid -->
+                        <div id="dateSelectorGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; overflow-x: auto; padding: 10px 0;">
+                            <!-- Dates will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Time Slot Tabs -->
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 15px; color: var(--dark); font-weight: 700; font-size: 18px;">⏰ Select Time</label>
+
+                        <!-- Time Period Tabs -->
+                        <div id="timePeriodTabs" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <button onclick="selectTimePeriod('morning')" id="morningTab" style="flex: 1; padding: 12px 20px; border: 2px solid #E5E7EB; border-radius: 10px; background: white; cursor: pointer; transition: all 0.2s ease; font-size: 15px; font-weight: 600; color: #6B7280;">
+                                Mañana
+                            </button>
+                            <button onclick="selectTimePeriod('afternoon')" id="afternoonTab" style="flex: 1; padding: 12px 20px; border: 2px solid #E5E7EB; border-radius: 10px; background: white; cursor: pointer; transition: all 0.2s ease; font-size: 15px; font-weight: 600; color: #6B7280;">
+                                Tarde
+                            </button>
+                            <button onclick="selectTimePeriod('evening')" id="eveningTab" style="flex: 1; padding: 12px 20px; border: 2px solid #E5E7EB; border-radius: 10px; background: white; cursor: pointer; transition: all 0.2s ease; font-size: 15px; font-weight: 600; color: #6B7280;">
+                                Noche
+                            </button>
+                        </div>
+
+                        <!-- Time Slots Grid -->
+                        <div id="timeSlots" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; min-height: 120px;">
+                            <p style="grid-column: 1/-1; text-align: center; color: #9CA3AF; padding: 40px; font-size: 15px;">Selecciona una fecha arriba para ver los horarios disponibles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; max-width: 900px; margin: 30px auto 0 auto;">
+                    <button onclick="goToStep(2)" style="flex: 1; padding: 18px; background: #E5E7EB; color: #374151; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 600;">← Atrás</button>
+                    <button onclick="goToStep(4)" id="step3NextBtn" style="flex: 1; padding: 18px; background: #0066FF; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 600;" disabled>Siguiente →</button>
                 </div>
             </div>
 
             <!-- Step 4: Confirm & Book -->
             <div id="step4" class="booking-step" style="display: none;">
-                <h3 style="margin-bottom: 20px; color: var(--dark);">Step 4: Confirm & Book</h3>
+                <h3 style="margin-bottom: 30px; color: var(--dark); font-size: 28px; text-align: center;">Confirma y Completa Tu Reserva</h3>
 
-                <div style="background: var(--light); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                    <p><strong>Technician:</strong> <span id="finalTechnician"></span></p>
-                    <p><strong>Services:</strong> <span id="finalService"></span></p>
-                    <p><strong>Date:</strong> <span id="finalDate"></span></p>
-                    <p><strong>Start Time:</strong> <span id="finalTime"></span></p>
-                    <p><strong>Removal:</strong> <span id="finalRemoval"></span></p>
-                    <p><strong>Estimated Duration:</strong> <span id="finalDuration"></span></p>
-                </div>
+                <div style="max-width: 700px; margin: 0 auto;">
+                    <!-- Booking Summary -->
+                    <div style="background: linear-gradient(135deg, var(--light), #fff); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--primary);">
+                        <h4 style="margin-bottom: 20px; color: var(--primary); font-size: 20px; font-weight: 700;">📋 Resumen de la Reserva</h4>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Técnica:</strong> <span id="finalTechnician" style="color: var(--primary);"></span></p>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Servicios:</strong> <span id="finalService" style="color: var(--primary);"></span></p>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Fecha:</strong> <span id="finalDate" style="color: var(--primary);"></span></p>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Hora de Inicio:</strong> <span id="finalTime" style="color: var(--primary);"></span></p>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Retiro:</strong> <span id="finalRemoval" style="color: var(--primary);"></span></p>
+                        <p style="margin: 8px 0; color: var(--dark); font-size: 16px;"><strong>Duración Estimada:</strong> <span id="finalDuration" style="color: var(--primary); font-weight: 700;"></span></p>
+                    </div>
 
-                <label style="display: block; margin-bottom: 5px; color: var(--dark); font-weight: 600;">Your Name:</label>
-                <input type="text" id="clientName" placeholder="Enter your name" style="width: 100%; padding: 12px; border: 2px solid var(--primary); border-radius: 8px; margin-bottom: 15px; font-size: 16px;">
+                    <!-- Customer Information -->
+                    <h4 style="margin-bottom: 20px; color: var(--primary); font-size: 20px; font-weight: 700;">👤 Tu Información</h4>
 
-                <label style="display: block; margin-bottom: 5px; color: var(--dark); font-weight: 600;">Phone (WhatsApp):</label>
-                <input type="tel" id="clientPhone" placeholder="+52 984 XXX XXXX" style="width: 100%; padding: 12px; border: 2px solid var(--primary); border-radius: 8px; margin-bottom: 20px; font-size: 16px;">
+                    <label style="display: block; margin-bottom: 8px; color: var(--dark); font-weight: 700; font-size: 16px;">Tu Nombre *</label>
+                    <input type="text" id="clientName" placeholder="Ingresa tu nombre completo" style="width: 100%; padding: 18px; border: 3px solid var(--primary); border-radius: 12px; margin-bottom: 20px; font-size: 18px; font-weight: 500;">
 
-                <label style="display: block; margin-bottom: 5px; color: var(--dark); font-weight: 600;">Special Requests (optional):</label>
-                <textarea id="specialRequests" placeholder="Any special requests or notes..." style="width: 100%; padding: 12px; border: 2px solid var(--primary); border-radius: 8px; margin-bottom: 20px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                    <label style="display: block; margin-bottom: 8px; color: var(--dark); font-weight: 700; font-size: 16px;">Teléfono (WhatsApp) *</label>
+                    <input type="tel" id="clientPhone" placeholder="+52 984 XXX XXXX" style="width: 100%; padding: 18px; border: 3px solid var(--primary); border-radius: 12px; margin-bottom: 20px; font-size: 18px; font-weight: 500;">
 
-                <!-- Important Notice -->
-                <div style="background: linear-gradient(135deg, #fff3cd, #ffe6a8); padding: 15px; border-radius: 12px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
-                    <p style="margin: 0; color: #856404; font-size: 14px; line-height: 1.5;">
-                        <strong style="font-size: 16px;">⚠️ IMPORTANT - NAIL DESIGN PHOTO</strong><br><br>
-                        📸 <strong>Please send us a photo of your desired nail design via WhatsApp BEFORE your appointment!</strong><br><br>
-                        ⚠️ <strong>About AI-Generated Designs:</strong><br>
-                        If your inspiration is from an AI-generated image (Midjourney, DALL-E, etc.), please note:<br>
-                        • Some AI designs may not be achievable in real life<br>
-                        • We'll adapt to create a similar but realistic style<br>
-                        • Please have alternative reference photos ready<br>
-                        • We'll confirm what's possible when you contact us
-                    </p>
-                </div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--dark); font-weight: 700; font-size: 16px;">Solicitudes Especiales (opcional)</label>
+                    <textarea id="specialRequests" placeholder="Alguna solicitud especial, alergias o notas..." style="width: 100%; padding: 18px; border: 3px solid var(--primary); border-radius: 12px; margin-bottom: 30px; font-size: 18px; min-height: 100px; resize: vertical; font-weight: 500;"></textarea>
 
-                <div style="display: flex; gap: 10px;">
-                    <button onclick="goToStep(3)" style="flex: 1; padding: 12px; background: var(--gray); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Back</button>
-                    <button onclick="confirmBooking()" style="flex: 1; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600;">✅ Confirm Booking</button>
+                    <!-- Important Notice -->
+                    <div style="background: linear-gradient(135deg, #fff3cd, #ffe6a8); padding: 25px; border-radius: 15px; border-left: 5px solid #ffc107; margin-bottom: 30px;">
+                        <p style="margin: 0; color: #856404; font-size: 15px; line-height: 1.6;">
+                            <strong style="font-size: 18px;">⚠️ IMPORTANTE - FOTO DEL DISEÑO DE UÑAS</strong><br><br>
+                            📸 <strong style="font-size: 16px;">Por favor envíanos una foto del diseño de uñas que deseas por WhatsApp ANTES de tu cita!</strong><br><br>
+                            Esto nos ayuda a prepararnos para tu cita y asegurar que obtengas el look que deseas.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 15px;">
+                        <button onclick="goToStep(3)" style="flex: 1; padding: 18px; background: var(--gray); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 600;">← Atrás</button>
+                        <button onclick="confirmBooking()" style="flex: 1; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">✅ Confirmar Reserva</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2700,11 +2928,20 @@
         let selectedRemoval = false;
         let estimatedDuration = 0;
 
+        // Nuevas variables para el selector horizontal
+        let weekOffset = 0; // Para navegación semanal (0 = esta semana)
+        let selectedTimePeriod = 'morning'; // morning, afternoon, evening
+        let displayedDates = []; // Fechas visibles en el selector horizontal
+        let existingAppointments = []; // Citas ya existentes en el sistema
+        let appointmentCache = {}; // Caché de citas por fecha y técnica
+        let clientType = ''; // 'local' o 'foreign'
+        let serviceVariants = {}; // Objeto para guardar variante por servicio: { 'Gelish': '1 Color', 'Acrylic': 'Efectos / Diseño' }
+
         // Emails de las técnicas y admin
         const technicianEmails = {
             'Carolina': '27supercaro@gmail.com',
             'Montse': 'Mrqz.mntse25@gmail.com',
-            'Diana': '' // Se agregará cuando se proporcione
+            'Diana': 'Dianamejia2825@gmail.com'
         };
 
         const adminEmails = ['jgchavezpanduro@gmail.com']; // Agregar más emails admin si es necesario
@@ -2712,18 +2949,370 @@
         // Google Apps Script URL para crear eventos en calendar
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/1S03h5BAPeOVvOb6H-0y3cSK_GQtg6r20th7L3NY3qcfd1d7yjZ3OFuwb/exec';
 
-        // Datos de servicios con tiempos base y tiempos de retiro
-        const serviceData = {
-            'Gelish': { duration: 90, removalTime: 30 },
-            'Rubber Base': { duration: 120, removalTime: 30 },
-            'Acrylic': { duration: 180, removalTime: 60 },
-            'Polygel': { duration: 180, removalTime: 60 },
-            'Express Pedicure': { duration: 60, removalTime: 0 },
-            'Russian Pedicure': { duration: 90, removalTime: 0 },
-            'Mystic Pedicure': { duration: 90, removalTime: 0 }
+        // Calendly URLs (serán configurados después)
+        const CALENDLY_URLS = {
+            'Carolina': 'https://calendly.com/mystic-nails-art/carolina',
+            'Montse': 'https://calendly.com/mystic-nails-art/montse',
+            'Diana': 'https://calendly.com/mystic-nails-art/diana'
         };
 
-        // Horarios de las técnicas
+        // Calendly API Token (obtener después de configurar Calendly)
+        const CALENDLY_API_TOKEN = ''; // Pendiente de obtener
+
+        // Datos de servicios con tiempos base y tiempos de retiro
+        // Precios actualizados según listas de precios reales (2026-05-13)
+        // Nota: Servicios de pedicure tienen el mismo precio para locales y extranjeras
+        // Variantes de manicure: "1 Color", "1 Color + French", "Efectos / Diseño"
+        const serviceData = {
+            'Gelish': {
+                duration: 90,
+                removalTime: 30,
+                variants: {
+                    '1 Color': { priceLocal: 330, priceForeign: 430 },
+                    '1 Color + French': { priceLocal: 365, priceForeign: 470 },
+                    'Efectos / Diseño': { priceLocal: 400, priceForeign: 500 }
+                }
+            },
+            'Rubber Base': {
+                duration: 120,
+                removalTime: 30,
+                variants: {
+                    '1 Color': { priceLocal: 400, priceForeign: 520 },
+                    '1 Color + French': { priceLocal: 440, priceForeign: 550 },
+                    'Efectos / Diseño': { priceLocal: 480, priceForeign: 600 }
+                }
+            },
+            'Acrylic': {
+                duration: 180,
+                removalTime: 60,
+                variants: {
+                    '1 Color': { priceLocal: 640, priceForeign: 740 },
+                    '1 Color + French': { priceLocal: 670, priceForeign: 770 },
+                    'Efectos / Diseño': { priceLocal: 700, priceForeign: 800 }
+                }
+            },
+            'Polygel': {
+                duration: 180,
+                removalTime: 60,
+                variants: {
+                    '1 Color': { priceLocal: 540, priceForeign: 640 },
+                    '1 Color + French': { priceLocal: 575, priceForeign: 680 },
+                    'Efectos / Diseño': { priceLocal: 610, priceForeign: 710 }
+                }
+            },
+            'Express Pedicure': { duration: 25, removalTime: 0, priceLocal: 200, priceForeign: 350 },
+            'Russian Pedicure': { duration: 45, removalTime: 0, priceLocal: 300, priceForeign: 500 },
+            'Mystic Pedicure': { duration: 75, removalTime: 0, priceLocal: 500, priceForeign: 700 },
+            'Not Sure Yet': {
+                duration: 180,
+                removalTime: 0,
+                variants: {
+                    '1 Color': { priceLocal: 0, priceForeign: 0 },
+                    '1 Color + French': { priceLocal: 0, priceForeign: 0 },
+                    'Efectos / Diseño': { priceLocal: 0, priceForeign: 0 }
+                }
+            }
+        };
+
+        // ========================================
+        // SELECTOR DE FECHAS HORIZONTAL
+        // ========================================
+
+        function initializeDateSelector() {
+            weekOffset = 0;
+            renderDateSelector();
+        }
+
+        function navigateWeek(direction) {
+            weekOffset += direction;
+            renderDateSelector();
+        }
+
+        function renderDateSelector() {
+            const grid = document.getElementById('dateSelectorGrid');
+            const monthDisplay = document.getElementById('currentMonthDisplay');
+
+            const today = new Date();
+
+            // Calcular el inicio de la semana basado en weekOffset
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() + (weekOffset * 7));
+
+            // Ajustar al lunes de esa semana (o mantener el día actual si es weekOffset 0)
+            if (weekOffset === 0) {
+                // Si es hoy, empezar desde hoy
+            } else {
+                // Ir al lunes de esa semana
+                const dayOfWeek = startOfWeek.getDay();
+                const daysUntilMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+                startOfWeek.setDate(startOfWeek.getDate() + daysUntilMonday);
+            }
+
+            // Obtener el rango de fechas para el display del mes
+            const endDate = new Date(startOfWeek);
+            endDate.setDate(startOfWeek.getDate() + 6);
+
+            // Actualizar display del mes/año
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                              'July', 'August', 'September', 'October', 'November', 'December'];
+
+            let displayText;
+            if (startOfWeek.getMonth() === endDate.getMonth()) {
+                displayText = `${monthNames[startOfWeek.getMonth()]} ${startOfWeek.getFullYear()}`;
+            } else {
+                displayText = `${monthNames[startOfWeek.getMonth()]} - ${monthNames[endDate.getMonth()]} ${startOfWeek.getFullYear()}`;
+            }
+            monthDisplay.textContent = displayText;
+
+            // Generar 7 días
+            displayedDates = [];
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(startOfWeek);
+                date.setDate(startOfWeek.getDate() + i);
+                displayedDates.push(date);
+            }
+
+            // Renderizar los días
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            grid.innerHTML = displayedDates.map((date, index) => {
+                const dayName = dayNames[date.getDay()];
+                const dayNumber = date.getDate();
+                const monthName = monthNamesShort[date.getMonth()];
+                const dateStr = date.toISOString().split('T')[0];
+                const isSelected = selectedDate === dateStr;
+                const isToday = date.toDateString() === today.toDateString();
+
+                const bgColor = isSelected ? '#0066FF' : 'white';
+                const textColor = isSelected ? 'white' : '#1F2937';
+                const borderColor = isSelected ? '#0066FF' : '#E5E7EB';
+                const boxShadow = isSelected ? '0 4px 12px rgba(0, 102, 255, 0.3)' : '0 1px 3px rgba(0,0,0,0.1)';
+
+                return `
+                    <div onclick="selectDate('${dateStr}')"
+                         style="padding: 15px 10px; border: 2px solid ${borderColor}; border-radius: 12px; background: ${bgColor}; cursor: pointer; transition: all 0.2s ease; text-align: center; box-shadow: ${boxShadow}; min-width: 90px;">
+                        <div style="font-size: 12px; font-weight: 600; color: ${isSelected ? 'rgba(255,255,255,0.9)' : '#6B7280'}; margin-bottom: 5px;">${dayName}</div>
+                        <div style="font-size: 24px; font-weight: 700; color: ${textColor}; margin-bottom: 3px;">${dayNumber}</div>
+                        <div style="font-size: 11px; font-weight: 500; color: ${isSelected ? 'rgba(255,255,255,0.8)' : '#9CA3AF'};">${monthName}</div>
+                        ${isToday ? '<div style="margin-top: 5px; font-size: 10px; font-weight: 600; color: #0066FF; background: rgba(0, 102, 255, 0.1); padding: 2px 8px; border-radius: 10px; display: inline-block;">TODAY</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectDate(dateStr) {
+            selectedDate = dateStr;
+            renderDateSelector(); // Re-render para actualizar estilos
+            selectTimePeriod('morning'); // Reset a morning al cambiar fecha
+            updateTimeSlotsWithTabs();
+        }
+
+        // ========================================
+        // TABS DE HORARIOS (MORNING/AFTERNOON/EVENING)
+        // ========================================
+
+        function selectTimePeriod(period) {
+            selectedTimePeriod = period;
+
+            // Actualizar estilos de tabs
+            const tabs = ['morning', 'afternoon', 'evening'];
+            tabs.forEach(tab => {
+                const tabEl = document.getElementById(tab + 'Tab');
+                if (tab === period) {
+                    tabEl.style.background = '#0066FF';
+                    tabEl.style.color = 'white';
+                    tabEl.style.borderColor = '#0066FF';
+                } else {
+                    tabEl.style.background = 'white';
+                    tabEl.style.color = '#6B7280';
+                    tabEl.style.borderColor = '#E5E7EB';
+                }
+            });
+
+            updateTimeSlotsWithTabs();
+        }
+
+        function updateTimeSlotsWithTabs() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+
+            if (!selectedDate) {
+                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9CA3AF; padding: 40px; font-size: 15px;">Select a date above to see available time slots</p>';
+                return;
+            }
+
+            // Get day of week
+            const selectedDateObj = new Date(selectedDate + 'T00:00:00');
+            const dayOfWeek = selectedDateObj.getDay();
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayName = dayNames[dayOfWeek];
+
+            const allSlots = technicianSchedules[selectedTechnician]?.[dayName] || [];
+
+            // Filtrar slots por periodo
+            const filteredSlots = allSlots.filter(slot => {
+                const hour = parseInt(slot.split(':')[0]);
+                if (selectedTimePeriod === 'morning') return hour >= 6 && hour < 12;
+                if (selectedTimePeriod === 'afternoon') return hour >= 12 && hour < 18;
+                if (selectedTimePeriod === 'evening') return hour >= 18;
+                return true;
+            });
+
+            if (filteredSlots.length === 0) {
+                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9CA3AF; padding: 40px; font-size: 15px;">No ' + selectedTimePeriod + ' slots available for this date</p>';
+                return;
+            }
+
+            // Verificar disponibilidad considerando servicios ya seleccionados
+            checkAvailabilityWithSelectedServices(filteredSlots);
+        }
+
+        async function checkAvailabilityWithSelectedServices(slots) {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+
+            // Calcular duración total de servicios seleccionados
+            let totalDuration = 0;
+            selectedServices.forEach(service => {
+                if (serviceData[service]) {
+                    totalDuration += serviceData[service].duration;
+
+                    // Agregar tiempo de retiro si aplica
+                    if (selectedRemoval && ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel'].includes(service)) {
+                        totalDuration += serviceData[service].removalTime;
+                    }
+                }
+            });
+
+            // Filtrar slots considerando la duración total
+            const availableSlots = slots.filter(slot => {
+                const slotDate = new Date(`${selectedDate}T${slot}:00`);
+                const now = new Date();
+                const isToday = selectedDate === now.toISOString().split('T')[0];
+
+                // Validar mínimo 2 horas si es hoy
+                if (isToday) {
+                    const minTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+                    const slotTime = new Date(`${selectedDate}T${slot}:00`);
+
+                    if (slotTime < minTime) {
+                        return false; // No mostrar slots que ya pasaron o son muy pronto
+                    }
+                }
+
+                return true; // Por ahora mostrar todos, luego filtramos con verificación
+            });
+
+            renderAvailableSlots(availableSlots, totalDuration);
+        }
+
+        function renderAvailableSlots(slots, totalDuration) {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+
+            if (slots.length === 0) {
+                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9CA3AF; padding: 40px; font-size: 15px;">No slots available for this period</p>';
+                return;
+            }
+
+            // Verificar disponibilidad de cada slot
+            const availableSlotsWithInfo = slots.map(slot => {
+                const availability = checkSlotAvailability(slot, slots, selectedDate, selectedTechnician);
+                return {
+                    slot: slot,
+                    available: availability.available,
+                    reason: availability.reason || null
+                };
+            });
+
+            // Filtrar solo slots disponibles
+            const trulyAvailableSlots = availableSlotsWithInfo.filter(s => s.available);
+
+            // Si no hay slots disponibles, mostrar mensaje
+            if (trulyAvailableSlots.length === 0) {
+                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9CA3AF; padding: 40px; font-size: 15px;">😔 No available time slots for this period</p>';
+                return;
+            }
+
+            // Renderizar slots con estados
+            const now = new Date();
+            const isToday = selectedDate === now.toISOString().split('T')[0];
+            const minTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
+            timeSlotsContainer.innerHTML = availableSlotsWithInfo.map(({slot, available, reason}) => {
+                const slotDate = new Date(`${selectedDate}T${slot}:00`);
+                const isSelected = selectedTime === slot;
+                const isTooSoon = isToday && slotDate < minTime;
+
+                let bgColor, textColor, borderColor, opacity, cursorStyle, disabledAttr, extraInfo;
+
+                if (!available) {
+                    // Slot ocupado
+                    bgColor = '#FEE2E2';
+                    textColor = '#DC2626';
+                    borderColor = '#FECACA';
+                    opacity = '0.6';
+                    cursorStyle = 'not-allowed';
+                    disabledAttr = 'disabled';
+                    extraInfo = `<br><span style="font-size: 10px; font-weight: 500;">${reason}</span>`;
+                } else if (isTooSoon) {
+                    // Muy pronto (menos de 2 horas)
+                    bgColor = '#E5E7EB';
+                    textColor = '#9CA3AF';
+                    borderColor = '#E5E7EB';
+                    opacity = '0.5';
+                    cursorStyle = 'not-allowed';
+                    disabledAttr = 'disabled';
+                    extraInfo = `<br><span style="font-size: 10px; font-weight: 500;">Too soon (min 2hrs)</span>`;
+                } else if (isSelected) {
+                    // Seleccionado
+                    bgColor = '#0066FF';
+                    textColor = 'white';
+                    borderColor = '#0066FF';
+                    opacity = '1';
+                    cursorStyle = 'pointer';
+                    disabledAttr = '';
+                    extraInfo = '';
+                } else {
+                    // Disponible
+                    bgColor = 'white';
+                    textColor = '#1F2937';
+                    borderColor = '#E5E7EB';
+                    opacity = '1';
+                    cursorStyle = 'pointer';
+                    disabledAttr = '';
+                    extraInfo = '';
+                }
+
+                return `
+                    <button
+                        onclick="${available && !isTooSoon ? `selectTimeSlot('${slot}')` : ''}"
+                        style="padding: 14px 20px; border: 2px solid ${borderColor}; border-radius: 10px; background: ${bgColor}; color: ${textColor}; cursor: ${cursorStyle}; transition: all 0.2s ease; font-size: 16px; font-weight: 600; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); opacity: ${opacity};"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'"
+                        ${disabledAttr}>
+                        ${formatTime(slot)}
+                        ${extraInfo}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function formatTime(time24) {
+            const [hours, minutes] = time24.split(':');
+            const hour = parseInt(hours);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${minutes} ${ampm}`;
+        }
+
+        function selectTimeSlot(time) {
+            selectedTime = time;
+            updateTimeSlotsWithTabs();
+            document.getElementById('step3NextBtn').disabled = false;
+        }
+
+        // ========================================
+        // HORARIOS DE LAS TÉCNICAS
+        // ========================================
         const technicianSchedules = {
             'Carolina': {
                 'Monday': ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
@@ -2736,7 +3325,7 @@
             },
             'Montse': {
                 'Monday': ['12:00', '13:00', '14:00', '15:00'],
-                'Tuesday': [], // Descanso
+                'Tuesday': ['12:00', '13:00', '14:00', '15:00'],
                 'Wednesday': ['12:00', '13:00', '14:00', '15:00'],
                 'Thursday': ['12:00', '13:00', '14:00', '15:00'],
                 'Friday': ['12:00', '13:00', '14:00', '15:00'],
@@ -2745,7 +3334,7 @@
             },
             'Diana': {
                 'Monday': ['09:00', '10:00', '11:00'],
-                'Tuesday': ['09:00', '10:00', '11:00'], // Solo hasta 12 PM (tiene cita a las 4:30 PM)
+                'Tuesday': ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
                 'Wednesday': [], // Descanso
                 'Thursday': ['09:00', '10:00', '11:00'],
                 'Friday': ['15:30', '16:30', '17:30', '18:30', '19:30'],
@@ -2765,11 +3354,195 @@
             }
             document.getElementById('bookingModal').style.display = 'flex';
             document.getElementById('appointmentDate').min = new Date().toISOString().split('T')[0];
-            goToStep(1);
+            goToStep(0); // Start with residency selection
+
+            // Citar caché de localStorage
+            loadAppointmentCache();
 
             // Scroll al top del modal
             document.getElementById('bookingModal').scrollIntoView({ behavior: 'smooth' });
             return false;
+        }
+
+        function loadAppointmentCache() {
+            try {
+                const cachedAppointments = localStorage.getItem('mysticNailsAppointments');
+                if (cachedAppointments) {
+                    appointmentCache = JSON.parse(cachedAppointments);
+
+                    // Verificar expiraciones de citas pendientes
+                    checkAllPendingAppointments();
+
+                    console.log('✅ Caché cargado:', Object.keys(appointmentCache).length, 'citas');
+                }
+            } catch (e) {
+                console.log('⚠️ No se pudo cargar caché de localStorage');
+            }
+        }
+
+        // Verificar todas las citas pendientes y expirar las que corresponda
+        function checkAllPendingAppointments() {
+            const now = Date.now();
+            let expiredCount = 0;
+
+            for (const [cacheKey, appointment] of Object.entries(appointmentCache)) {
+                // Solo verificar citas pending_deposit
+                if (appointment.status === 'pending_deposit') {
+                    const expiresTime = new Date(appointment.depositExpiresAt).getTime();
+
+                    // Si expiró, cambiar estado
+                    if (now >= expiresTime) {
+                        appointment.status = 'expired';
+                        appointment.expiredAt = new Date().toISOString();
+                        appointmentCache[cacheKey] = appointment;
+                        expiredCount++;
+
+                        console.log('⏰ Cita expirada:', appointment.clientName, '-', appointment.technician);
+                    }
+                }
+            }
+
+            // Guardar cambios si hubo expiraciones
+            if (expiredCount > 0) {
+                try {
+                    localStorage.setItem('mysticNailsAppointments', JSON.stringify(appointmentCache));
+                    console.log(`✅ ${expiredCount} cita(s) expirada(s) liberada(s)`);
+                } catch (e) {
+                    console.log('⚠️ Error guardando cambios:', e);
+                }
+            }
+
+            return expiredCount;
+        }
+
+        // ========================================
+        // PANEL DE ADMIN PARA GESTIONAR CITAS
+        // ========================================
+
+        // Mostrar panel de admin
+        function showAdminPanel() {
+            const adminCode = prompt('🔐 Ingresa código de admin:');
+            if (adminCode === 'MYSTIC2026') {
+                renderAdminPanel();
+            } else {
+                alert('❌ Código incorrecto');
+            }
+        }
+
+        // Renderizar panel de admin
+        function renderAdminPanel() {
+            const panelHtml = `
+                <div id="adminPanel" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                    <div style="background: white; border-radius: 20px; padding: 40px; max-width: 800px; max-height: 80vh; overflow-y: auto; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                            <h2 style="font-size: 28px; color: var(--primary);">📋 Panel de Admin - Citas</h2>
+                            <button onclick="closeAdminPanel()" style="background: none; border: none; font-size: 32px; cursor: pointer;">✕</button>
+                        </div>
+
+                        <div id="adminAppointmentsList">
+                            ${getAppointmentsListHtml()}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', panelHtml);
+        }
+
+        // Obtener HTML de lista de citas
+        function getAppointmentsListHtml() {
+            const appointments = Object.entries(appointmentCache);
+
+            if (appointments.length === 0) {
+                return '<p style="text-align: center; color: var(--gray); padding: 40px;">No hay citas registradas</p>';
+            }
+
+            // Ordenar por fecha
+            const sortedAppointments = appointments.sort((a, b) => {
+                const dateA = new Date(a[1].date + 'T' + a[1].startTime);
+                const dateB = new Date(b[1].date + 'T' + b[1].startTime);
+                return dateA - dateB;
+            });
+
+            return sortedAppointments.map(([cacheKey, apt]) => {
+                const statusColors = {
+                    'pending_deposit': '#FFA500',
+                    'confirmed': '#00C851',
+                    'cancelled': '#FF4444',
+                    'expired': '#999999'
+                };
+
+                const statusLabels = {
+                    'pending_deposit': '⏳ Pendiente Depósito',
+                    'confirmed': '✅ Confirmada',
+                    'cancelled': '❌ Cancelada',
+                    'expired': '⏰ Expirada'
+                };
+
+                const timeUntilExpiry = apt.status === 'pending_deposit'
+                    ? Math.floor((new Date(apt.depositExpiresAt).getTime() - Date.now()) / (1000 * 60 * 60))
+                    : null;
+
+                return `
+                    <div style="border: 2px solid ${statusColors[apt.status] || '#ccc'}; border-radius: 12px; padding: 20px; margin-bottom: 15px; background: ${apt.status === 'pending_deposit' ? '#fff9f0' : 'white'};">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                <h4 style="color: var(--dark); margin-bottom: 5px;">${apt.clientName}</h4>
+                                <p style="color: var(--gray); font-size: 14px; margin-bottom: 5px;">
+                                    📅 ${apt.date} | ⏰ ${apt.startTime} | 👩‍🎨 ${apt.technician}
+                                </p>
+                                <p style="color: var(--gray); font-size: 14px;">
+                                    💅 ${apt.services.join(', ')}
+                                </p>
+                                <p style="color: var(--gray); font-size: 14px;">
+                                    📱 Tel: ${apt.clientPhone}
+                                </p>
+                                ${apt.confirmationCode ? `<p style="color: var(--gold); font-size: 13px; font-weight: 600;">🎫 Código: ${apt.confirmationCode}</p>` : ''}
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="display: inline-block; padding: 6px 12px; border-radius: 20px; color: white; background: ${statusColors[apt.status]}; font-size: 12px; font-weight: 600; margin-bottom: 5px;">
+                                    ${statusLabels[apt.status]}
+                                </span>
+                                ${timeUntilExpiry !== null ? `
+                                    <p style="font-size: 12px; color: #FF6B6B; margin-top: 5px;">
+                                        ⏰ Expira en ${timeUntilExpiry}h
+                                    </p>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            ${apt.status === 'pending_deposit' ? `
+                                <button onclick="updateAppointmentStatus('${apt.technician}', '${apt.date}', '${apt.startTime}', 'confirmed')" style="flex: 1; padding: 10px; background: #00C851; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;">
+                                    ✅ Confirmar Depósito
+                                </button>
+                                <button onclick="releaseAppointment('${apt.technician}', '${apt.date}', '${apt.startTime}'); closeAdminPanel();" style="flex: 1; padding: 10px; background: #FF4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;">
+                                    ❌ Cancelar
+                                </button>
+                            ` : ''}
+                            ${apt.status === 'confirmed' ? `
+                                <button onclick="releaseAppointment('${apt.technician}', '${apt.date}', '${apt.startTime}'); closeAdminPanel();" style="flex: 1; padding: 10px; background: #FF4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;">
+                                    ❌ Cancelar Cita
+                                </button>
+                            ` : ''}
+                            ${apt.status === 'expired' || apt.status === 'cancelled' ? `
+                                <button onclick="releaseAppointment('${apt.technician}', '${apt.date}', '${apt.startTime}'); closeAdminPanel();" style="flex: 1; padding: 10px; background: #999; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;">
+                                    🗑️ Eliminar
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Cerrar panel de admin
+        function closeAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            if (panel) {
+                panel.remove();
+            }
+        }
         }
 
         function closeBookingModal() {
@@ -2782,20 +3555,98 @@
             selectedTime = '';
             selectedRemoval = false;
             estimatedDuration = 0;
+            confirmationCode = '';
+            clientType = '';
+            serviceVariants = {}; // Reset service variants
 
             document.getElementById('clientName').value = '';
             document.getElementById('clientPhone').value = '';
             document.getElementById('specialRequests').value = '';
 
             // Reset buttons styling
-            document.querySelectorAll('.service-btn').forEach(btn => {
-                btn.style.background = 'white';
-                btn.style.color = 'var(--dark)';
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.background = 'white';
+                card.style.color = 'var(--dark)';
+            });
+
+            document.querySelectorAll('.client-type-card').forEach(card => {
+                card.style.background = 'white';
+                card.style.borderColor = 'var(--primary)';
+                card.style.transform = 'scale(1)';
             });
 
             document.querySelectorAll('.removal-btn').forEach(btn => {
                 btn.style.background = 'white';
                 btn.style.color = 'var(--dark)';
+            });
+
+            document.querySelectorAll('.variant-select').forEach(select => {
+                select.selectedIndex = 0; // Reset to first option
+            });
+        }
+
+        function selectClientType(type) {
+            clientType = type;
+
+            // Highlight selected card
+            document.querySelectorAll('.client-type-card').forEach(card => {
+                card.style.background = 'white';
+                card.style.borderColor = 'var(--primary)';
+                card.style.transform = 'scale(1)';
+            });
+
+            // Find and highlight the selected card
+            const selectedCard = event.currentTarget;
+            selectedCard.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            selectedCard.style.borderColor = 'var(--primary)';
+            selectedCard.style.transform = 'scale(1.05)';
+
+            // Update service prices display
+            updateServicePrices();
+
+            // Move to next step after a short delay
+            setTimeout(() => {
+                goToStep(1);
+            }, 300);
+        }
+
+        function updateServicePrices() {
+            // Update price displays on all service cards
+            document.querySelectorAll('.service-price-display').forEach(priceEl => {
+                const service = priceEl.getAttribute('data-service');
+                if (service && serviceData[service]) {
+                    let price;
+
+                    // Check if service has variants
+                    if (serviceData[service].variants) {
+                        // Use selected variant for this specific service
+                        const variant = serviceVariants[service] || '1 Color';
+                        const variantData = serviceData[service].variants[variant];
+                        price = clientType === 'foreign' ? variantData.priceForeign : variantData.priceLocal;
+                    } else {
+                        // Use direct price (for services without variants like pedicures)
+                        price = clientType === 'foreign' ? serviceData[service].priceForeign : serviceData[service].priceLocal;
+                    }
+
+                    priceEl.textContent = `$${price} MXN`;
+                }
+            });
+
+            // Update dropdown option prices for all services
+            document.querySelectorAll('.variant-select').forEach(select => {
+                const service = select.getAttribute('data-service');
+                if (service && serviceData[service] && serviceData[service].variants) {
+                    // Update each option with current client type price
+                    Object.keys(serviceData[service].variants).forEach(variant => {
+                        const variantData = serviceData[service].variants[variant];
+                        const price = clientType === 'foreign' ? variantData.priceForeign : variantData.priceLocal;
+                        const option = select.querySelector(`option[value="${variant}"]`);
+                        if (option) {
+                            const optionText = option.textContent.split(' - ')[0];
+                            option.textContent = `${optionText} - $${price}`;
+                        }
+                    });
+                }
             });
         }
 
@@ -2807,35 +3658,75 @@
 
         function selectService(service, duration) {
             const serviceIndex = selectedServices.indexOf(service);
+            const manicureServices = ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel', 'Not Sure Yet'];
 
             if (serviceIndex === -1) {
-                // Agregar servicio si no está seleccionado
+                // Si es un servicio de manicure, quitar cualquier otro servicio de manicure ya seleccionado
+                if (manicureServices.includes(service)) {
+                    // Remover todos los servicios de manicure excepto el que se está seleccionando
+                    selectedServices = selectedServices.filter(s => !manicureServices.includes(s));
+                }
+                // Agregar servicio
                 selectedServices.push(service);
             } else {
                 // Quitar servicio si ya está seleccionado
                 selectedServices.splice(serviceIndex, 1);
             }
 
-            // Highlight selected service buttons (toggle effect)
-            document.querySelectorAll('.service-btn').forEach(btn => {
+            // Highlight selected service cards (toggle effect)
+            document.querySelectorAll('.service-card').forEach(card => {
+                const btn = card.querySelector('.service-btn');
+
+                // Skip if no button found (like pedicure cards with different structure)
+                if (!btn) return;
+
                 const btnService = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                const checkbox = card.querySelector('.checkbox-indicator');
+
                 if (selectedServices.includes(btnService)) {
-                    btn.style.background = 'var(--primary)';
-                    btn.style.color = 'white';
+                    card.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                    card.style.borderColor = 'var(--primary)';
+                    card.style.color = 'white';
+                    if (checkbox) {
+                        checkbox.style.background = 'white';
+                        checkbox.style.color = 'var(--primary)';
+                    }
+                    // Initialize variant if not set
+                    const manicureServices = ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel', 'Not Sure Yet'];
+                    if (manicureServices.includes(btnService) && !serviceVariants[btnService]) {
+                        serviceVariants[btnService] = '1 Color';
+                    }
                 } else {
-                    btn.style.background = 'white';
-                    btn.style.color = 'var(--dark)';
+                    card.style.background = 'white';
+                    card.style.color = 'var(--dark)';
+                    card.style.borderColor = 'var(--primary)';
+                    if (checkbox) {
+                        checkbox.style.background = 'transparent';
+                        checkbox.style.color = 'var(--primary)';
+                    }
+                    // Remove variant from serviceVariants
+                    delete serviceVariants[btnService];
                 }
             });
 
-            // Show removal option si hay servicios de manicure seleccionados
-            const hasManicureService = selectedServices.some(s => ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel'].includes(s));
+            // Show removal option if there are manicure services selected
+            const hasManicureService = selectedServices.some(s => ['Gelish', 'Rubber Base', 'Acrylic', 'Polygel', 'Not Sure Yet'].includes(s));
             if (hasManicureService) {
                 document.getElementById('removalOption').style.display = 'block';
             } else {
                 document.getElementById('removalOption').style.display = 'none';
                 selectedRemoval = false;
             }
+
+            // Show/hide individual variant dropdowns based on service selection
+            document.querySelectorAll('.service-variant-dropdown').forEach(dropdown => {
+                const serviceName = dropdown.getAttribute('data-service');
+                if (selectedServices.includes(serviceName)) {
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            });
 
             // Calculate and display estimated time
             calculateEstimatedTime();
@@ -2862,6 +3753,47 @@
 
             // Recalculate estimated time for all services
             calculateEstimatedTime();
+        }
+
+        function selectServiceVariant(service, variant) {
+            // Save variant for this specific service
+            serviceVariants[service] = variant;
+
+            // Update price display for this service
+            updateServicePrice(service);
+
+            // Also update the dropdown option text to show the price
+            const selectElement = document.querySelector(`.variant-select[data-service="${service}"]`);
+            if (selectElement) {
+                const selectedOption = selectElement.querySelector(`option[value="${variant}"]`);
+                if (selectedOption) {
+                    // Update option text with current price
+                    const variantData = serviceData[service].variants[variant];
+                    const price = clientType === 'foreign' ? variantData.priceForeign : variantData.priceLocal;
+                    const optionText = selectedOption.textContent.split(' - ')[0]; // Get the text part before the price
+                    selectedOption.textContent = `${optionText} - $${price}`;
+                }
+            }
+        }
+
+        function updateServicePrice(service) {
+            const priceEl = document.querySelector(`.service-price-display[data-service="${service}"]`);
+            if (priceEl && serviceData[service]) {
+                let price;
+
+                // Check if service has variants
+                if (serviceData[service].variants) {
+                    // Use selected variant for this service
+                    const variant = serviceVariants[service] || '1 Color';
+                    const variantData = serviceData[service].variants[variant];
+                    price = clientType === 'foreign' ? variantData.priceForeign : variantData.priceLocal;
+                } else {
+                    // Use direct price (for services without variants like pedicures)
+                    price = clientType === 'foreign' ? serviceData[service].priceForeign : serviceData[service].priceLocal;
+                }
+
+                priceEl.textContent = `$${price} MXN`;
+            }
         }
 
         function calculateEstimatedTime() {
@@ -2895,10 +3827,38 @@
             document.getElementById('timeEstimate').style.display = 'block';
         }
 
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+
+            selectedServices.forEach(service => {
+                if (serviceData[service]) {
+                    let servicePrice;
+
+                    // Check if service has variants
+                    if (serviceData[service].variants) {
+                        // Use selected variant for this specific service
+                        const variant = serviceVariants[service] || '1 Color';
+                        const variantData = serviceData[service].variants[variant];
+                        servicePrice = clientType === 'foreign' ? variantData.priceForeign : variantData.priceLocal;
+                    } else {
+                        // Use direct price (for services without variants like pedicures)
+                        servicePrice = clientType === 'foreign' ? serviceData[service].priceForeign : serviceData[service].priceLocal;
+                    }
+
+                    totalPrice += servicePrice;
+                }
+            });
+
+            return totalPrice;
+        }
+
         function goToStep(step) {
             console.log('=== goToStep called with step:', step, '===');
             console.log('selectedTechnician:', selectedTechnician);
             console.log('selectedServices:', selectedServices);
+
+            // Update breadcrumb progress
+            updateBreadcrumb(step);
 
             document.querySelectorAll('.booking-step').forEach(s => s.style.display = 'none');
             document.getElementById('step' + step).style.display = 'block';
@@ -2910,16 +3870,26 @@
 
                 // Mostrar lista de servicios seleccionados
                 if (selectedServices.length > 0) {
-                    document.getElementById('confirmService').textContent = selectedServices.join(', ');
+                    // Show services with their variants
+                    const servicesWithVariants = selectedServices.map(service => {
+                        const variant = serviceVariants[service] ? ` (${serviceVariants[service]})` : '';
+                        return `${service}${variant}`;
+                    });
+                    document.getElementById('confirmService').textContent = servicesWithVariants.join(', ');
                 } else {
                     document.getElementById('confirmService').textContent = 'Not selected';
                 }
 
+                // Mostrar precio total
+                const totalPrice = calculateTotalPrice();
+                document.getElementById('confirmPrice').textContent = `$${totalPrice} MXN`;
+
                 const timeEstimate = document.getElementById('estimatedTime');
                 document.getElementById('confirmTimeEstimate').textContent = timeEstimate ? timeEstimate.textContent : 'Not calculated';
 
-                // Clear previous time slots
-                document.getElementById('timeSlots').innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">Please select a date above to see available time slots.</p>';
+                // Inicializar el nuevo selector de fechas horizontal
+                initializeDateSelector();
+                selectTimePeriod('morning'); // Reset a morning
             }
 
             // Update final confirmation details when entering step 4
@@ -2943,156 +3913,106 @@
                 });
 
                 document.getElementById('finalTime').textContent = selectedTime;
+                document.getElementById('finalRemoval').textContent = selectedRemoval ? 'Yes, included' : 'No';
+                document.getElementById('finalDuration').textContent = document.getElementById('estimatedTime').textContent;
             }
         }
 
-        function updateTimeSlots() {
-            const dateInput = document.getElementById('appointmentDate');
-            const timeSlotsContainer = document.getElementById('timeSlots');
+        function updateBreadcrumb(currentStep) {
+            const steps = [
+                { number: 0, label: 'Residencia' },
+                { number: 1, label: 'Nail Artist' },
+                { number: 2, label: 'Services' },
+                { number: 3, label: 'Date & Time' },
+                { number: 4, label: 'Confirm' }
+            ];
 
-            console.log('=== updateTimeSlots called ===');
-            console.log('Date input value:', dateInput.value);
-            console.log('Selected technician:', selectedTechnician);
+            const breadcrumbHTML = steps.map((step, index) => {
+                const isCompleted = step.number < currentStep;
+                const isCurrent = step.number === currentStep;
+                const isUpcoming = step.number > currentStep;
 
-            if (!dateInput.value) {
-                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">📅 Please select a date first</p>';
-                return;
-            }
+                let bgColor = 'var(--light)';
+                let textColor = 'var(--gray)';
+                let borderColor = 'var(--gray)';
 
-            // Get day of week (0 = Sunday, 1 = Monday, etc.)
-            const selectedDateObj = new Date(dateInput.value + 'T00:00:00');
-            const dayOfWeek = selectedDateObj.getDay();
-
-            // Map day number to day name
-            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const dayName = dayNames[dayOfWeek];
-
-            console.log('Day of week (number):', dayOfWeek);
-            console.log('Day name:', dayName);
-            console.log('Technician schedules:', technicianSchedules[selectedTechnician]);
-
-            const slots = technicianSchedules[selectedTechnician]?.[dayName] || [];
-
-            console.log('Available slots for ' + dayName + ':', slots);
-
-            if (slots.length === 0) {
-                timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ ' + selectedTechnician + ' is not available on ' + dayName + '.<br><br>Please select another date.<br><br><strong>Available days:</strong><br>' + Object.keys(technicianSchedules[selectedTechnician] || {}).join(', ') + '</p>';
-                return;
-            }
-
-            // Get current time for validation
-            const now = new Date();
-            const isToday = selectedDateObj.toDateString() === now.toDateString();
-
-            // Minimum booking time: 2 hours from now
-            const minTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
-            const minHour = minTime.getHours();
-            const minMinute = minTime.getMinutes();
-
-            console.log('Is today:', isToday);
-            console.log('Current time:', now.toLocaleTimeString());
-            console.log('Minimum booking time:', minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-
-            timeSlotsContainer.innerHTML = '';
-            let availableSlots = 0;
-            let skippedSlots = 0;
-
-            slots.forEach(time => {
-                const [hours, minutes] = time.split(':').map(Number);
-                console.log('Checking time:', time, 'hours:', hours, 'minutes:', minutes);
-
-                // Skip times that don't meet minimum requirement
-                if (isToday) {
-                    console.log('Comparing with min time - hours:', hours, 'minHour:', minHour, 'minutes:', minutes, 'minMinute:', minMinute);
-                    if (hours < minHour || (hours === minHour && minutes < minMinute)) {
-                        console.log('Skipping time:', time);
-                        skippedSlots++;
-                        return; // Skip this slot
-                    }
+                if (isCompleted) {
+                    bgColor = 'var(--primary)';
+                    textColor = 'white';
+                    borderColor = 'var(--primary)';
+                } else if (isCurrent) {
+                    bgColor = 'var(--secondary)';
+                    textColor = 'white';
+                    borderColor = 'var(--secondary)';
                 }
 
-                const btn = document.createElement('button');
-                btn.textContent = time;
-                btn.onclick = () => selectTime(time);
-                btn.style.cssText = 'padding: 10px; border: 2px solid var(--primary); border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s ease;';
-                timeSlotsContainer.appendChild(btn);
-                availableSlots++;
-                console.log('Added time slot:', time);
-            });
+                return `
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: ${bgColor}; border: 3px solid ${borderColor}; border-radius: 50px; font-weight: 600; color: ${textColor}; font-size: 14px; transition: all 0.3s ease;">
+                            <span style="background: white; color: ${bgColor}; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">${step.number}</span>
+                            <span>${step.label}</span>
+                        </div>
+                        ${index < steps.length - 1 ? '<div style="color: var(--gray); font-size: 20px;">→</div>' : ''}
+                    </div>
+                `;
+            }).join('');
 
-            console.log('Total available slots:', availableSlots);
-            console.log('Skipped slots:', skippedSlots);
-
-            // Show message if no slots available
-            if (availableSlots === 0) {
-                if (skippedSlots > 0) {
-                    timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ All slots for today have passed (minimum 2 hours in advance).<br><br><strong>Current time:</strong> ' + now.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) + '<br><strong>Next available time:</strong> ' + minTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) + '<br><br><strong>Please select a future date or contact us via WhatsApp.</strong></p>';
-                } else {
-                    timeSlotsContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">⚠️ No available slots for this date.</p>';
-                }
-            }
-
-            document.getElementById('step3NextBtn').disabled = true;
+            document.getElementById('breadcrumbProgress').innerHTML = breadcrumbHTML;
         }
 
         function selectTime(time) {
             selectedTime = time;
 
-            // Calculate end time
-            const [hours, minutes] = time.split(':').map(Number);
-            const startDate = new Date(selectedDate + 'T' + time + ':00');
-            const endDate = new Date(startDate.getTime() + estimatedDuration * 60000);
-
+            // Actualizar estilos de botones
             document.querySelectorAll('#timeSlots button').forEach(btn => {
-                btn.style.background = btn.textContent === time ? 'var(--primary)' : 'white';
-                btn.style.color = btn.textContent === time ? 'white' : 'var(--dark)';
+                const btnTime = btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+                if (btnTime === time) {
+                    btn.style.background = '#0066FF';
+                    btn.style.color = 'white';
+                    btn.style.borderColor = '#0066FF';
+                } else {
+                    btn.style.background = 'white';
+                    btn.style.color = '#1F2937';
+                    btn.style.borderColor = '#E5E7EB';
+                }
             });
 
             document.getElementById('step3NextBtn').disabled = false;
-
-            // Update confirmation details
-            updateConfirmationDetails();
         }
 
         function updateConfirmationDetails() {
             document.getElementById('confirmTechnician').textContent = selectedTechnician;
 
-            // Mostrar lista de servicios seleccionados
+            // Mostrar lista de servicios seleccionados con sus variantes
             if (selectedServices.length > 0) {
-                document.getElementById('confirmService').textContent = selectedServices.join(', ');
+                const servicesWithVariants = selectedServices.map(service => {
+                    const variant = serviceVariants[service] ? ` (${serviceVariants[service]})` : '';
+                    return `${service}${variant}`;
+                });
+                document.getElementById('confirmService').textContent = servicesWithVariants.join(', ');
             } else {
                 document.getElementById('confirmService').textContent = 'Not selected';
             }
 
+            // Mostrar precio total
+            const totalPrice = calculateTotalPrice();
+            document.getElementById('confirmPrice').textContent = `$${totalPrice} MXN`;
+
             document.getElementById('confirmTimeEstimate').textContent = document.getElementById('estimatedTime').textContent;
         }
 
-        document.getElementById('appointmentDate').addEventListener('change', function() {
-            selectedDate = this.value;
-            console.log('Date changed to:', selectedDate);
+        // Variable para guardar el código de confirmación
+        let confirmationCode = '';
 
-            // Display friendly date format
-            const dateObj = new Date(selectedDate + 'T00:00:00');
-            const friendlyDate = dateObj.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-
-            // Create or update the friendly date display
-            let friendlyDateDisplay = document.getElementById('friendlyDateDisplay');
-            if (!friendlyDateDisplay) {
-                const dateInput = document.getElementById('appointmentDate');
-                friendlyDateDisplay = document.createElement('div');
-                friendlyDateDisplay.id = 'friendlyDateDisplay';
-                friendlyDateDisplay.style.cssText = 'margin-top: 10px; padding: 12px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; text-align: center; color: white; font-weight: 600;';
-                dateInput.parentNode.insertBefore(friendlyDateDisplay, dateInput.nextSibling);
+        function generateConfirmationCode() {
+            // Generar código único: MYSTIC + 4 caracteres aleatorios
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Sin caracteres confusos (0, O, I, 1)
+            let code = 'MYSTIC-';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            friendlyDateDisplay.textContent = friendlyDate;
-
-            updateTimeSlots();
-        });
+            return code;
+        }
 
         function confirmBooking() {
             const name = document.getElementById('clientName').value;
@@ -3127,10 +4047,28 @@
                 day: 'numeric'
             });
 
+            // Generar código de confirmación único
+            confirmationCode = generateConfirmationCode();
+
+            // Guardar cita en caché para bloquear slots futuros
+            saveAppointmentToCache({
+                technician: selectedTechnician,
+                date: selectedDate,
+                startTime: selectedTime,
+                endTime: endTime,
+                duration: estimatedDuration,
+                services: selectedServices,
+                clientName: name,
+                clientPhone: phone,
+                confirmationCode: confirmationCode
+            });
+
             // Preparar lista de servicios para WhatsApp
+            const totalPrice = calculateTotalPrice();
             const servicesList = selectedServices.map((service, index) => {
-                return `${index + 1}. ${service}`;
-            }).join('%0A');
+                const variant = serviceVariants[service] ? ` (${serviceVariants[service]})` : '';
+                return `${index + 1}. ${service}${variant}`;
+            }).join('\n');
 
             // Prepare data for Google Calendar event
             const calendarData = {
@@ -3142,7 +4080,8 @@
                 startTime: selectedTime,
                 durationMinutes: estimatedDuration,
                 includeRemoval: selectedRemoval,
-                specialRequests: specialRequests
+                specialRequests: specialRequests,
+                confirmationCode: confirmationCode
             };
 
             // Create Google Calendar event via Apps Script
@@ -3171,12 +4110,14 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 *Name:* ${name}
 *Phone:* ${phone}
+*Confirmation Code:* ${confirmationCode}
 
 *APPOINTMENT DETAILS*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 *Technician:* ${selectedTechnician}
 *Services:*
 ${servicesList}
+*Total Price:* $${totalPrice} MXN
 
 *Date:* ${formattedDate}
 *Time:* ${selectedTime} - ${endTime}
@@ -3189,23 +4130,24 @@ ${specialRequests ? `*Notes:* ${specialRequests}
 
 *IMPORTANT - PLEASE READ CAREFULLY*
 
+💰 *DEPOSIT REQUIRED TO CONFIRM*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏰ *You have 2 HOURS to send deposit*
+• Deposit: $100 MXN to account: [INSERTAR CUENTA BANCARIA]
+• Send photo/screenshot of deposit via WhatsApp
+• Your appointment will be confirmed once deposit is received
+⚠️ *If deposit not sent within 2 hours, appointment will be automatically cancelled*
+
 *PHOTO OF YOUR NAIL DESIGN*
 Please send a photo or screenshot of the nail design you want ASAP! This helps us prepare for your appointment.
-
-*NOTE ABOUT AI-GENERATED DESIGNS*
-If your design inspiration is from an AI-generated image (Midjourney, DALL-E, etc.), please be aware that:
-• Some AI designs may not be achievable in real life
-• We can create similar styles but with realistic adaptations
-• Please have alternative reference photos ready
-• We'll confirm what's possible during your appointment
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📋 *POLICIES - NO EXCEPTIONS*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💰 *DEPOSIT REQUIRED*
-• We book appointments with $100 deposit only
-• Cannot confirm appointments without deposit
+🎫 *CONFIRMATION CODE: ${confirmationCode}*
+• Save this code! Show it when you arrive
+• Keep it for your records
 
 ⏰ *TOLERANCE POLICY*
 • Every minute is important - we wait up to 10min
@@ -3221,24 +4163,238 @@ If your design inspiration is from an AI-generated image (Midjourney, DALL-E, et
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-*We'll reply to confirm your appointment, deposit payment and discuss your nail design!*
+*We'll reply to confirm your appointment once we receive your deposit!*
 
 Thank you for choosing *Mystic Nails Art*!`;
 
-            // Open WhatsApp
-            window.open(`https://wa.me/529843108186?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+            // Abrir Calendly con la técnica preseleccionada
+            const calendlyUrl = CALENDLY_URLS[selectedTechnician];
 
-            alert(`✅ *Booking Request Sent!*
+            // Abrir Calendly en nueva pestaña
+            window.open(calendlyUrl, '_blank');
 
-📅 Google Calendar event created for admin and technician
-💬 WhatsApp message opened
+            // Mostrar instrucciones al cliente
+            alert(`✅ *PASO 1: COMPLETA TU RESERVA*
 
-⚠️ *IMPORTANT:*
-• Please send us a photo of your nail design ASAP
-• If it's an AI-generated design, we'll confirm what's possible
-• $100 deposit required to confirm your appointment`);
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📅 *Calendly se abrirá en una nueva pestaña*
+
+1. Selecciona tu fecha y hora preferida
+2. Completa tus datos
+3. Confirma tu cita
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 *PASO 2: DEPÓSITO*
+
+⏰ *Tienes 2 horas para enviar depósito*
+• Deposit: $100 MXN
+• Cuenta: [INSERTAR CUENTA BANCARIA]
+• Envía foto/screenshot por WhatsApp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📸 *IMPORTANTE: FOTO DEL DISEÑO*
+
+Envíanos foto del diseño de uñas que quieres para prepararnos mejor.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ *Tu cita se confirmará al recibir tu depósito!*
+
+Thank you for choosing *Mystic Nails Art*!`);
+
+            // Opcional: Abrir WhatsApp después de un momento
+            setTimeout(() => {
+                window.open(`https://wa.me/529843108186?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+            }, 2000); // 2 segundos después
 
             closeBookingModal();
+        }
+
+        function saveAppointmentToCache(appointment) {
+            // Crear clave única para la cita
+            const cacheKey = `${appointment.technician}_${appointment.date}_${appointment.startTime}`;
+
+            // Agregar estado y timestamps
+            const appointmentWithStatus = {
+                ...appointment,
+                status: 'pending_deposit', // pending_deposit, confirmed, cancelled, expired
+                createdAt: new Date().toISOString(),
+                depositExpiresAt: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(), // 2 horas
+                confirmedAt: null,
+                cancelledAt: null
+            };
+
+            // Guardar en caché
+            appointmentCache[cacheKey] = appointmentWithStatus;
+
+            // Guardar en localStorage para persistencia
+            try {
+                const existingCache = JSON.parse(localStorage.getItem('mysticNailsAppointments') || '{}');
+                existingCache[cacheKey] = appointmentWithStatus;
+                localStorage.setItem('mysticNailsAppointments', JSON.stringify(existingCache));
+            } catch (e) {
+                console.log('LocalStorage no disponible, usando caché temporal');
+            }
+
+            console.log('✅ Cita guardada en caché con estado pending_deposit:', appointmentWithStatus);
+
+            // Programar verificación de expiración
+            scheduleExpirationCheck(cacheKey, appointmentWithStatus.depositExpiresAt);
+        }
+
+        // Programar verificación de expiración
+        function scheduleExpirationCheck(cacheKey, expiresAt) {
+            const expiresTime = new Date(expiresAt).getTime();
+            const now = Date.now();
+            const timeUntilExpiry = expiresTime - now;
+
+            if (timeUntilExpiry > 0) {
+                setTimeout(() => {
+                    checkAndExpireAppointment(cacheKey);
+                }, timeUntilExpiry);
+            }
+        }
+
+        // Verificar y expirar cita si no tiene depósito
+        function checkAndExpireAppointment(cacheKey) {
+            const appointment = appointmentCache[cacheKey];
+            if (!appointment) return;
+
+            // Si todavía está pending_deposit después de 24h, expirarla
+            if (appointment.status === 'pending_deposit') {
+                const expiresTime = new Date(appointment.depositExpiresAt).getTime();
+                if (Date.now() >= expiresTime) {
+                    // Expirar la cita
+                    appointment.status = 'expired';
+                    appointment.expiredAt = new Date().toISOString();
+
+                    // Actualizar caché y localStorage
+                    appointmentCache[cacheKey] = appointment;
+                    try {
+                        const existingCache = JSON.parse(localStorage.getItem('mysticNailsAppointments') || '{}');
+                        existingCache[cacheKey] = appointment;
+                        localStorage.setItem('mysticNailsAppointments', JSON.stringify(existingCache));
+                    } catch (e) {
+                        console.log('Error actualizando localStorage:', e);
+                    }
+
+                    console.log('⏰ Cita expirada por falta de depósito:', cacheKey);
+
+                    // Notificar al admin (opcional - podría enviar WhatsApp)
+                    notifyAdminExpiredAppointment(appointment);
+                }
+            }
+        }
+
+        // Notificar al admin sobre cita expirada (opcional)
+        function notifyAdminExpiredAppointment(appointment) {
+            const message = `⏰ *CITA EXPIRADA*\n\nCliente: ${appointment.clientName}\nTécnica: ${appointment.technician}\nFecha: ${appointment.date}\nHora: ${appointment.startTime}\n\nLa cita expiró por falta de depósito.`;
+
+            // Opcional: enviar notificación al admin
+            // window.open(`https://wa.me/529843108186?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Cambiar estado de cita (para admin/manicurista)
+        function updateAppointmentStatus(technician, date, startTime, newStatus, adminNote = '') {
+            const cacheKey = `${technician}_${date}_${startTime}`;
+            const appointment = appointmentCache[cacheKey];
+
+            if (!appointment) {
+                alert('❌ Cita no encontrada');
+                return false;
+            }
+
+            // Actualizar estado
+            appointment.status = newStatus;
+            appointment.adminNote = adminNote;
+
+            if (newStatus === 'confirmed') {
+                appointment.confirmedAt = new Date().toISOString();
+            } else if (newStatus === 'cancelled') {
+                appointment.cancelledAt = new Date().toISOString();
+            }
+
+            // Actualizar caché y localStorage
+            appointmentCache[cacheKey] = appointment;
+            try {
+                const existingCache = JSON.parse(localStorage.getItem('mysticNailsAppointments') || '{}');
+                existingCache[cacheKey] = appointment;
+                localStorage.setItem('mysticNailsAppointments', JSON.stringify(existingCache));
+            } catch (e) {
+                console.log('Error actualizando localStorage:', e);
+            }
+
+            console.log(`✅ Cita actualizada a estado: ${newStatus}`, appointment);
+            return true;
+        }
+
+        // Liberar cita (cambiar a cancelled o deleted)
+        function releaseAppointment(technician, date, startTime) {
+            const cacheKey = `${technician}_${date}_${startTime}`;
+            const appointment = appointmentCache[cacheKey];
+
+            if (!appointment) {
+                alert('❌ Cita no encontrada');
+                return false;
+            }
+
+            // Eliminar de caché y localStorage
+            delete appointmentCache[cacheKey];
+            try {
+                const existingCache = JSON.parse(localStorage.getItem('mysticNailsAppointments') || '{}');
+                delete existingCache[cacheKey];
+                localStorage.setItem('mysticNailsAppointments', JSON.stringify(existingCache));
+            } catch (e) {
+                console.log('Error liberando cita:', e);
+            }
+
+            console.log('✅ Cita liberada:', cacheKey);
+            alert('✅ Cita liberada correctamente');
+            return true;
+        }
+
+        function checkSlotAvailability(slot, allSlots, selectedDate, technician) {
+            const slotDate = new Date(`${selectedDate}T${slot}:00`);
+
+            // Verificar citas existentes en caché
+            const cacheKeyPrefix = `${technician}_${selectedDate}`;
+
+            // Buscar todas las citas de esta técnica en esta fecha
+            for (const [key, appointment] of Object.entries(appointmentCache)) {
+                if (key.startsWith(cacheKeyPrefix)) {
+                    // Ignorar citas canceladas, expiradas o eliminadas
+                    if (appointment.status === 'cancelled' || appointment.status === 'expired') {
+                        continue;
+                    }
+
+                    // Para citas pending_deposit, verificar si no han expirado
+                    if (appointment.status === 'pending_deposit') {
+                        const expiresTime = new Date(appointment.depositExpiresAt).getTime();
+                        if (Date.now() >= expiresTime) {
+                            // Expirar automáticamente
+                            appointment.status = 'expired';
+                            appointment.expiredAt = new Date().toISOString();
+                            continue;
+                        }
+                    }
+
+                    const apptStart = new Date(`${appointment.date}T${appointment.startTime}:00`);
+                    const apptEnd = new Date(apptStart.getTime() + appointment.duration * 60000);
+
+                    // Verificar si el slot choca con esta cita
+                    const slotEnd = new Date(slotDate.getTime() + 60 * 60000); // Asumimos 1 hora como mínimo
+
+                    if (slotDate < apptEnd && slotEnd > apptStart) {
+                        const statusText = appointment.status === 'pending_deposit' ? '(Pendiente)' : '';
+                        return { available: false, reason: 'Reservado: ' + appointment.clientName + ' ' + statusText };
+                    }
+                }
+            }
+
+            return { available: true };
         }
 
         // ========================================

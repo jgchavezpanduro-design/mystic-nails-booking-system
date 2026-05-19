@@ -24,10 +24,23 @@ const SHEETS = {
 const TECHNICIAN_EMAILS = {
   'Carolina': '27supercaro@gmail.com',
   'Montse': 'Mrqz.mntse25@gmail.com',
-  'Diana': '' // Agregar cuando se tenga
+  'Diana': 'Dianamejia2825@gmail.com'
 };
 
-const ADMIN_EMAILS = ['jgchavezpanduro@gmail.com']; // Agregar más admins si es necesario
+const ADMIN_EMAILS = ['jgchavezpanduro@gmail.com'];
+
+// IDs de los calendarios personales de cada técnica
+// INSTRUCCIONES: Para obtener el ID del calendario:
+// 1. Ve a Google Calendar
+// 2. Selecciona el calendario
+// 3. Click en el ícono de configuración ⚙️
+// 4. Selecciona "Configuración y uso compartido"
+// 5. En "Integrar el calendario", copia el "ID del calendario"
+const TECHNICIAN_CALENDAR_IDS = {
+  'Carolina': 'primary', // O el ID del calendario personal de Carolina
+  'Montse': 'primary',   // O el ID del calendario personal de Montse
+  'Diana': 'primary'     // O el ID del calendario personal de Diana
+};
 
 // ============================================
 // UTILIDADES
@@ -121,6 +134,8 @@ function doPost(e) {
         return jsonResponse(createCompra(body));
       case 'calendar/create-event':
         return jsonResponse(createCalendarEvent(body));
+      case 'calendar/check-availability':
+        return jsonResponse(checkAvailability(body));
       default:
         return jsonResponse(null, 'Endpoint not found: ' + path);
     }
@@ -571,10 +586,26 @@ ${data.specialRequests ? '📝 Notes: ' + data.specialRequests : ''}
 ---
 Booking created via Mystic Nails Art website`;
 
-    // Create calendar event
-    const calendar = CalendarApp.getDefaultCalendar();
+    // Get the technician's personal calendar
+    const calendarId = TECHNICIAN_CALENDAR_IDS[data.technician];
+    let calendar;
+
+    if (calendarId === 'primary') {
+      // Use the technician's primary calendar
+      // This requires the script to run as the technician
+      calendar = CalendarApp.getDefaultCalendar();
+    } else {
+      // Use the specific calendar ID
+      calendar = CalendarApp.getCalendarById(calendarId);
+    }
+
+    if (!calendar) {
+      throw new Error(`Calendar not found for technician: ${data.technician}`);
+    }
+
+    // Create event in the technician's calendar
     const event = calendar.createEvent(
-      `💅 ${data.service} - ${data.technician}`,
+      `💅 ${data.service} - ${data.clientName}`,
       startDate,
       endDate,
       {
@@ -585,14 +616,92 @@ Booking created via Mystic Nails Art website`;
       }
     );
 
+    // Also create event in admin calendar for backup
+    const adminCalendar = CalendarApp.getDefaultCalendar();
+    adminCalendar.createEvent(
+      `💅 ${data.service} - ${data.technician} - ${data.clientName}`,
+      startDate,
+      endDate,
+      {
+        description: description,
+        location: 'Mystic Nails Art, Playa del Carmen',
+        guests: guests.join(','),
+        sendInvites: false // Already sent from technician calendar
+      }
+    );
+
     return {
       success: true,
       eventId: event.getId(),
-      message: 'Event created successfully',
+      message: 'Event created successfully in ' + data.technician + '\'s calendar',
+      technicianCalendar: data.technician,
       guests: guests
     };
 
   } catch (error) {
     throw new Error('Error creating calendar event: ' + error.toString());
+  }
+}
+
+// ============================================
+// CHECK AVAILABILITY (Bloqueo de horarios)
+// ============================================
+
+function checkAvailability(data) {
+  try {
+    const technician = data.technician;
+    const date = data.date; // Format: YYYY-MM-DD
+    const timeSlots = data.timeSlots; // Array of time slots to check
+
+    // Get the technician's calendar
+    const calendarId = TECHNICIAN_CALENDAR_IDS[technician];
+    let calendar;
+
+    if (calendarId === 'primary') {
+      calendar = CalendarApp.getDefaultCalendar();
+    } else {
+      calendar = CalendarApp.getCalendarById(calendarId);
+    }
+
+    if (!calendar) {
+      throw new Error(`Calendar not found for technician: ${technician}`);
+    }
+
+    // Check each time slot
+    const availableSlots = [];
+    const blockedSlots = [];
+
+    timeSlots.forEach(time => {
+      // Create start and end datetime for this slot
+      const startTime = new Date(`${date}T${time}:00`);
+      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // Check for 1 hour window
+
+      // Get events in this time window
+      const events = calendar.getEvents(startTime, endTime);
+
+      if (events.length > 0) {
+        // Slot is blocked
+        blockedSlots.push({
+          time: time,
+          reason: events[0].getTitle(),
+          blocked: true
+        });
+      } else {
+        // Slot is available
+        availableSlots.push(time);
+      }
+    });
+
+    return {
+      technician: technician,
+      date: date,
+      availableSlots: availableSlots,
+      blockedSlots: blockedSlots,
+      totalAvailable: availableSlots.length,
+      totalBlocked: blockedSlots.length
+    };
+
+  } catch (error) {
+    throw new Error('Error checking availability: ' + error.toString());
   }
 }

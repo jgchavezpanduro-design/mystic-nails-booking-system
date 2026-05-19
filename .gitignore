@@ -27,3 +27,6 @@ __pycache__/
 # Claude
 .claude/
 mystic-nails-app/
+
+# Local Netlify folder
+.netlify

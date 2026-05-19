@@ -371,3 +371,59 @@ If your design inspiration is from an AI-generated image
 **Versión:** 5.3 - All Duplicate Images Removed + Clean Folder Structure
 **Estado:** ✅ Production Ready
 **Último cambio:** Eliminada carpeta watermarked/ (31 duplicados) + solo 17 imágenes únicas restantes
+
+
+---
+
+## 🎨 Actualizaciones Recientes (2026-05-12)
+
+### **UI SaaS Premium - Selector Horizontal + Tabs**
+- ✅ **Selector de fechas horizontal** tipo Calendly/Fresa
+  - 7 días visibles simultáneamente
+  - Navegación semanal (no mensual)
+  - Display del mes/año actual
+  - Diseño minimalista con sombras suaves
+  - Días seleccionados con fondo azul vibrante (#0066FF)
+  - Indicador "TODAY" para el día actual
+
+- ✅ **Tabs de horarios** (Morning/Afternoon/Evening)
+  - Filtrado automático de horarios por periodo
+  - Morning: 6:00 AM - 11:59 AM
+  - Afternoon: 12:00 PM - 5:59 PM
+  - Evening: 6:00 PM onwards
+  - Diseño pill/rounded moderno
+  - Estados hover elegantes con elevación
+
+- ✅ **Estilo SaaS Premium aplicado:**
+  - Paleta de colores: Azul vibrante (#0066FF) + neutros
+  - Bordes redondeados (10-16px)
+  - Sombras suaves: `0 1px 3px rgba(0,0,0,0.1)`
+  - Transiciones suaves (0.2s ease)
+  - Mucho espacio en blanco
+  - Tipografía limpia y legible
+
+### **Horarios Actualizados**
+- ✅ **Carolina:** 9:00 AM - 5:00 PM (todos los días)
+- ✅ **Montse:** 12:00 PM - 4:00 PM (todos los días, sin descanso martes)
+- ✅ **Diana:**
+  - Lunes/Jueves: 9:00 AM - 12:00 PM
+  - Martes: 9:00 AM - 8:00 PM (extendido)
+  - Miércoles: Descanso
+  - Viernes/Sábado/Domingo: 3:30 PM - 8:00 PM
+
+### **Calendarios Personales (Implementado)**
+- ✅ **Google Apps Script actualizado** para crear eventos en calendarios personales
+- ✅ **Email de Diana agregado:** Dianamejia2825@gmail.com
+- ✅ **Sistema preparado** para calendarios individuales
+- ✅ **Eventos se crean** en calendario de la técnica + admin
+
+### **Documentación Creada**
+- ✅ INSTRUCCIONES_CALENDARIOS_PERSONALES.md - Guía completa técnica
+- ✅ PASOS_RAPIDES_CALENDARIOS.md - Guía simplificada para técnicas
+
+---
+
+**Última actualización:** 2026-05-12
+**Versión:** 6.0 - SaaS Premium UI + Personal Calendars + Updated Schedules
+**Estado:** ✅ Production Ready (Calendarios personales pendientes de IDs)
+
