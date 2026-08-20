@@ -78,9 +78,9 @@ TEMPLATE = '''<!DOCTYPE html>
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
   html {{ scroll-behavior: smooth; }}
   body {{
-    --mn-bg:#0d0a1a; --mn-card:#1d1930; --mn-bdr:rgba(255,255,255,0.09);
-    --mn-pri:#b06be0; --mn-pdim:rgba(176,107,224,0.15); --mn-txt:#ede7f8; --mn-mut:#9b8fb0;
-    --mn-ga:#7b3fbf; --mn-gb:#c060a0; --mn-foot:#080613;
+    --mn-bg:#fdf8fb; --mn-card:#ffffff; --mn-bdr:rgba(0,0,0,0.08);
+    --mn-pri:#7a3fa8; --mn-pdim:rgba(122,63,168,0.10); --mn-txt:#1e1428; --mn-mut:#7a6890;
+    --mn-ga:#7a3fa8; --mn-gb:#c4577a; --mn-foot:#0a0814;
     background:var(--mn-bg); color:var(--mn-txt); font-family:'Big Shoulders Display',sans-serif; font-weight:300; line-height:1.6;
   }}
   h1, h2, h3 {{ font-family:'Big Shoulders Display',sans-serif; font-weight:600; line-height:1.15; }}
@@ -121,7 +121,7 @@ TEMPLATE = '''<!DOCTYPE html>
   footer a {{ color:rgba(255,255,255,0.6); }}
 </style>
 </head>
-<body data-theme="dark">
+<body data-theme="light">
 
 <nav>
   <div class="wrap">
