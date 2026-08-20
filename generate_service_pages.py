@@ -134,7 +134,7 @@ TEMPLATE = '''<!DOCTYPE html>
   <div class="wrap">
     <p class="breadcrumb"><a href="https://mysticnailsart.com/">Inicio</a> / {h1}</p>
 
-    <h1>{h1}</h1>
+    <h1>{h1} 🇲🇽</h1>
     <p class="lead">{lead}</p>
 
     <div class="cta-row">
@@ -175,7 +175,7 @@ TEMPLATE = '''<!DOCTYPE html>
 
 <footer>
   <div class="wrap">
-    <div>Mystic Nails Art &mdash; Calle 38 Nte Lote 73, Tohoku, Centro, Playa del Carmen, Q.R.</div>
+    <div>Mystic Nails Art &mdash; Calle 38 Nte Lote 73, Tohoku, Centro, Playa del Carmen, Q.R. 🇲🇽</div>
     <div><a href="https://wa.me/529843108186" target="_blank" rel="noopener">+52 984 310 8186</a> &middot; Lun&ndash;Dom 09:00&ndash;20:00</div>
   </div>
 </footer>
