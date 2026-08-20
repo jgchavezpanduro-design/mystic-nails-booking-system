@@ -63,7 +63,7 @@ TEMPLATE = '''<!DOCTYPE html>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16897215421"></script>
 <script>
@@ -81,14 +81,14 @@ TEMPLATE = '''<!DOCTYPE html>
     --mn-bg:#0d0a1a; --mn-card:#1d1930; --mn-bdr:rgba(255,255,255,0.09);
     --mn-pri:#b06be0; --mn-pdim:rgba(176,107,224,0.15); --mn-txt:#ede7f8; --mn-mut:#9b8fb0;
     --mn-ga:#7b3fbf; --mn-gb:#c060a0; --mn-foot:#080613;
-    background:var(--mn-bg); color:var(--mn-txt); font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.6;
+    background:var(--mn-bg); color:var(--mn-txt); font-family:'Bebas Neue',sans-serif; font-weight:300; line-height:1.6;
   }}
-  h1, h2, h3 {{ font-family:'Bodoni Moda','Playfair Display',serif; font-weight:600; line-height:1.15; }}
+  h1, h2, h3 {{ font-family:'Bebas Neue',sans-serif; font-weight:600; line-height:1.15; }}
   a {{ color:var(--mn-pri); }}
   .wrap {{ max-width:800px; margin:0 auto; padding:0 24px; }}
   nav {{ padding:22px 0; border-bottom:1px solid var(--mn-bdr); }}
   nav .wrap {{ display:flex; justify-content:space-between; align-items:center; }}
-  .brand {{ font-family:'Bodoni Moda','Playfair Display',serif; font-size:22px; font-weight:600; background:linear-gradient(135deg,var(--mn-ga),var(--mn-gb)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }}
+  .brand {{ font-family:'Bebas Neue',sans-serif; font-size:22px; font-weight:600; background:linear-gradient(135deg,var(--mn-ga),var(--mn-gb)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }}
   .back-link {{ font-size:14px; color:var(--mn-mut); text-decoration:none; }}
   .back-link:hover {{ color:var(--mn-pri); }}
   main {{ padding:56px 0 80px; }}
@@ -111,7 +111,7 @@ TEMPLATE = '''<!DOCTYPE html>
   td {{ padding:14px 18px; font-size:15px; color:var(--mn-mut); border-top:1px solid var(--mn-bdr); }}
   td:first-child {{ font-weight:600; color:var(--mn-txt); white-space:nowrap; }}
   .faq-item {{ border-bottom:1px solid var(--mn-bdr); padding:18px 0; }}
-  .faq-item h3 {{ font-size:17px; font-weight:600; margin-bottom:8px; color:var(--mn-txt); font-family:'DM Sans',sans-serif; }}
+  .faq-item h3 {{ font-size:17px; font-weight:600; margin-bottom:8px; color:var(--mn-txt); font-family:'Bebas Neue',sans-serif; }}
   .faq-item p {{ font-size:15px; color:var(--mn-mut); }}
   .related {{ display:flex; gap:10px; flex-wrap:wrap; }}
   .related a {{ border:1px solid var(--mn-bdr); border-radius:50px; padding:9px 18px; font-size:14px; text-decoration:none; color:var(--mn-txt); }}
