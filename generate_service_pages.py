@@ -205,8 +205,22 @@ def benefits_block(items):
 def compare_rows_block(rows):
     return '\n'.join('          <tr><td>{name}</td><td>{desc}</td></tr>'.format(name=n, desc=d) for n, d in rows)
 
+NAME_TO_SLUG = {
+    "Gelish": "gelish-playa-del-carmen",
+    "Rubber Base": "rubber-base-playa-del-carmen",
+    "Builder Gel": "builder-gel-playa-del-carmen",
+    "Kapping": "kapping-playa-del-carmen",
+    "Softgel / Gel X": "softgel-gel-x-playa-del-carmen",
+    "Extensiones (Softgel / Gel X)": "softgel-gel-x-playa-del-carmen",
+    "Acrílicas / Polygel": "acrilicas-polygel-playa-del-carmen",
+    "Esmaltado Express": "esmaltado-express-playa-del-carmen",
+    "Pedicure Ruso": "pedicure-ruso-playa-del-carmen",
+    "Pedicure Místico": "pedicure-mistico-playa-del-carmen",
+    "Pedicure": "pedicure-mistico-playa-del-carmen",
+}
+
 def related_block(items):
-    return '\n'.join('        <a href="https://mysticnailsart.com/#services">{name}</a>'.format(name=n) for n in items) + \
+    return '\n'.join('        <a href="https://mysticnailsart.com/{slug}/">{name}</a>'.format(slug=NAME_TO_SLUG[n], name=n) for n in items) + \
            '\n        <a href="https://mysticnailsart.com/#gallery">Ver galería de diseños</a>'
 
 PAGES = [
@@ -349,7 +363,7 @@ PAGES = [
         og_description="Extensiones resistentes para mayor estructura, largo y diseños más elaborados. Reserva por WhatsApp.",
         og_image="unas-doradas-elegantes-diseno-hoja-playa-del-carmen.webp",
         lead="Extensiones resistentes para mayor estructura, largo y diseños más elaborados — la opción ideal si quieres nail art detallado o uñas más largas.",
-        wa_text="Hola%2C%20quiero%20reservar%20Ac%C3%ADlicas%20%2F%20Polygel%20en%20Mystic%20Nails%20Art",
+        wa_text="Hola%2C%20quiero%20reservar%20Acr%C3%ADlicas%20%2F%20Polygel%20en%20Mystic%20Nails%20Art",
         benefits=[
             ("Resistencia", "la opción más duradera para largos mayores"),
             ("Estructura", "soporta diseños 3D, piedras y nail art elaborado"),
