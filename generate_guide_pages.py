@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 """Generates blog/guide article pages, reusing the service-page design system."""
 import os
+from urllib.parse import quote
 
 TEMPLATE = '''<!DOCTYPE html>
-<html lang="es-MX">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,8 +42,8 @@ TEMPLATE = '''<!DOCTYPE html>
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {{ "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mysticnailsart.com/" }},
-    {{ "@type": "ListItem", "position": 2, "name": "Guía", "item": "https://mysticnailsart.com/#servicios-playa-del-carmen" }},
+    {{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mysticnailsart.com/" }},
+    {{ "@type": "ListItem", "position": 2, "name": "Guide", "item": "https://mysticnailsart.com/#servicios-playa-del-carmen" }},
     {{ "@type": "ListItem", "position": 3, "name": "{h1}", "item": "https://mysticnailsart.com/guia/{slug}/" }}
   ]
 }}
@@ -59,7 +60,7 @@ TEMPLATE = '''<!DOCTYPE html>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16897215421"></script>
 <script>
@@ -77,14 +78,14 @@ TEMPLATE = '''<!DOCTYPE html>
     --mn-bg:#fdf8fb; --mn-card:#ffffff; --mn-bdr:rgba(0,0,0,0.08);
     --mn-pri:#7a3fa8; --mn-pdim:rgba(122,63,168,0.10); --mn-txt:#1e1428; --mn-mut:#7a6890;
     --mn-ga:#7a3fa8; --mn-gb:#c4577a; --mn-foot:#0a0814;
-    background:var(--mn-bg); color:var(--mn-txt); font-family:'Big Shoulders Display',sans-serif; font-weight:300; line-height:1.6;
+    background:var(--mn-bg); color:var(--mn-txt); font-family:'Fredoka',sans-serif; font-weight:300; line-height:1.6;
   }}
-  h1, h2, h3 {{ font-family:'Big Shoulders Display',sans-serif; font-weight:600; line-height:1.15; }}
+  h1, h2, h3 {{ font-family:'Fredoka',sans-serif; font-weight:600; line-height:1.15; }}
   a {{ color:var(--mn-pri); }}
   .wrap {{ max-width:800px; margin:0 auto; padding:0 24px; }}
   nav {{ padding:22px 0; border-bottom:1px solid var(--mn-bdr); }}
   nav .wrap {{ display:flex; justify-content:space-between; align-items:center; }}
-  .brand {{ font-family:'Big Shoulders Display',sans-serif; font-size:22px; font-weight:600; background:linear-gradient(135deg,var(--mn-ga),var(--mn-gb)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }}
+  .brand {{ font-family:'Fredoka',sans-serif; font-size:22px; font-weight:600; background:linear-gradient(135deg,var(--mn-ga),var(--mn-gb)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }}
   .back-link {{ font-size:14px; color:var(--mn-mut); text-decoration:none; }}
   .back-link:hover {{ color:var(--mn-pri); }}
   main {{ padding:56px 0 80px; }}
@@ -110,7 +111,7 @@ TEMPLATE = '''<!DOCTYPE html>
   td {{ padding:14px 18px; font-size:15px; color:var(--mn-mut); border-top:1px solid var(--mn-bdr); }}
   td:first-child {{ font-weight:600; color:var(--mn-txt); white-space:nowrap; }}
   .faq-item {{ border-bottom:1px solid var(--mn-bdr); padding:18px 0; }}
-  .faq-item h3 {{ font-size:17px; font-weight:600; margin-bottom:8px; color:var(--mn-txt); font-family:'Big Shoulders Display',sans-serif; }}
+  .faq-item h3 {{ font-size:17px; font-weight:600; margin-bottom:8px; color:var(--mn-txt); font-family:'Fredoka',sans-serif; }}
   .faq-item p {{ font-size:15px; color:var(--mn-mut); }}
   .related {{ display:flex; gap:10px; flex-wrap:wrap; }}
   .related a {{ border:1px solid var(--mn-bdr); border-radius:50px; padding:9px 18px; font-size:14px; text-decoration:none; color:var(--mn-txt); }}
@@ -125,32 +126,32 @@ TEMPLATE = '''<!DOCTYPE html>
 <nav>
   <div class="wrap">
     <a class="brand" href="https://mysticnailsart.com/">Mystic Nails Art</a>
-    <a class="back-link" href="https://mysticnailsart.com/">&larr; Volver al inicio</a>
+    <a class="back-link" href="https://mysticnailsart.com/">&larr; Back to home</a>
   </div>
 </nav>
 
 <main>
   <div class="wrap">
-    <p class="breadcrumb"><a href="https://mysticnailsart.com/">Inicio</a> / <a href="https://mysticnailsart.com/#servicios-playa-del-carmen">Gu&iacute;a</a> / {h1}</p>
+    <p class="breadcrumb"><a href="https://mysticnailsart.com/">Home</a> / <a href="https://mysticnailsart.com/#servicios-playa-del-carmen">Guide</a> / {h1}</p>
 
-    <p class="kicker">Gu&iacute;a Mystic Nails Art</p>
+    <p class="kicker">Mystic Nails Art Guide</p>
     <h1>{h1}</h1>
     <p class="lead">{lead}</p>
 
     <div class="cta-row">
-      <a class="btn-primary" href="https://wa.me/529843108186?text={wa_text}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-      <a class="btn-secondary" href="https://mysticnailsart.com/#precios">Ver precios</a>
+      <a class="btn-primary" href="https://wa.me/529843108186?text={wa_text}" target="_blank" rel="noopener">Get a quote on WhatsApp</a>
+      <a class="btn-secondary" href="https://mysticnailsart.com/#precios">View prices</a>
     </div>
 
 {body_sections}
 
     <section>
-      <h2>Preguntas frecuentes</h2>
+      <h2>Frequently asked questions</h2>
 {faq_html}
     </section>
 
     <section>
-      <h2>Explora otros servicios</h2>
+      <h2>Explore other services</h2>
       <div class="related">
 {related}
       </div>
@@ -161,7 +162,7 @@ TEMPLATE = '''<!DOCTYPE html>
 <footer>
   <div class="wrap">
     <div>Mystic Nails Art &mdash; Calle 38 Nte Lote 73, Tohoku, Centro, Playa del Carmen, Q.R. \U0001f1f2\U0001f1fd</div>
-    <div><a href="https://wa.me/529843108186" target="_blank" rel="noopener">+52 984 310 8186</a> &middot; Lun&ndash;Dom 09:00&ndash;20:00</div>
+    <div><a href="https://wa.me/529843108186" target="_blank" rel="noopener">+52 984 310 8186</a> &middot; Mon&ndash;Sun 09:00&ndash;20:00</div>
   </div>
 </footer>
 
@@ -210,206 +211,243 @@ NAME_TO_SLUG = {
     "Rubber Base": "rubber-base-playa-del-carmen",
     "Builder Gel": "builder-gel-playa-del-carmen",
     "Kapping": "kapping-playa-del-carmen",
-    "Softgel / Gel X": "softgel-gel-x-playa-del-carmen",
-    "Acrílicas / Polygel": "acrilicas-polygel-playa-del-carmen",
-    "Esmaltado Express": "esmaltado-express-playa-del-carmen",
-    "Pedicure Ruso": "pedicure-ruso-playa-del-carmen",
-    "Pedicure Místico": "pedicure-mistico-playa-del-carmen",
+    "Soft Gel / Gel X": "softgel-gel-x-playa-del-carmen",
+    "Acrylic / Polygel": "acrilicas-polygel-playa-del-carmen",
+    "Express Polish": "esmaltado-express-playa-del-carmen",
+    "Russian Pedicure": "pedicure-ruso-playa-del-carmen",
+    "Mystic Pedicure": "pedicure-mistico-playa-del-carmen",
 }
 
 def related_block(items):
     return '\n'.join('        <a href="https://mysticnailsart.com/{slug}/">{name}</a>'.format(slug=NAME_TO_SLUG[n], name=n) for n in items) + \
-           '\n        <a href="https://mysticnailsart.com/#gallery">Ver galería de diseños</a>'
+           '\n        <a href="https://mysticnailsart.com/#gallery">View design gallery</a>'
 
 GUIDES = []
 
 # ---------------------------------------------------------------- Article 1
 GUIDES.append(dict(
     slug="gelish-acrilico-polygel-diferencias-playa-del-carmen",
-    title="Gelish vs. Acrílico vs. Polygel: ¿cuál elegir? | Mystic Nails Art",
-    description="Comparamos Gelish, Rubber Base, Acrílico y Polygel: duración, resistencia y precio desde, para que elijas la técnica ideal en Playa del Carmen.",
-    og_description="Comparativa completa de técnicas de uñas: Gelish, Rubber Base, Acrílico y Polygel. Duración, resistencia y precio.",
+    title="Gelish vs. Acrylic vs. Polygel: Which Should You Choose? | Mystic Nails Art",
+    description="We compare Gelish, Rubber Base, Acrylic and Polygel: duration, durability and starting price, so you can choose the ideal technique in Playa del Carmen.",
+    og_description="A complete comparison of nail techniques: Gelish, Rubber Base, Acrylic and Polygel. Duration, durability and price.",
     og_image="gelish-rosa-diseno-playa-del-carmen.webp",
     date_published="2026-08-22",
-    h1="Gelish vs. Acrílico vs. Polygel: ¿cuál elegir?",
-    lead="Las cuatro técnicas más pedidas en Mystic Nails Art explicadas en simple: qué hace cada una, cuánto dura y para quién es ideal.",
-    wa_text="Hola%2C%20le%C3%AD%20la%20gu%C3%ADa%20de%20t%C3%A9cnicas%20y%20quiero%20que%20me%20recomienden%20cu%C3%A1l%20me%20conviene",
+    h1="Gelish vs. Acrylic vs. Polygel: Which Should You Choose?",
+    lead="The four most requested techniques at Mystic Nails Art explained simply: what each one does, how long it lasts and who it's ideal for.",
+    wa_message="Hi, I read the technique guide and I'd like a recommendation on what works best for me",
     body_sections=[
-        section("Qué es cada técnica", paragraphs=[
-            "<strong>Gelish</strong> es un esmaltado en gel que se cura con lámpara UV/LED sobre tu uña natural. No agrega estructura ni largo, solo color y brillo de larga duración.",
-            "<strong>Rubber Base</strong> es una base flexible que refuerza uñas débiles o delgadas antes de aplicar color, ayudando a nivelar y proteger sin perder flexibilidad natural.",
-            "<strong>Acrílico</strong> es un sistema de polvo y líquido que se esculpe sobre la uña para dar largo, forma y estructura muy resistente; es la opción clásica para extensiones duraderas.",
-            "<strong>Polygel</strong> combina lo mejor de gel y acrílico: se moldea como el acrílico pero cura con lámpara como el gel, dando un acabado más liviano y natural para kapping o extensiones."
+        section("What each technique is", paragraphs=[
+            "<strong>Gelish</strong> is a gel polish cured under a UV/LED lamp over your natural nail. It doesn't add structure or length, only long-lasting color and shine.",
+            "<strong>Rubber Base</strong> is a flexible base that reinforces weak or thin nails before color is applied, helping to level and protect without losing natural flexibility.",
+            "<strong>Acrylic</strong> is a powder-and-liquid system sculpted over the nail to give length, shape and very resistant structure; it's the classic choice for long-lasting extensions.",
+            "<strong>Polygel</strong> combines the best of gel and acrylic: it's molded like acrylic but cures under a lamp like gel, giving a lighter, more natural finish for Kapping or extensions."
         ]),
-        section("Comparativa rápida", table_headers=["Técnica", "Duración", "Ideal para", "Precio desde"], table_rows=[
-            ["Gelish", "3+ semanas", "Color y brillo en uña natural", "$430 MXN"],
-            ["Rubber Base", "3+ semanas", "Uñas débiles o delgadas", "$500 MXN"],
-            ["Acrílicas / Polygel", "3-4 semanas", "Largo y estructura resistente", "$740 MXN"],
-            ["Kapping (Polygel)", "3+ semanas", "Reforzar sin hacer extensión", "$640 MXN"],
+        section("Quick comparison", table_headers=["Technique", "Duration", "Ideal for", "Starting price"], table_rows=[
+            ["Gelish", "3+ weeks", "Color and shine on natural nails", "$430 MXN"],
+            ["Rubber Base", "3+ weeks", "Weak or thin nails", "$500 MXN"],
+            ["Acrylic / Polygel", "3-4 weeks", "Length and resistant structure", "$740 MXN"],
+            ["Kapping (Polygel)", "3+ weeks", "Reinforcing without a full extension", "$640 MXN"],
         ]),
-        section("¿Cuál te conviene?", paragraphs=[
-            "Si solo quieres color parejo y brillante en tu uña natural, <strong>Gelish</strong> es la opción más rápida y económica.",
-            "Si tus uñas se rompen o doblan fácil, empieza con <strong>Rubber Base</strong> antes de pensar en extensiones.",
-            "Si quieres más largo y una estructura que aguante el día a día, <strong>Acrílico o Polygel</strong> son la mejor inversión.",
-            "Ante la duda, mandános una foto de referencia por WhatsApp y te decimos exactamente qué técnica y precio te conviene."
+        section("Which one is right for you?", paragraphs=[
+            "If you just want even, glossy color on your natural nail, <strong>Gelish</strong> is the fastest and most affordable option.",
+            "If your nails break or bend easily, start with <strong>Rubber Base</strong> before considering extensions.",
+            "If you want more length and structure that holds up to daily use, <strong>Acrylic or Polygel</strong> are the best investment.",
+            "When in doubt, send us a reference photo on WhatsApp and we'll tell you exactly which technique and price works for you."
         ]),
     ],
     faq=[
-        ("¿Puedo combinar técnicas, por ejemplo Rubber Base con diseño?", "Sí. Rubber Base admite el mismo nivel de diseño y nail art que el Gelish tradicional; solo cambia la base que se usa antes del color."),
-        ("¿Cuál técnica es menos dañina para la uña natural?", "Gelish y Rubber Base son las más respetuosas con la uña natural. Acrílico y Polygel requieren más cuidado en el retiro para no debilitar la uña."),
-        ("¿Cuánto cuesta cambiar de una técnica a otra?", "El retiro de un servicio anterior tiene un costo aparte, ya sea que vengas de Mystic Nails Art o de otro salón. Pregúntanos por WhatsApp con tu caso específico."),
+        ("Can I combine techniques, for example Rubber Base with a design?", "Yes. Rubber Base supports the same level of design and nail art as traditional Gelish; only the base used before color changes."),
+        ("Which technique is gentler on the natural nail?", "Gelish and Rubber Base are the most gentle on the natural nail. Acrylic and Polygel require more careful removal to avoid weakening the nail."),
+        ("How much does it cost to switch from one technique to another?", "Removing a previous service has a separate cost, whether you're coming from Mystic Nails Art or another salon. Ask us on WhatsApp about your specific case."),
     ],
-    related=["Gelish", "Rubber Base", "Acrílicas / Polygel", "Kapping"],
+    related=["Gelish", "Rubber Base", "Acrylic / Polygel", "Kapping"],
 ))
 
 # ---------------------------------------------------------------- Article 2
 GUIDES.append(dict(
     slug="cuanto-dura-gelish-acrilico-rubber-base-playa-del-carmen",
-    title="Cuánto dura cada técnica de uñas (guía completa) | Mystic Nails Art",
-    description="Cuánto dura el Gelish, Rubber Base, Acrílico y Polygel, qué factores afectan la duración y cómo alargarla. Guía de Mystic Nails Art, Playa del Carmen.",
-    og_description="Guía de duración por técnica de uñas y tips para que tu manicure dure más tiempo.",
+    title="How Long Each Nail Technique Lasts (Complete Guide) | Mystic Nails Art",
+    description="How long Gelish, Rubber Base, Acrylic and Polygel last, what affects durability and how to make it last longer. A guide from Mystic Nails Art, Playa del Carmen.",
+    og_description="A duration guide by nail technique, plus tips to make your manicure last longer.",
     og_image="gelish-rubber-base-natural-playa-del-carmen.webp",
     date_published="2026-08-22",
-    h1="Cuánto dura cada técnica de uñas",
-    lead="La duración real de Gelish, Rubber Base, Acrílico y Polygel, y qué puedes hacer para que tu manicure aguante más.",
-    wa_text="Hola%2C%20quiero%20saber%20cu%C3%A1nto%20me%20dura%20cada%20t%C3%A9cnica%20de%20u%C3%B1as",
+    h1="How Long Each Nail Technique Lasts",
+    lead="The real duration of Gelish, Rubber Base, Acrylic and Polygel, and what you can do to make your manicure hold up longer.",
+    wa_message="Hi, I'd like to know how long each nail technique lasts",
     body_sections=[
-        section("Duración por técnica", list_items=[
-            ("Gelish", "Más de 3 semanas con brillo intacto sobre uña natural."),
-            ("Rubber Base", "3+ semanas, con la ventaja de que refuerza la uña mientras dura."),
-            ("Acrílicas / Polygel", "3 a 4 semanas antes de necesitar retoque de crecimiento."),
-            ("Kapping (Polygel)", "3+ semanas, similar al Gelish pero con más resistencia."),
-            ("Esmaltado Express", "5 a 10 días, al ser esmalte tradicional sin curado UV."),
+        section("Duration by technique", list_items=[
+            ("Gelish", "More than 3 weeks with intact shine on the natural nail."),
+            ("Rubber Base", "3+ weeks, with the added benefit of reinforcing the nail while it lasts."),
+            ("Acrylic / Polygel", "3 to 4 weeks before needing a growth touch-up."),
+            ("Kapping (Polygel)", "3+ weeks, similar to Gelish but more resistant."),
+            ("Express Polish", "5 to 10 days, since it's traditional polish without UV curing."),
         ]),
-        section("Qué hace que dure menos", paragraphs=[
-            "El contacto constante con agua de mar, cloro de alberca y protector solar puede acelerar el desgaste de cualquier técnica.",
-            "Usar las uñas como herramienta (abrir latas, rascar) es la causa más común de que se levante o rompa antes de tiempo.",
-            "Una aplicación mal sellada en los bordes (sin cap sellante) deja entrar humedad y acorta la duración."
+        section("What makes it last less", paragraphs=[
+            "Constant contact with seawater, pool chlorine and sunscreen can speed up wear on any technique.",
+            "Using your nails as a tool (opening cans, scratching) is the most common cause of lifting or breaking early.",
+            "A poorly sealed edge (no sealing top coat) lets in moisture and shortens how long it lasts."
         ]),
-        section("Cómo alargar la duración", list_items=[
-            ("Hidrata la cutícula", "Un aceite de cutícula a diario evita que el gel se levante en los bordes."),
-            ("Usa guantes", "Para lavar trastes o limpiar, protege tus uñas de químicos y agua caliente."),
-            ("Evita quitar el esmalte tirando", "Despegar el gel a la fuerza daña la uña natural y arruina el trabajo antes de tiempo."),
+        section("How to make it last longer", list_items=[
+            ("Moisturize your cuticles", "A daily cuticle oil keeps the gel from lifting at the edges."),
+            ("Use gloves", "Protect your nails from chemicals and hot water when washing dishes or cleaning."),
+            ("Avoid peeling off polish", "Forcing gel off damages the natural nail and ruins the work early."),
         ]),
     ],
     faq=[
-        ("¿Puedo bañarme en el mar con Gelish o Acrílico recién hecho?", "Sí, pero espera al menos 2 horas después de tu cita para que cure por completo, y aplica protector de uñas o aceite después de nadar."),
-        ("¿Qué técnica aguanta mejor el clima de Playa del Carmen?", "Rubber Base y Kapping suelen tener mejor comportamiento con calor y humedad porque son más flexibles que el acrílico tradicional."),
-        ("¿Cada cuánto debo hacerme mantenimiento?", "Recomendamos retoque cada 3 semanas para extensiones y Rubber Base, y cada 3-4 semanas para Gelish, según qué tan rápido te crece la uña."),
+        ("Can I swim in the sea with fresh Gelish or Acrylic?", "Yes, but wait at least 2 hours after your appointment for it to fully cure, and apply nail oil or protectant after swimming."),
+        ("Which technique holds up best in Playa del Carmen's climate?", "Rubber Base and Kapping tend to perform better with heat and humidity because they're more flexible than traditional acrylic."),
+        ("How often should I get maintenance?", "We recommend a touch-up every 3 weeks for extensions and Rubber Base, and every 3-4 weeks for Gelish, depending on how fast your nails grow."),
     ],
-    related=["Gelish", "Rubber Base", "Acrílicas / Polygel", "Esmaltado Express"],
+    related=["Gelish", "Rubber Base", "Acrylic / Polygel", "Express Polish"],
 ))
 
 # ---------------------------------------------------------------- Article 3
 GUIDES.append(dict(
     slug="cuidado-unas-gel-playa-del-carmen",
-    title="Cómo cuidar tus uñas con gel en la playa | Mystic Nails Art",
-    description="Guía para cuidar tus uñas con gel, acílico o polygel en Playa del Carmen: sol, agua de mar, cloro y protector solar sin arruinar tu manicure.",
-    og_description="Tips para que tu manicure sobreviva al sol, mar y cloro de Playa del Carmen.",
+    title="How to Care for Gel Nails at the Beach | Mystic Nails Art",
+    description="A guide to caring for gel, acrylic or polygel nails in Playa del Carmen: sun, seawater, chlorine and sunscreen without ruining your manicure.",
+    og_description="Tips to help your manicure survive the sun, sea and chlorine of Playa del Carmen.",
     og_image="manicure-ombre-french-almendra-playa-del-carmen.webp",
     date_published="2026-08-22",
-    h1="Cómo cuidar tus uñas con gel en la playa",
-    lead="Vivir o vacacionar en Playa del Carmen expone tus uñas a sol, sal y cloro todos los días. Así las cuidas sin sacrificar tu manicure.",
-    wa_text="Hola%2C%20quiero%20unas%20que%20aguanten%20bien%20el%20clima%20de%20playa",
+    h1="How to Care for Gel Nails at the Beach",
+    lead="Living in or vacationing in Playa del Carmen exposes your nails to sun, salt and chlorine every day. Here's how to care for them without sacrificing your manicure.",
+    wa_message="Hi, I'd like nails that hold up well to beach weather",
     body_sections=[
-        section("Por qué el clima de playa afecta tus uñas", paragraphs=[
-            "El sol directo reseca la cutícula y puede opacar el brillo del gel con el tiempo.",
-            "El agua de mar y el cloro de alberca son abrasivos: debilitan poco a poco cualquier esmaltado, incluido el semipermanente.",
-            "El protector solar en manos, si no se retira bien, deja una película que hace que el esmalte se vea opaco o se despegue antes."
+        section("Why beach weather affects your nails", paragraphs=[
+            "Direct sun dries out cuticles and can dull the shine of gel over time.",
+            "Seawater and pool chlorine are abrasive: they gradually weaken any polish, including semi-permanent gel.",
+            "Sunscreen on your hands, if not fully absorbed, leaves a film that can make polish look dull or lift sooner."
         ]),
-        section("Tips prácticos para cuidarlas", list_items=[
-            ("Aplica aceite de cutícula", "Todos los días, especialmente después de nadar o tomar el sol."),
-            ("Enjuaga tus manos tras el mar o alberca", "El agua dulce quita el exceso de sal y cloro que reseca la uña."),
-            ("Usa protector solar en manos con cuidado", "Aplica en el dorso de la mano, evitando que se acumule justo en el borde de la uña."),
-            ("Seca bien tus manos", "La humedad atrapada bajo el esmalte favorece que se despegue o cambie de color."),
+        section("Practical care tips", list_items=[
+            ("Apply cuticle oil", "Every day, especially after swimming or sun exposure."),
+            ("Rinse your hands after the sea or pool", "Fresh water removes the excess salt and chlorine that dries out the nail."),
+            ("Use hand sunscreen carefully", "Apply to the back of the hand, avoiding buildup right at the nail edge."),
+            ("Dry your hands thoroughly", "Trapped moisture under the polish makes it more likely to lift or discolor."),
         ]),
-        section("Qué técnica recomendamos para turistas y locales activos", paragraphs=[
-            "Si vas a estar mucho tiempo en el mar o alberca, <strong>Gelish</strong> o <strong>Rubber Base</strong> son más fáciles de mantener que las extensiones largas.",
-            "Si quieres extensiones para tu viaje, prioriza un largo corto o medio: aguanta mejor el uso diario en la playa que un largo extremo."
+        section("Which technique we recommend for tourists and active locals", paragraphs=[
+            "If you'll spend a lot of time in the sea or pool, <strong>Gelish</strong> or <strong>Rubber Base</strong> are easier to maintain than long extensions.",
+            "If you want extensions for your trip, go for a short or medium length: it holds up better to daily beach wear than an extreme length."
         ]),
     ],
     faq=[
-        ("¿Puedo hacerme las uñas un día antes de viajar a la playa?", "Sí, de hecho lo recomendamos: dale al menos 24 horas para que cure completamente antes de exponerlas al mar."),
-        ("¿El cloro decolora el Gelish?", "Puede opacar el brillo con exposición prolongada y frecuente. Enjuagar tus manos después de la alberca ayuda a minimizar el efecto."),
-        ("¿Qué hago si se me levanta una uña en pleno viaje?", "Escríbenos por WhatsApp; si estás en Playa del Carmen podemos agendarte un ajuste rápido antes de que se rompa más."),
+        ("Can I get my nails done the day before traveling to the beach?", "Yes, in fact we recommend it: give it at least 24 hours to fully cure before exposing it to the sea."),
+        ("Does chlorine fade Gelish?", "It can dull the shine with prolonged, frequent exposure. Rinsing your hands after the pool helps minimize the effect."),
+        ("What do I do if a nail lifts mid-trip?", "Message us on WhatsApp; if you're in Playa del Carmen we can schedule a quick fix before it breaks further."),
     ],
-    related=["Gelish", "Rubber Base", "Kapping", "Pedicure Místico"],
+    related=["Gelish", "Rubber Base", "Kapping", "Mystic Pedicure"],
 ))
 
 # ---------------------------------------------------------------- Article 4
 GUIDES.append(dict(
     slug="precios-unas-playa-del-carmen",
-    title="Cuánto cuesta hacerse las uñas en Playa del Carmen (guía de precios) | Mystic Nails Art",
-    description="Precios reales de Gelish, Rubber Base, Acrílico, Polygel y pedicure en Playa del Carmen. Guía de precios 2026 de Mystic Nails Art.",
-    og_description="Guía de precios de uñas en Playa del Carmen: Gelish, Rubber Base, extensiones y pedicure.",
+    title="How Much Nails Cost in Playa del Carmen (Price Guide) | Mystic Nails Art",
+    description="Real prices for Gelish, Rubber Base, Acrylic, Polygel and pedicure in Playa del Carmen. Mystic Nails Art's 2026 price guide.",
+    og_description="A price guide for nails in Playa del Carmen: Gelish, Rubber Base, extensions and pedicure.",
     og_image="unas-doradas-elegantes-diseno-hoja-playa-del-carmen.webp",
     date_published="2026-08-22",
-    h1="Cuánto cuesta hacerse las uñas en Playa del Carmen",
-    lead="Precios reales, desde los más básicos hasta las extensiones más elaboradas, para que cotices tu cita sin sorpresas.",
-    wa_text="Hola%2C%20vi%20la%20gu%C3%ADa%20de%20precios%20y%20quiero%20cotizar%20mi%20cita",
+    h1="How Much Nails Cost in Playa del Carmen",
+    lead="Real prices, from the most basic options to the most elaborate extensions, so you can quote your appointment with no surprises.",
+    wa_message="Hi, I saw the price guide and I'd like a quote for my appointment",
     body_sections=[
-        section("Precios por técnica", table_headers=["Servicio", "Desde"], table_rows=[
+        section("Prices by technique", table_headers=["Service", "Starting at"], table_rows=[
             ["Gelish", "$430 MXN"],
             ["Rubber Base", "$500 MXN"],
             ["Builder Gel", "$520 MXN"],
             ["Kapping (Polygel)", "$640 MXN"],
-            ["Softgel / Gel X", "$600 MXN"],
-            ["Acrílicas / Polygel", "$740 MXN"],
-            ["Esmaltado Express (pies)", "$200 MXN"],
-            ["Pedicure Ruso", "$300 MXN"],
-            ["Pedicure Místico", "$500 MXN"],
+            ["Soft Gel / Gel X", "$600 MXN"],
+            ["Acrylic / Polygel", "$740 MXN"],
+            ["Express Polish (feet)", "$200 MXN"],
+            ["Russian Pedicure", "$300 MXN"],
+            ["Mystic Pedicure", "$500 MXN"],
         ]),
-        section("Qué hace que el precio suba o baje", list_items=[
-            ("Nivel de diseño", "Un color liso cuesta menos que nail art elaborado, 3D o pedrería."),
-            ("Largo de la extensión", "A mayor largo, mayor cantidad de material y tiempo de trabajo."),
-            ("Retiro de servicio anterior", "Si vienes con uñas de otro salón o de Mystic Nails Art, el retiro se cotiza aparte."),
+        section("What makes the price go up or down", list_items=[
+            ("Design level", "A solid color costs less than elaborate nail art, 3D or rhinestones."),
+            ("Extension length", "The longer the length, the more material and work time required."),
+            ("Removing a previous service", "If you're coming with nails from another salon or from Mystic Nails Art, removal is quoted separately."),
         ]),
-        section("Cómo cotizar tu precio exacto", paragraphs=[
-            "Los precios de esta guía son el punto de partida (“desde”); el precio final depende de diseño, largo y estado de tu uña natural.",
-            "La forma más rápida de saber tu precio exacto es mandarnos una foto de referencia por WhatsApp: te respondemos con el costo antes de que agendes."
+        section("How to get your exact price", paragraphs=[
+            "The prices in this guide are the starting point (“from”); the final price depends on design, length and the condition of your natural nail.",
+            "The fastest way to know your exact price is to send us a reference photo on WhatsApp: we'll reply with the cost before you book."
         ]),
     ],
     faq=[
-        ("¿Los precios incluyen retiro de otro salón?", "No, el retiro se cotiza aparte y varía según la técnica que traigas puesta."),
-        ("¿Manejan paquetes de manos y pies?", "Sí, pregunta por WhatsApp por combos de manicure y pedicure el mismo día."),
-        ("¿Aceptan pagos con tarjeta?", "Sí, aceptamos efectivo y tarjeta."),
+        ("Do the prices include removal from another salon?", "No, removal is quoted separately and varies depending on the technique you're currently wearing."),
+        ("Do you offer hands-and-feet packages?", "Yes, ask us on WhatsApp about manicure and pedicure combos on the same day."),
+        ("Do you accept card payments?", "Yes, we accept cash and card."),
     ],
-    related=["Gelish", "Rubber Base", "Acrílicas / Polygel", "Pedicure Místico"],
+    related=["Gelish", "Rubber Base", "Acrylic / Polygel", "Mystic Pedicure"],
 ))
 
 # ---------------------------------------------------------------- Article 5
 GUIDES.append(dict(
     slug="unas-para-boda-evento-playa-del-carmen",
-    title="Uñas para boda o evento en Playa del Carmen: qué elegir | Mystic Nails Art",
-    description="Qué técnica y diseño de uñas elegir para tu boda o evento especial en Playa del Carmen, y cuándo agendar tu cita.",
-    og_description="Guía de uñas para boda o evento: técnica, diseño y cuándo agendar en Playa del Carmen.",
+    title="Wedding or Event Nails in Playa del Carmen: What to Choose | Mystic Nails Art",
+    description="Which nail technique and design to choose for your wedding or special event in Playa del Carmen, and when to book your appointment.",
+    og_description="A guide to wedding and event nails: technique, design and when to book in Playa del Carmen.",
     og_image="unas-3d-flores-rosa-holografico-playa-del-carmen.webp",
     date_published="2026-08-22",
-    h1="Uñas para boda o evento: qué elegir",
-    lead="Playa del Carmen es uno de los destinos de bodas favoritos de México. Esto es lo que recomendamos para que tus uñas luzcan perfectas todo el día.",
-    wa_text="Hola%2C%20tengo%20una%20boda%2Fevento%20y%20quiero%20cotizar%20mis%20u%C3%B1as",
+    h1="Wedding or Event Nails: What to Choose",
+    lead="Playa del Carmen is one of Mexico's favorite wedding destinations. Here's what we recommend so your nails look perfect all day.",
+    wa_message="Hi, I have a wedding/event and I'd like a quote for my nails",
     body_sections=[
-        section("Qué técnica dura más para el día del evento", paragraphs=[
-            "Para bodas o eventos recomendamos <strong>Gelish o Rubber Base</strong> si quieres tu uña natural con acabado impecable, o <strong>Acrílico/Polygel</strong> si buscas más largo y presencia en las fotos.",
-            "Ambas opciones aguantan un día completo de fotos, baile y actividades sin perder brillo ni forma."
+        section("Which technique lasts longest for your event day", paragraphs=[
+            "For weddings or events we recommend <strong>Gelish or Rubber Base</strong> if you want your natural nail with a flawless finish, or <strong>Acrylic/Polygel</strong> if you want more length and presence in photos.",
+            "Both options hold up through a full day of photos, dancing and activities without losing shine or shape."
         ]),
-        section("Estilos más pedidos para eventos", list_items=[
-            ("Francesita moderna", "Clásica, elegante y combina con cualquier vestido."),
-            ("Nude con brillo sutil", "Discreta pero luminosa en fotos, ideal para novias."),
-            ("Diseño con pedrería puntual", "Un detalle de pedrería o línea dorada da un toque especial sin saturar."),
+        section("Most requested styles for events", list_items=[
+            ("Modern French", "Classic, elegant and pairs with any dress."),
+            ("Nude with subtle shine", "Discreet but luminous in photos, ideal for brides."),
+            ("Design with a touch of rhinestones", "A hint of rhinestones or a gold line adds a special touch without overdoing it."),
         ]),
-        section("Cuándo agendar antes del evento", paragraphs=[
-            "Lo ideal es agendar entre 1 y 3 días antes del evento: suficiente tiempo para que cure bien, pero sin riesgo de crecimiento notorio.",
-            "Si tu evento requiere prueba de diseño (por ejemplo bodas), podemos agendar una prueba previa por separado.",
-            "En temporada alta de bodas, te recomendamos reservar tu fecha con anticipación por WhatsApp para asegurar tu horario."
+        section("When to book before your event", paragraphs=[
+            "It's best to book between 1 and 3 days before the event: enough time for it to cure well, without the risk of noticeable growth.",
+            "If your event requires a design trial (for example, weddings), we can schedule a separate trial appointment beforehand.",
+            "During peak wedding season, we recommend booking your date in advance on WhatsApp to secure your time slot."
         ]),
     ],
     faq=[
-        ("¿Puedo llevar una foto de referencia de mi vestido para elegir color?", "Sí, mandánosla por WhatsApp junto con la fecha de tu evento y te ayudamos a elegir el tono ideal."),
-        ("¿Hacen diseños para todo el cortejo de una boda?", "Sí, podemos coordinar citas para varias personas el mismo día; escríbenos con el número de personas y fecha."),
-        ("¿Cuánto tiempo antes debo reservar en temporada alta?", "Recomendamos reservar con 2 a 3 semanas de anticipación en temporada alta de bodas para asegurar tu horario."),
+        ("Can I bring a photo of my dress to help choose a color?", "Yes, send it to us on WhatsApp along with your event date and we'll help you choose the ideal shade."),
+        ("Do you do designs for an entire bridal party?", "Yes, we can coordinate appointments for multiple people on the same day; message us with the number of people and the date."),
+        ("How far in advance should I book during peak season?", "We recommend booking 2 to 3 weeks in advance during peak wedding season to secure your time slot."),
     ],
-    related=["Gelish", "Rubber Base", "Acrílicas / Polygel", "Pedicure Místico"],
+    related=["Gelish", "Rubber Base", "Acrylic / Polygel", "Mystic Pedicure"],
+))
+
+# ---------------------------------------------------------------- Article 6
+GUIDES.append(dict(
+    slug="manicura-rusa-vs-tradicional-playa-del-carmen",
+    title="Russian Manicure vs. Traditional Manicure: The Differences | Mystic Nails Art",
+    description="What the Russian manicure and pedicure technique is, how it differs from a traditional manicure, and where we apply it at Mystic Nails Art, Playa del Carmen.",
+    og_description="The differences between the Russian technique and a traditional manicure: precision, durability and who it's ideal for.",
+    og_image="rubber-base-nail-art-playa-del-carmen.webp",
+    date_published="2026-08-23",
+    h1="Russian Manicure vs. Traditional Manicure: The Differences",
+    lead="The Russian technique became popular for its precision and neat finish. Here's what it involves and how it differs from the traditional method.",
+    wa_message="Hi, I read about the Russian technique and I'd like a quote for my appointment",
+    body_sections=[
+        section("What the Russian technique is", paragraphs=[
+            "The Russian technique (also called dry manicure/pedicure) uses an electric drill to remove cuticles and hangnails without soaking the nail in water, achieving a very clean, precise finish all around the nail.",
+            "It's especially valued because it leaves the nail ready for gel polish to last longer, by better removing the excess skin that usually causes gel to lift at the edges."
+        ]),
+        section("What a traditional manicure is", paragraphs=[
+            "A traditional manicure soaks hands or feet in warm water to soften the cuticle, which is then removed with clippers or a cuticle nipper.",
+            "It's a faster method and works well for regular maintenance, though the finish around the nail isn't always as precise as with the dry technique."
+        ]),
+        section("Quick comparison", table_headers=["Technique", "Precision", "Polish longevity", "Ideal for"], table_rows=[
+            ["Russian technique (dry)", "Very high", "Longer-lasting thanks to a better seal", "Short nails, thick cuticles, salon-quality result"],
+            ["Traditional (soak)", "Standard", "Normal duration", "Quick, regular maintenance"],
+        ]),
+        section("Where we apply it at Mystic Nails Art", paragraphs=[
+            "We use the Russian dry-cuticle technique in our <strong>Russian Pedicure</strong>, the service where its precision and finish stand out the most.",
+            "For hands we work with Gelish, Rubber Base and Builder Gel with the same meticulous cuticle care; if you're specifically looking for the dry method on hands, let us know on WhatsApp and we'll review it based on your case."
+        ]),
+    ],
+    faq=[
+        ("Does the Russian technique hurt more than the traditional one?", "It shouldn't hurt if done correctly; we use the drill at low speed with controlled pressure for a comfortable, precise result."),
+        ("Do you do Russian manicure on hands?", "We apply the Russian-style dry cuticle technique in our Russian Pedicure. For hands we work with the same level of care in Gelish and Rubber Base; message us on WhatsApp to discuss your specific case."),
+        ("How often should I repeat a Russian Pedicure?", "We recommend every 3 to 4 weeks, similar to how long Gelish lasts, depending on how fast your nails grow."),
+    ],
+    related=["Russian Pedicure", "Mystic Pedicure", "Rubber Base", "Gelish"],
 ))
 
 for g in GUIDES:
@@ -423,7 +461,7 @@ for g in GUIDES:
         date_published=g["date_published"],
         h1=g["h1"],
         lead=g["lead"],
-        wa_text=g["wa_text"],
+        wa_text=quote(g["wa_message"]),
         body_sections="\n".join(g["body_sections"]),
         faq_schema=faq_schema,
         faq_html=faq_html,
