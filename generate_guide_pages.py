@@ -120,6 +120,7 @@ TEMPLATE = '''<!DOCTYPE html>
   footer {{ background:var(--mn-foot); color:rgba(255,255,255,0.5); padding:40px 0; margin-top:40px; }}
   footer .wrap {{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:13px; }}
   footer a {{ color:rgba(255,255,255,0.6); }}
+  footer .footer-links {{ display:flex; gap:14px; flex-wrap:wrap; }}
 </style>
 </head>
 <body data-theme="light">
@@ -164,6 +165,11 @@ TEMPLATE = '''<!DOCTYPE html>
   <div class="wrap">
     <div>Mystic Nails Art &mdash; Calle 38 Nte Lote 73, Tohoku, Centro, Playa del Carmen, Q.R. \U0001f1f2\U0001f1fd</div>
     <div><a href="https://wa.me/529843108186" target="_blank" rel="noopener">+52 984 310 8186</a> &middot; Mon&ndash;Sun 09:00&ndash;20:00</div>
+    <div class="footer-links">
+      <a href="https://mysticnailsart.com/about/">About</a>
+      <a href="https://mysticnailsart.com/contact/">Contact</a>
+      <a href="https://mysticnailsart.com/privacy/">Privacy</a>
+    </div>
   </div>
 </footer>
 

@@ -72,6 +72,56 @@ CANONICAL=$(curl -s "$BASE/" | grep -c 'rel="canonical" href="https://mysticnail
 if [ "$CANONICAL" -gt 0 ]; then echo "PASS: canonical tag present"; PASS=$((PASS+1)); else echo "FAIL: canonical tag missing"; FAIL=$((FAIL+1)); fi
 
 echo ""
+echo "== 1b. Heading hierarchy (not flat) =="
+H2_COUNT=$(curl -s "$BASE/" | python3 -c "
+import sys, re
+c = sys.stdin.read()
+idx = c.find('<script type=\"__bundler/template\">')
+pre = c[:idx] if idx != -1 else c
+print(len(re.findall(r'<h2[^>]*>', pre)))
+")
+if [ "$H2_COUNT" -ge 1 ]; then echo "PASS: $H2_COUNT H2(s) present (non-flat hierarchy)"; PASS=$((PASS+1)); else echo "FAIL: no H2 in raw HTML (flat hierarchy)"; FAIL=$((FAIL+1)); fi
+
+echo ""
+echo "== 3. Agent instruction / when-to-use in llms.txt =="
+WHEN_TO_USE=$(curl -s "$BASE/llms.txt" | grep -c "When to recommend\|How an agent should call")
+if [ "$WHEN_TO_USE" -ge 1 ]; then echo "PASS: llms.txt has when-to-use guidance"; PASS=$((PASS+1)); else echo "FAIL: llms.txt missing when-to-use section"; FAIL=$((FAIL+1)); fi
+
+echo ""
+echo "== 4. Organization schema completeness =="
+ORG_CHECK=$(curl -s "$BASE/" | python3 -c "
+import sys, re, json
+c = sys.stdin.read()
+idx = c.find('<script type=\"__bundler/template\">')
+pre = c[:idx] if idx != -1 else c
+found = False
+for m in re.finditer(r'<script type=\"application/ld\+json\">\s*(.*?)\s*</script>', pre, re.S):
+    d = json.loads(m.group(1))
+    t = d.get('@type')
+    types = t if isinstance(t, list) else [t]
+    if 'Organization' in types and 'contactPoint' in d and 'address' in d:
+        found = True
+print('yes' if found else 'no')
+")
+check "Organization type + contactPoint + address" "$ORG_CHECK" "yes"
+
+echo ""
+echo "== 5. Trust anchor pages =="
+for p in about contact privacy; do
+  CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE/$p/")
+  check "/$p/ returns 200" "$CODE" "200"
+  LEN=$(curl -s "$BASE/$p/" | python3 -c "
+import sys, re
+c = sys.stdin.read()
+no_script = re.sub(r'<script\b[^>]*>.*?</script>', '', c, flags=re.S)
+no_style = re.sub(r'<style\b[^>]*>.*?</style>', '', no_script, flags=re.S)
+text = re.sub(r'<[^>]+>', ' ', no_style)
+print(len(re.sub(r'\s+', ' ', text).strip()))
+")
+  if [ "$LEN" -ge 500 ]; then echo "PASS: /$p/ has $LEN chars (>= 500)"; PASS=$((PASS+1)); else echo "FAIL: /$p/ has only $LEN chars"; FAIL=$((FAIL+1)); fi
+done
+
+echo ""
 echo "===================="
 echo "PASS: $PASS  FAIL: $FAIL"
 [ "$FAIL" -eq 0 ]

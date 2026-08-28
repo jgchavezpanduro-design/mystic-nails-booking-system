@@ -59,5 +59,8 @@ Yes, we accept cash and card.
 
 ## More
 
+- [About Us](https://mysticnailsart.com/about/)
+- [Contact](https://mysticnailsart.com/contact/)
+- [Privacy Policy](https://mysticnailsart.com/privacy/)
 - [Sitemap](https://mysticnailsart.com/sitemap.xml)
 - [llms.txt](https://mysticnailsart.com/llms.txt)
