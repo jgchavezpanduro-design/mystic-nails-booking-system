@@ -222,6 +222,23 @@ def related_block(items):
     return '\n'.join('        <a href="https://mysticnailsart.com/{slug}/">{name}</a>'.format(slug=NAME_TO_SLUG[n], name=n) for n in items) + \
            '\n        <a href="https://mysticnailsart.com/#gallery">View design gallery</a>'
 
+def render_markdown(p):
+    lines = ['# {}'.format(p['h1']), '', p['lead'], '', '## Why choose {}?'.format(p['service_name_short']), '']
+    for label, text in p['benefits']:
+        lines.append('- **{}**: {}'.format(label, text))
+    lines += ['', '## {}'.format(p['compare_title']), '', '| Technique | Ideal for |', '|---|---|']
+    for name, desc in p['compare_rows']:
+        lines.append('| {} | {} |'.format(name, desc))
+    lines += ['', '## FAQ about {}'.format(p['service_name_short']), '']
+    for q, a in p['faq']:
+        lines += ['**{}**'.format(q), a, '']
+    lines += ['## Book', '', 'WhatsApp: https://wa.me/529843108186?text={}'.format(quote(p['wa_message'])),
+              'Website: https://mysticnailsart.com/{}/'.format(p['slug']), '',
+              '## Explore other services', '']
+    for n in p['related']:
+        lines.append('- [{}](https://mysticnailsart.com/{}/)'.format(n, NAME_TO_SLUG[n]))
+    return '\n'.join(lines) + '\n'
+
 COMPARE_ROWS_NATURAL = [
     ("Gelish", "Natural nails with shine and color, results lasting 3+ weeks"),
     ("Rubber Base", "Weak nails that need reinforcement with a natural finish"),
@@ -492,4 +509,7 @@ for p in PAGES:
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    print("Generated:", outdir)
+    os.makedirs("md", exist_ok=True)
+    with open(os.path.join("md", p["slug"] + ".md"), "w", encoding="utf-8") as f:
+        f.write(render_markdown(p))
+    print("Generated:", outdir, "+ md/" + p["slug"] + ".md")

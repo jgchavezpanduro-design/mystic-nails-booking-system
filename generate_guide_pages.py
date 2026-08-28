@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Generates blog/guide article pages, reusing the service-page design system."""
 import os
+import re
 from urllib.parse import quote
 
 TEMPLATE = '''<!DOCTYPE html>
@@ -221,6 +222,44 @@ NAME_TO_SLUG = {
 def related_block(items):
     return '\n'.join('        <a href="https://mysticnailsart.com/{slug}/">{name}</a>'.format(slug=NAME_TO_SLUG[n], name=n) for n in items) + \
            '\n        <a href="https://mysticnailsart.com/#gallery">View design gallery</a>'
+
+def section_html_to_markdown(section_html):
+    """Converts the predictable output of section() (h2/p/ul.benefits/table) to markdown."""
+    heading = re.search(r'<h2>(.*?)</h2>', section_html, re.S).group(1)
+    lines = ['## {}'.format(heading), '']
+    for p in re.findall(r'<p>(.*?)</p>', section_html, re.S):
+        p = re.sub(r'<strong>(.*?)</strong>', r'**\1**', p)
+        lines.append(p)
+        lines.append('')
+    items = re.findall(r'<li><strong>(.*?):</strong>\s*(.*?)</li>', section_html, re.S)
+    for label, text in items:
+        lines.append('- **{}**: {}'.format(label, text))
+    if items:
+        lines.append('')
+    headers = re.findall(r'<th>(.*?)</th>', section_html, re.S)
+    if headers:
+        lines.append('| ' + ' | '.join(headers) + ' |')
+        lines.append('|' + '---|' * len(headers))
+        for row in re.findall(r'<tr>(.*?)</tr>', section_html.split('<tbody>')[1] if '<tbody>' in section_html else '', re.S):
+            cells = re.findall(r'<td>(.*?)</td>', row, re.S)
+            lines.append('| ' + ' | '.join(cells) + ' |')
+        lines.append('')
+    return '\n'.join(lines)
+
+def render_markdown(g):
+    lines = ['# {}'.format(g['h1']), '', g['lead'], '']
+    for sec in g['body_sections']:
+        lines.append(section_html_to_markdown(sec))
+        lines.append('')
+    lines += ['## Frequently asked questions', '']
+    for q, a in g['faq']:
+        lines += ['**{}**'.format(q), a, '']
+    lines += ['## Get a quote', '', 'WhatsApp: https://wa.me/529843108186?text={}'.format(quote(g['wa_message'])),
+              'Website: https://mysticnailsart.com/guia/{}/'.format(g['slug']), '',
+              '## Explore other services', '']
+    for n in g['related']:
+        lines.append('- [{}](https://mysticnailsart.com/{}/)'.format(n, NAME_TO_SLUG[n]))
+    return '\n'.join(lines) + '\n'
 
 GUIDES = []
 
@@ -471,4 +510,7 @@ for g in GUIDES:
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    print("Generated:", outdir)
+    os.makedirs(os.path.join("md", "guia"), exist_ok=True)
+    with open(os.path.join("md", "guia", g["slug"] + ".md"), "w", encoding="utf-8") as f:
+        f.write(render_markdown(g))
+    print("Generated:", outdir, "+ md/guia/" + g["slug"] + ".md")
