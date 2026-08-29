@@ -72,7 +72,7 @@ CANONICAL=$(curl -s "$BASE/" | grep -c 'rel="canonical" href="https://mysticnail
 if [ "$CANONICAL" -gt 0 ]; then echo "PASS: canonical tag present"; PASS=$((PASS+1)); else echo "FAIL: canonical tag missing"; FAIL=$((FAIL+1)); fi
 
 echo ""
-echo "== 1b. Heading hierarchy (not flat) =="
+echo "== 1b. Heading hierarchy (not flat: H1 -> H2 -> H3 depth) =="
 H2_COUNT=$(curl -s "$BASE/" | python3 -c "
 import sys, re
 c = sys.stdin.read()
@@ -80,11 +80,19 @@ idx = c.find('<script type=\"__bundler/template\">')
 pre = c[:idx] if idx != -1 else c
 print(len(re.findall(r'<h2[^>]*>', pre)))
 ")
-if [ "$H2_COUNT" -ge 1 ]; then echo "PASS: $H2_COUNT H2(s) present (non-flat hierarchy)"; PASS=$((PASS+1)); else echo "FAIL: no H2 in raw HTML (flat hierarchy)"; FAIL=$((FAIL+1)); fi
+if [ "$H2_COUNT" -ge 1 ]; then echo "PASS: $H2_COUNT H2(s) present"; PASS=$((PASS+1)); else echo "FAIL: no H2 in raw HTML"; FAIL=$((FAIL+1)); fi
+H3_COUNT=$(curl -s "$BASE/" | python3 -c "
+import sys, re
+c = sys.stdin.read()
+idx = c.find('<script type=\"__bundler/template\">')
+pre = c[:idx] if idx != -1 else c
+print(len(re.findall(r'<h3[^>]*>', pre)))
+")
+if [ "$H3_COUNT" -ge 1 ]; then echo "PASS: $H3_COUNT H3(s) present (real H1->H2->H3 depth, not flat)"; PASS=$((PASS+1)); else echo "FAIL: no H3 in raw HTML (still flat)"; FAIL=$((FAIL+1)); fi
 
 echo ""
 echo "== 3. Agent instruction / when-to-use in llms.txt =="
-WHEN_TO_USE=$(curl -s "$BASE/llms.txt" | grep -c "When to recommend\|How an agent should call")
+WHEN_TO_USE=$(curl -s "$BASE/llms.txt" | grep -ic "when to use this\|how to call this business")
 if [ "$WHEN_TO_USE" -ge 1 ]; then echo "PASS: llms.txt has when-to-use guidance"; PASS=$((PASS+1)); else echo "FAIL: llms.txt missing when-to-use section"; FAIL=$((FAIL+1)); fi
 
 echo ""
